@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "RoundUp",
+    "slug": "roundup",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "roundup",
+    "platforms": ["android", "ios", "web"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.roundup.app"
+    },
+    "android": {
+      "package": "com.roundup.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A84FF"
+      }
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-notifications"
+    ]
+  }
+}

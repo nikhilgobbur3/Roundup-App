@@ -1,0 +1,24 @@
+# React Native
+Mobile/node_modules/
+Mobile/.expo/
+Mobile/dist/
+
+# Spring Boot
+Backend/target/
+Backend/data/
+Backend/*.log
+
+# Environment
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# ChatGPT / Documentation
+.agents/
+references/
+SESSION_SUMMARY.md
+SKILL.md
+project_context.md

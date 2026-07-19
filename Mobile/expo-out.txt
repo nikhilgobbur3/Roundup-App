@@ -1,0 +1,26 @@
+env: load .env
+env: export EXPO_PUBLIC_API_URL
+Starting project at C:\Users\acer\Desktop\Roundup-App\Mobile
+Starting Metro Bundler
+The following packages should be updated for best compatibility with the installed expo version:
+  react-native-worklets@0.9.2 - expected version: 0.5.1
+  typescript@5.7.3 - expected version: ~5.9.2
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8081
+Logs for your project will appear below.
+Web node_modules\expo-router\entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.7% (738/739)
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 6035ms node_modules\expo-router\entry.js (1343 modules)
+Web node_modules\expo-router\entry.js ▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓░ 99.9% (1343/1343)
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web node_modules\expo-router\entry.js ░░░░░░░░░░░░░░░░  0.0% (0/1)
+Web Bundled 6064ms node_modules\expo-router\entry.js (1 module)
+Web Bundled 6117ms node_modules\expo-router\entry.js (1 module)
+Web Bundled 4228ms node_modules\expo-router\entry.js (1 module)
+ LOG  [web] Logs will appear in the browser console
+ LOG  [web] Logs will appear in the browser console
+
+C:\Users\acer\Desktop\Roundup-App\Mobile>

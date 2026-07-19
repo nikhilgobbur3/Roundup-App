@@ -1,0 +1,19 @@
+# Node modules
+Mobile/node_modules/
+
+# Expo
+Mobile/.expo/
+
+# Build folders
+Backend/target/
+
+# Local database
+Backend/data/
+
+# Environment files
+.env
+*.env
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,99 @@
+# =============================================================================
+# RoundUp Backend - Application Configuration
+#
+# This file contains ALL configuration for the Spring Boot application.
+# Spring Boot loads this file automatically when the app starts.
+#
+# YAML format notes:
+# - Indentation matters (use 2 spaces per level)
+# - Colon after key must be followed by a space
+# - Dash (- ) creates list items
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Server Configuration
+# -----------------------------------------------------------------------------
+# Configures the embedded Tomcat server.
+# port: 8080 is the default, but we set it explicitly for clarity.
+server:
+  port: 8080
+
+# -----------------------------------------------------------------------------
+# Database Configuration (PostgreSQL via Neon)
+# -----------------------------------------------------------------------------
+# Spring Data JPA + PostgreSQL Driver will use these settings
+# to connect to the database.
+#
+# For Neon (cloud PostgreSQL), your connection string looks like:
+#   postgresql://username:password@ep-xxxx.us-east-2.aws.neon.tech/neondb
+#
+# IMPORTANT: In production, use environment variables instead of hardcoding:
+#   ${DATABASE_URL} or ${SPRING_DATASOURCE_URL}
+#
+# For local development (if you have PostgreSQL installed locally):
+#   url: jdbc:postgresql://localhost:5432/roundup
+#   username: postgres
+#   password: your_local_password
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/roundup
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  # ---------------------------------------------------------------------------
+  # JPA / Hibernate Configuration
+  # ---------------------------------------------------------------------------
+  jpa:
+    # hibernate.ddl-auto controls how Hibernate manages database tables.
+    #
+    # Options:
+    #   none      - Don't touch the database (for production)
+    #   validate  - Check that tables match entities (for production)
+    #   update    - Auto-create/alter tables (for development)
+    #   create    - Drop and recreate tables on every startup
+    #   create-drop - Same as create, but drops tables on shutdown
+    #
+    # We use "update" during development so Hibernate auto-adds new tables/columns.
+    # Change to "validate" or "none" for production.
+    hibernate:
+      ddl-auto: update
+
+    # Show SQL queries in the console (useful for learning/debugging).
+    # Set to false in production to reduce log noise.
+    show-sql: true
+
+    # Format SQL output with line breaks and indentation (easier to read).
+    properties:
+      hibernate:
+        format_sql: true
+
+# -----------------------------------------------------------------------------
+# JWT Configuration
+# -----------------------------------------------------------------------------
+# These values are read by JwtTokenProvider.java using @Value annotations.
+#
+# jwt.secret:
+#   - Used to sign and verify JWT tokens (HMAC-SHA256 algorithm)
+#   - Must be at least 256 bits (32 characters) for HS256
+#   - In production, use a long random string from a password generator
+#   - NEVER commit a real secret to Git! Use environment variables:
+#     @Value("${JWT_SECRET}")
+#
+# jwt.expiration:
+#   - Token lifetime in milliseconds
+#   - 86400000 ms = 24 hours (1 day)
+#   - Users must log in again after token expires
+#   - For production, consider shorter expiration + refresh tokens
+jwt:
+  secret: MySuperSecretKeyForJWTTokenGeneration2026RoundUpApp
+  expiration: 86400000
+
+# -----------------------------------------------------------------------------
+# Razorpay Configuration
+# -----------------------------------------------------------------------------
+# Get your test keys from: https://dashboard.razorpay.com → Settings → API Keys
+# Replace these placeholders with your actual keys before testing payments.
+razorpay:
+  key-id: rzp_test_TEHMqdwzTsrNk4
+  key-secret: Lrrc9RV4BMONnSmhbagUoVVV

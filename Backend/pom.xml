@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--
+        parent: Inherits Spring Boot defaults.
+        spring-boot-starter-parent gives us pre-configured dependency versions
+        so we don't need to specify versions for each library.
+    -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.5</version>
+        <relativePath/>
+    </parent>
+
+    <!-- Unique identifiers for this project -->
+    <groupId>com.roundup</groupId>
+    <artifactId>RoundUp-Backend</artifactId>
+    <version>1.0.0</version>
+    <name>RoundUp Backend</name>
+    <description>Backend API for RoundUp fintech app</description>
+
+    <properties>
+        <!-- Use Java 17 features -->
+        <java.version>17</java.version>
+        <!-- jjwt version for JWT token generation/validation -->
+        <jjwt.version>0.12.5</jjwt.version>
+    </properties>
+
+    <dependencies>
+        <!--
+            spring-boot-starter-web:
+            - Build REST APIs (@RestController, @RequestMapping)
+            - Embedded Tomcat server (no need to install separately)
+            - JSON conversion (Jackson library)
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--
+            spring-boot-starter-security:
+            - Authentication & authorization
+            - Password encoding (BCrypt)
+            - Security filter chain
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!--
+            spring-boot-starter-data-jpa:
+            - Connects to database using JPA (Java Persistence API)
+            - Auto-creates SQL queries from method names
+            - Manages database connections (HikariCP pool)
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!--
+            PostgreSQL Driver:
+            - Allows Java to talk to PostgreSQL database
+            - Spring Boot auto-configures it when it sees this dependency
+        -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+            H2 Database (for local development without PostgreSQL):
+            - In-memory database used with dev profile
+            - No installation needed
+        -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+            jjwt-api / jjwt-impl / jjwt-jackson:
+            - Library for creating and verifying JWT tokens
+            - We use version 0.12.5 (modern, actively maintained)
+        -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>${jjwt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId>
+            <version>${jjwt.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--
+            spring-boot-starter-validation:
+            - Lets us use @NotBlank, @Email, @Size on DTOs
+            - Automatically validates request bodies
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!--
+            Lombok:
+            - Reduces boilerplate code
+            - @Data generates getters, setters, toString, equals, hashCode
+            - @Builder generates the builder pattern
+        -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!--
+            Razorpay Java SDK:
+            - Used to create orders and verify payment signatures
+            - Official Razorpay API bindings for Java
+        -->
+        <dependency>
+            <groupId>com.razorpay</groupId>
+            <artifactId>razorpay-java</artifactId>
+            <version>1.4.9</version>
+        </dependency>
+
+        <!--
+            spring-boot-starter-test:
+            - JUnit 5 + Mockito for writing tests
+            - Auto-included when running `mvn test`
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+                spring-boot-maven-plugin:
+                - Packages app as executable JAR
+                - Finds the main class automatically
+            -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Exclude Lombok from the final JAR (only needed during compilation) -->
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
