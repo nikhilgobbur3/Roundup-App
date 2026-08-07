@@ -22,6 +22,9 @@ Mobile/expo-qr.png
 .DS_Store
 Thumbs.db
 
+# Social auto-post credentials
+scripts/.env
+
 # ChatGPT / Documentation
 .agents/
 references/

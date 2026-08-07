@@ -45,7 +45,7 @@
 App logo centered on screen. Animated tagline fades in below: "Round up your expenses, effortlessly."
 
 **Script:**
-"Meet RoundUp — the UPI expense tracker that saves your spare change automatically. No manual entries, no complicated setups."
+"Why do most of us never save? Because saving never happens by itself. RoundUp fixes that — a UPI expense tracker that rounds up every payment to the nearest ₹10 and saves the spare change for you. No manual entries, no complicated setups."
 
 ---
 
@@ -95,9 +95,9 @@ Enter amount ₹153. The roundup preview appears below: "You'll pay ₹160.00" a
 Tap "Pay ₹153.00" (the exact bill). Brief loading spinner (1.5s). **Celebration screen**: gold confetti rains down, a gold checkmark pops in with a haptic buzz, and the pill "+₹7.00 invested in savings" drops in below "₹153.00 paid to Blue Tokai".
 
 **Script:**
-"Tap Pay — exact bill amount. Then the app celebrates with you: confetti, a buzz, and your spare change now invested. That moment of delight is what keeps you coming back."
+"Tap Pay — the exact bill amount. Then the app celebrates with you: confetti, a buzz, and your spare change now invested. That moment of delight is what turns users into repeat users."
 
-**Note:** Currently in dummy payment mode for testing. Transaction is recorded to backend — savings and transaction history all update. When ready for real payments, one config flag activates the full Razorpay checkout with real payment methods.
+**Note:** Currently in dummy payment mode for testing. The transaction is recorded to the backend — savings and transaction history all update for real. When ready, one config flag activates the full Razorpay checkout with real payment methods.
 
 ---
 
@@ -117,7 +117,7 @@ Navigate back to home. The "Your Wealth" number jumped up. Transaction appears i
 Show Profile screen with user details. Overlay text fades in showing the tech stack: "React Native · Expo · Spring Boot · Razorpay · Railway · Neon"
 
 **Script:**
-"Built with React Native, Expo, Spring Boot, and Razorpay. Production-ready and built for India's UPI ecosystem."
+"Built end-to-end with React Native, Expo, Spring Boot, and Razorpay. Production-ready and built for India's UPI ecosystem."
 
 **Outro:**
 "RoundUp — round up your expenses, effortlessly. Follow for more."
@@ -153,7 +153,7 @@ Show Profile screen with user details. Overlay text fades in showing the tech st
 Open the app on home screen. Tap the QR icon in top-right. Camera view opens.
 
 **Script:**
-"Open RoundUp, tap the QR button. The camera opens instantly."
+"Saving shouldn't be a separate app — it should live inside the payment itself. Open RoundUp, tap the QR button, and the camera opens instantly."
 
 ---
 
@@ -210,7 +210,7 @@ Home screen with updated balance and transaction list.
 Open the app on home screen. Slow zoom on the "Your Wealth" hero — savings in huge type.
 
 **Script:**
-"Your savings, in big bold type. Not your balance, not your expenses — your wealth."
+"Most finance apps show you what you spend. RoundUp shows you what you own — your wealth, in big bold type. Because what you measure, you grow."
 
 ---
 
@@ -268,23 +268,29 @@ Home screen — the "Your Wealth" number grew.
 | Format | 1080p, 60fps, portrait (9:16) recommended for LinkedIn |
 | Subtitles | Auto-generate in CapCut, then proofread |
 
-## LinkedIn Post Template
+## LinkedIn Post
 
-```
-Introducing RoundUp — your UPI expense tracker that saves spare change automatically. 🚀
+**Date:** TBD
+**Note:** set Date to today when the phone screenshots in `media/screenshots/` are added
+**Posted:** ❌
 
-[Link to video]
+**Body:**
 
-What it does:
-• Scan any UPI QR → enter amount → done
-• Rounds up every expense to the nearest ₹10
-• Spare change goes straight to savings
-• No manual entries, no UPI app switching
+I built RoundUp to fix a problem every Indian professional knows: UPI makes spending effortless, but saving is left to memory and willpower.
 
-Built with: React Native, Expo, Spring Boot, Razorpay
+RoundUp is a UPI expense tracker built end-to-end. Scan any UPI QR code or type a UPI ID, enter the amount, and every payment rounds up to the nearest ₹10. A ₹153 payment becomes ₹160 — and ₹7 quietly goes into savings. No manual entries, no switching apps.
 
-#Fintech #UPI #ReactNative #Expo #Startup #India
-```
+![RoundUp home screen - Your Wealth](media/screenshots/home.png)
+
+The design is deliberate. The home screen doesn't show a balance; it shows one big "Your Wealth" number. Every payment ends with confetti, a haptic buzz, and "₹7 invested in savings." Tiny wins that turn into a real habit.
+
+I'm a full-stack engineer who thinks in products — React Native + Expo for the app, Spring Boot + PostgreSQL for the backend, Razorpay for payments. The real checkout is built and ready behind one flag.
+
+Code is public: https://github.com/nikhilgobbur3/Roundup-App
+
+What everyday habit would you build an app around?
+
+#Fintech #UPI #ReactNative #FullStackEngineer
 
 ---
 

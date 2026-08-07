@@ -1,0 +1,26 @@
+[
+  {
+    "id": "roundup-math",
+    "title": "Server-side roundup logic",
+    "file": "Backend/src/main/java/com/roundup/service/TransactionService.java",
+    "language": "java",
+    "startLine": 26,
+    "endLine": 49
+  },
+  {
+    "id": "celebration-screen",
+    "title": "Celebration gold confetti engine",
+    "file": "Mobile/components/CelebrationOverlay.tsx",
+    "language": "tsx",
+    "startLine": 38,
+    "endLine": 61
+  },
+  {
+    "id": "security-config",
+    "title": "JWT SecurityConfig & auth entry point",
+    "file": "Backend/src/main/java/com/roundup/security/SecurityConfig.java",
+    "language": "java",
+    "startLine": 77,
+    "endLine": 97
+  }
+]

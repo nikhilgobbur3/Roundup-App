@@ -1,0 +1,24 @@
+// JWT SecurityConfig & auth entry point
+// Backend/src/main/java/com/roundup/security/SecurityConfig.java (lines 77-97)
+// Screenshot could not be rendered via Carbon API - plain text fallback.
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session ->
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
+                .anyRequest().authenticated()
+            )
+            .exceptionHandling(ex -> ex.authenticationEntryPoint((request, response, authException) -> {
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                response.setContentType(MediaType.APPLICATION_JSON_VALUE);
+                response.getWriter().write("{\"message\":\"Authentication required\"}");
+            }))
+            .addFilterBefore(jwtAuthenticationFilter,
+                             UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }

@@ -1,0 +1,27 @@
+// Celebration gold confetti engine
+// Mobile/components/CelebrationOverlay.tsx (lines 38-61)
+// Screenshot could not be rendered via Carbon API - plain text fallback.
+const CONFETTI_COLORS = [
+  "#F5B301",
+  "#FFD166",
+  "#00C853",
+  "#34D399",
+  "#FF6B6B",
+  "#4ECDC4",
+  "#FFE066",
+];
+const GOLD = "#F5B301";
+
+function rand(min: number, max: number) {
+  return Math.random() * (max - min) + min;
+}
+
+const PIECES: Piece[] = Array.from({ length: 34 }, (_, i) => ({
+  x: Math.random() * SCREEN_W,
+  delay: i * 30 + Math.random() * 150,
+  duration: rand(1800, 2800),
+  size: rand(6, 13),
+  color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+  sway: rand(-60, 60),
+  rotation: rand(-360, 360),
+}));

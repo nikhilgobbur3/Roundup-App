@@ -1,0 +1,27 @@
+// Server-side roundup logic
+// Backend/src/main/java/com/roundup/service/TransactionService.java (lines 26-49)
+// Screenshot could not be rendered via Carbon API - plain text fallback.
+    public Double calculateRoundup(Double amount) {
+        double rounded = Math.ceil(amount / 10.0) * 10.0;
+        return rounded - amount;
+    }
+
+    @Transactional
+    public TransactionResponse createExpense(Long userId, TransactionRequest request) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Double amount = request.getAmount();
+        Double roundupAmount = calculateRoundup(amount);
+
+        user.setBalance(user.getBalance() - amount);
+        user.setSavings(user.getSavings() + roundupAmount);
+        userRepository.save(user);
+
+        Transaction expense = new Transaction(userId, amount, request.getDescription(), "EXPENSE", roundupAmount);
+        transactionRepository.save(expense);
+
+        if (roundupAmount > 0) {
+            Transaction saving = new Transaction(userId, roundupAmount,
+                    "RoundUp savings from: " + request.getDescription(),
+                    "ROUNDUP_SAVING", null);

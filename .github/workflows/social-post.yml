@@ -1,0 +1,41 @@
+name: Auto-Post Social
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  social:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Post ready drafts
+        env:
+          DEVTO_API_KEY: ${{ secrets.DEVTO_API_KEY }}
+          HASHNODE_API_TOKEN: ${{ secrets.HASHNODE_API_TOKEN }}
+          HASHNODE_PUBLICATION_ID: ${{ secrets.HASHNODE_PUBLICATION_ID }}
+          REDDIT_CLIENT_ID: ${{ secrets.REDDIT_CLIENT_ID }}
+          REDDIT_CLIENT_SECRET: ${{ secrets.REDDIT_CLIENT_SECRET }}
+          REDDIT_REFRESH_TOKEN: ${{ secrets.REDDIT_REFRESH_TOKEN }}
+          LINKEDIN_CLIENT_ID: ${{ secrets.LINKEDIN_CLIENT_ID }}
+          LINKEDIN_CLIENT_SECRET: ${{ secrets.LINKEDIN_CLIENT_SECRET }}
+          LINKEDIN_REFRESH_TOKEN: ${{ secrets.LINKEDIN_REFRESH_TOKEN }}
+        run: node scripts/social/post.mjs
+
+      - name: Commit posted marks
+        run: |
+          git config user.name "roundup-bot"
+          git config user.email "roundup-bot@users.noreply.github.com"
+          git add Mobile/*.md
+          git diff --cached --quiet || git commit -m "docs: mark posted drafts [skip ci]"
+          git push

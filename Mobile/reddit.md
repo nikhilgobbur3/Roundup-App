@@ -4,87 +4,85 @@
 
 | # | Topic | Subreddit | Date | Posted |
 |---|-------|-----------|------|--------|
-| 1 | App Showcase | r/reactnative, r/developersIndia | TBD | ❌ |
+| 1 | App Showcase | r/reactnative, r/developersIndia, r/SideProject | 2026-08-07 | ❌ |
 | 2 | | | | |
-| 3 | | | | |
+
+> **How auto-posting works:** the GitHub Action posts each subreddit draft below when `**Date:**` is set (not TBD) and `**Posted:**` is `❌`. After posting it flips to `✅`.
 
 ---
 
 ## Post 1: App Showcase
 
-**Date:** TBD
+**Date:** 2026-08-07
+**Posted:** ❌
 **Subreddits:** r/reactnative, r/developersIndia, r/SideProject
 
-### Title Options
-- "Built a UPI expense tracker with React Native + Spring Boot — feedback welcome!"
-- "I built a tiny app that rounds up my UPI expenses to the nearest ₹10"
+### r/reactnative
 
-### Post Body (r/reactnative)
+**Title:** Built a UPI expense tracker with React Native + Expo — full-stack, running on my phone. Here's what I learned.
 
-**Title:** Built a UPI expense tracker with React Native + Expo — here's my experience
+**Body:**
 
-**Content:**
+Hey everyone — sharing **RoundUp**, a UPI expense tracker that rounds up every payment to the nearest ₹10 and puts the spare change into savings.
 
-Hey everyone,
+The stack: React Native + Expo SDK 54 (Expo Router, Reanimated, Gesture Handler), Zustand + React Query, expo-secure-store. Spring Boot 3.2.5 backend, PostgreSQL (Neon), Razorpay payments, Railway hosting.
 
-Built a side project called RoundUp — a UPI expense tracker that rounds up every payment to the nearest ₹10 and saves the spare change.
+The part I'm proudest of: I wanted it to feel like a product, not a demo. Every payment ends with a celebration (confetti + haptic buzz) and the home screen shows one big "Your Wealth" number. Small wins, consistently = habit formation. That's the whole thesis.
 
-**Stack:**
-- React Native + Expo SDK 54
-- Expo Router (file-based routing)
-- Spring Boot 3.2.5 backend
-- PostgreSQL (Neon)
-- Razorpay for payments
-- Zustand + React Query for state
+Hardest bugs I hit:
 
-**What I learned:**
+1. **Roundup always showed ₹0** — I was sending the rounded total (₹160) to the backend instead of the original bill (₹153). The server does the roundup math (`ceil(amount/10)*10 - amount`) and needs the original amount.
+2. **"Payment failed: HTTP 403"** — Spring Security returns 403 for bad/unknown-user tokens by default; my app only cleared its session on 401, so stale sessions failed silently. Fix: 401 JSON `AuthenticationEntryPoint` + logout on both statuses.
+3. **PhonePe blocks external `upi://pay` intents** — switched to a Razorpay WebView checkout (works in Expo Go, no native modules needed).
 
-1. **PhonePe blocks `upi://pay` intents** — Had to switch from UPI deep links to Razorpay WebView checkout. PhonePe intentionally blocks payments initiated from third-party apps for security.
+![roundup math](media/code/roundup-math.png)
 
-2. **Railway free tier cold start is painful** — 20-30s delay on first request after idle. Fixed by setting API timeout to 30s in the fetch client.
+Repo: https://github.com/nikhilgobbur3/Roundup-App
 
-3. **Expo Go is great but limiting** — Can't use native modules. Went with WebView-based Razorpay checkout instead of the native SDK. Works in both Expo Go and production APK.
+Would love your feedback on the architecture or the UX. And genuinely curious: **what would you have built differently?**
 
-4. **expo-notifications crashes Expo Go on SDK 54** — Known issue. Notifications work in APK but not in Expo Go past SDK 53. Had to remove notification code from Expo Go builds.
+### r/developersIndia
 
-**Current state:** App runs live on my phone (Expo Go — my phone is the hotspot, Metro server runs detached so it survives shell timeouts). Dummy payment mode is active for testing (1.5s spinner → transaction recorded to backend → celebration screen). Each payment ends with confetti + haptics and "+₹7 invested in savings"; the home screen shows a single "Your Wealth" hero with savings in huge type. All Razorpay code preserved behind one flag (`DUMMY_PAYMENTS`); flipping it activates the full Razorpay checkout.
+**Title:** Built a UPI expense tracker for India — React Native + Spring Boot, full-stack
 
-**What I'd change / am stuck on:**
-- The 401-vs-403 auth trap — Spring Security returns 403 by default for bad/unknown-user tokens, and my app only cleared its session on 401. A stale token for a user who no longer existed in the DB (Railway reset) failed silently with ₹0. Fix: 401 JSON `AuthenticationEntryPoint` + clear session on both statuses. (Backend change waiting on a Railway redeploy.)
-- Another sneaky bug — roundup always showed ₹0 because I was sending the rounded total (₹160) to the backend instead of the original bill (₹153). The server does the roundup math; it needs the original amount.
-- Razorpay dashboard UPI toggle — need to enable it for UPI to show in checkout
-- EAS free tier build minutes exhausted — need to wait for monthly reset or upgrade
+**Body:**
 
-**Repo:** [GitHub link — coming soon]
+Built **RoundUp** — a UPI expense tracker that rounds up every payment to the nearest ₹10 and auto-saves the spare change. Very India-specific: UPI is everywhere, expense tracking is nowhere.
 
-Would love feedback on the architecture, code structure, or UX. Thanks!
+Stack: React Native + Expo SDK 54, Spring Boot 3.2.5, PostgreSQL (Neon), Razorpay, Railway.
 
----
+Highlights and pain points:
 
-### Post Body (r/developersIndia)
+- PhonePe/GPay block external `upi://pay` intents → Razorpay WebView checkout instead
+- Railway free tier cold start (20–30s) → 30s API timeout in the client
+- Roundup showed ₹0 because I sent the rounded total (₹160) instead of the original bill (₹153) — the server needs the original amount to compute the roundup
+- Auth trap: Spring Security returns 403 for bad/unknown-user tokens, but my app only logged out on 401 → silent failures. Fix: 401 JSON `AuthenticationEntryPoint` + clear session on both statuses
 
-**Title:** Built a UPI expense tracker for India — React Native + Spring Boot
+The product angle: celebration screen after every payment, "Your Wealth" hero on home. Money psychology, productized. Runs live on my phone.
 
-**Content:**
+Repo: https://github.com/nikhilgobbur3/Roundup-App
 
-[Same as above, but emphasize India-specific challenges]
+Feedback welcome — **what would you have built differently?**
 
-**India-specific notes:**
-- UPI integration required
-- PhonePe/GPay deep link limitations
-- Currency: ₹ INR, rounds to nearest ₹10
-- Railway free tier for hosting (cheap but cold start)
-- Neon PostgreSQL for database
+### r/SideProject
 
----
+**Title:** I built an app that saves your spare change on every UPI payment — without you noticing
 
-### Post Body (r/SideProject)
+**Body:**
 
-**Title:** I built an app that rounds up my UPI expenses automatically
+Every UPI payment is a tiny leak in your savings that you never track. **RoundUp** logs every payment automatically, rounds up to the nearest ₹10, and the spare change goes to savings.
 
-**Content:**
+- Scan any UPI QR → enter amount → done
+- ₹153 payment → you pay ₹160, ₹7 quietly moves to savings
+- Home screen shows one big "Your Wealth" number, not a balance
 
-[Shorter version — focus on the problem/solution, less technical detail]
+Built it full-stack myself: React Native + Expo, Spring Boot, PostgreSQL, Razorpay. Running on my phone today (dummy payment mode for testing — real checkout is built and ready behind one flag).
+
+The part I'm proudest of: design decisions that create a habit. Every payment ends in a celebration. Small wins, repeated = the product works.
+
+Repo: https://github.com/nikhilgobbur3/Roundup-App
+
+What would you have built differently? Feedback welcome.
 
 ---
 

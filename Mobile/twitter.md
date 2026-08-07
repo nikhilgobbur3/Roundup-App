@@ -17,32 +17,25 @@
 **Date:** TBD
 
 ### Tweet 1
-Built a UPI expense tracker called RoundUp in my free time. 🚀
+Most people don't save because saving never happens automatically. So I built RoundUp — a UPI expense tracker that saves your spare change for you. 🚀
 
-Scan any UPI QR → enter amount → rounds up to nearest ₹10 → spare change saved automatically.
+### Tweet 2
+Scan any UPI QR code (or type a UPI ID) → enter the amount → every payment rounds up to the nearest ₹10. A ₹153 payment becomes ₹160. The ₹7 goes straight to savings.
 
 No manual entries. No switching apps.
 
-### Tweet 2
-Tech stack:
-• React Native + Expo SDK 54
-• Spring Boot 3.2.5
-• PostgreSQL (Neon)
-• Razorpay
-• JWT auth
-• Railway
-
-Built for India's UPI ecosystem. 🇮🇳
-
 ### Tweet 3
-Hardest part: PhonePe blocks external upi://pay intents. Switched to Razorpay WebView checkout instead — works in Expo Go without native builds.
-
-Railway free tier cold start (20-30s) was another challenge. Fixed with 30s API timeout.
+Built end-to-end by me: React Native + Expo app, Spring Boot backend, PostgreSQL, Razorpay for payments, hosted on Railway. Real product, real payment flow — live checkout is built and ready behind one flag.
 
 ### Tweet 4
-This is a side project — not a startup. Just solving my own problem of tracking UPI expenses and saving spare change automatically.
+Hardest part was payments: PhonePe blocks external UPI intents, so I switched to Razorpay's WebView checkout. Also killed the Railway cold-start problem with a 30s API timeout.
 
-Code is on GitHub. Will share the link when I clean it up. 🔗
+### Tweet 5
+Why I built it: I'm a full-stack engineer who thinks in products. I wanted to take an idea from QR scan to money actually saved — and ship it publicly.
+
+Code is live on GitHub: https://github.com/nikhilgobbur3/Roundup-App
+
+What's the one habit you'd automate if you could? 👇
 
 ---
 
@@ -51,19 +44,21 @@ Code is on GitHub. Will share the link when I clean it up. 🔗
 **Date:** TBD
 
 ### Tweet 1
-Quick update on RoundUp — added a dummy payment mode so I can test the full flow without setting up Razorpay live payments. 🔧
+RoundUp update: I built a dummy payment mode so the entire flow works end-to-end for testing — without touching live money. 🔧
 
 ### Tweet 2
-How it works:
-Scan QR → enter amount → tap Pay → 1.5s spinner → "Payment Successful" ✅
+How it works: scan QR → enter amount → tap Pay → 1.5s spinner → "Payment Successful" ✅
 
-All Razorpay code stays in place — just behind a flag. Flip one variable to go live.
+Same backend, same roundup math, same celebration. No real charge — perfect for demos and safe for tests.
 
 ### Tweet 3
-Also cleaned up the Razorpay WebView config. Removed hardcoded payment method blocks. Now it shows whatever methods are enabled in the dashboard automatically.
+The real Razorpay checkout is fully built and waiting behind one config flag. Flip it and real payments switch on. Dummy mode keeps shipping fast without risking a single rupee.
 
 ### Tweet 4
-Next step: Fix Expo Go connection over mobile hotspot. Windows firewall keeps blocking it. Anyone dealt with this before? Tips welcome. 🙏
+Also cleaned up the Razorpay WebView config. Payment methods now auto-load from the dashboard instead of being hardcoded. Less code, fewer surprises.
+
+### Tweet 5
+Next up: shipping to my phone over Expo Go on a mobile hotspot. Windows firewall, I'm coming for you. Anyone dealt with this? Tips welcome. 🙏
 
 ---
 
@@ -72,29 +67,23 @@ Next step: Fix Expo Go connection over mobile hotspot. Windows firewall keeps bl
 **Date:** TBD
 
 ### Tweet 1
-Fixed a bug in RoundUp's dummy payment mode. It was showing "Payment Successful" but never actually recording the transaction. 🐛
+Found a money bug in RoundUp and fixed it. The math looked right on screen, but the backend was getting the wrong number. 🐛
 
 ### Tweet 2
-What was happening:
-- User scans QR → enters ₹153 → taps Pay → "Success! ✅"
-- Goes home → balance still ₹0, no transaction, no savings
+What was happening: I sent the ROUNDED total (₹160) to the backend instead of the ORIGINAL bill (₹153). So the server ran the roundup math on ₹160 → ₹0 saved.
 
-Not very useful as a demo. 😅
+Paying more, saving nothing. Not the point of the app. 😅
 
 ### Tweet 3
-Fix: Added `addTransaction()` + `fetchTransactions()` calls before the success screen.
+The fix: send the original amount. Now it works end-to-end:
 
-Now the dummy mode:
-1. Shows processing spinner (1.5s)
-2. Records expense to backend (₹160)
-3. Calculates roundup savings (+₹7)
-4. Updates balance + transaction list
-5. Shows success screen
+Expense ₹153 → roundup +₹7 → total ₹160. Savings actually land.
 
 ### Tweet 4
-Same backend API, same roundup logic — just no Razorpay checkout modal. One config flag (`DUMMY_PAYMENTS`) controls real vs dummy mode. All Razorpay code preserved.
+This is exactly why you test payments in dummy mode before going live — same backend, same logic, real bugs, zero real money at stake.
 
-Dummy mode now behaves identically to real mode for the user. 🚀
+### Tweet 5
+RoundUp now: pays the exact bill (₹153), rounds up (+₹7), and updates "Your Wealth" in real time. One config flag (`DUMMY_PAYMENTS`) flips over to the real Razorpay checkout. 🚀
 
 ---
 
@@ -103,18 +92,21 @@ Dummy mode now behaves identically to real mode for the user. 🚀
 **Date:** TBD
 
 ### Tweet 1
-RoundUp update: every payment now ends with a celebration. 🎉 Confetti, a haptic buzz, and "+₹7 invested in savings" dropping in after you pay.
+RoundUp update: every payment now ends with a celebration. 🎉 Confetti, a haptic buzz, and "+₹7 invested in savings" dropping in the moment you pay.
 
 ### Tweet 2
-The home screen got a redesign too. Instead of balance, it shows one big number: **Your Wealth** — your savings, 52pt, bold. The psychological difference is huge.
+Why? Psychology. ₹7 of savings feels like nothing — until the app makes a moment of it. Small wins are what build real habits.
 
 ### Tweet 3
-Also finally fixed phone testing: the app now runs on my phone via Expo Go with my phone as the hotspot (Metro server runs detached so it survives my shell timeouts). No more firewall fighting. 📱
+The home screen got a redesign too. No balance front and center — just ONE number: **Your Wealth**. 52pt, bold. The number you actually want to see grow.
 
 ### Tweet 4
-And a bug deep-dive: payments were failing with "HTTP 403" — Spring Security's default response for bad/unknown-user tokens. The app only logged you out on 401, so a stale session failed silently. Added a 401 JSON entry point + now logging out on 403 too.
+Also finally fixed phone testing: the app now runs on my phone via Expo Go with my phone as the hotspot. Metro server runs detached, so it survives my shell timeouts. No more firewall fighting. 📱
 
-Savings already show correctly end-to-end: pay ₹153 → +₹7 to wealth. 🚀
+### Tweet 5
+And a backend deep-dive: payments were failing with "HTTP 403" — Spring Security's default response for bad/unknown-user tokens, but the app only logged out on 401. Added a 401 JSON entry point and now handle 403 too.
+
+Result: pay ₹153 → +₹7 to wealth, end to end. 🚀
 
 ---
 
