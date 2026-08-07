@@ -5,21 +5,39 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "scheme": "roundup",
-    "platforms": ["android", "ios", "web"],
+    "platforms": [
+      "android",
+      "ios",
+      "web"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.roundup.app"
     },
     "android": {
       "package": "com.roundup.app",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#0A84FF"
-      }
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#00C853"
+      },
+      "icon": "./assets/icon.png"
+    },
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#00C853"
     },
     "plugins": [
       "expo-router",
-      "expo-secure-store",
-      "expo-notifications"
-    ]
+      "expo-secure-store"
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "9fd57fac-b1a9-44dc-8bd6-f4ee09bade49"
+      }
+    },
+    "owner": "nikhilgobbur"
   }
 }

@@ -8,9 +8,9 @@
 
 **RoundUp** is a banking app that "rounds up" your spare change.
 
-Example: If you buy coffee for $3.50, the app rounds up to $4.00 and saves the extra $0.50 automatically. Over time, those pennies grow into real savings.
+Example: If you buy coffee for ₹350, the app rounds up to ₹360 and saves the extra ₹10 automatically. Over time, those pennies grow into real savings.
 
-Right now we have the **login system** built. The actual "rounding up" feature comes next.
+The app is fully built: login/signup, QR scan, payment flow, and the automatic "round up to savings" feature all work end-to-end.
 
 ---
 
@@ -69,7 +69,7 @@ Mobile/
 │
 ├── app.json                ← Expo config (app name, Android/iOS settings)
 ├── package.json            ← List of all ingredients (libraries) used
-├── .env                    ← Secret address: "backend lives at http://localhost:8080"
+├── .env                    ← Secret address: "backend lives at https://roundup-app-production.up.railway.app"
 └── tsconfig.json           ← TypeScript settings (makes code less error-prone)
 ```
 
@@ -137,7 +137,7 @@ React Hook Form + Zod CHECK:
     │
     ▼
 API Client sends POST to:
-    │  http://localhost:8080/api/auth/signup
+    │  https://roundup-app-production.up.railway.app/api/auth/signup
     │  Body: { name: "John", email: "john@email.com", password: "MyPassword1" }
     │
     ▼
@@ -157,7 +157,7 @@ App receives response:
 (tabs)/home.tsx ← YOU ARE HERE
     │  Reads user from Zustand Store
     │  Shows: "Hello, John"
-    │  Shows: Balance card ($0.00 — no transactions yet)
+    │  Shows: "Your Wealth" savings card (₹0.00 — no transactions yet)
     │  Shows: Bottom tab bar [Home] [Profile]
 ```
 
@@ -173,7 +173,7 @@ AuthGate runs
     │
     ▼
 API Client sends GET to:
-    │  http://localhost:8080/api/auth/me
+    │  https://roundup-app-production.up.railway.app/api/auth/me
     │  Header: Authorization: Bearer xxx.yyy.zzz
     │
     ▼
@@ -226,14 +226,14 @@ Alert pops up: "Are you sure you want to sign out?"
 | `login.tsx` | **Sign In page** — email + password form, sends to backend, on success → saves token → goes Home |
 | `signup.tsx` | **Create Account page** — name + email + password + confirm, validates rules, sends to backend |
 | `(tabs)/_layout.tsx` | **Bottom tab bar** — puts [Home] and [Profile] tabs at the bottom of the screen |
-| `home.tsx` | **Home dashboard** — shows "Hello [name]", balance card (placeholder $0.00), empty activity list |
+| `home.tsx` | **Home dashboard** — shows "Hello [name]", the "Your Wealth" savings hero, QR button (scan-to-pay), and the activity list |
 | `profile.tsx` | **Profile page** — shows your avatar, name, email, settings rows, and Sign Out button |
 
 ### Services (`services/`)
 
 | File | One-sentence job |
 |---|---|
-| `api/client.ts` | **The waiter** — sends GET/POST/PUT/DELETE requests to the backend with the JWT token, handles timeouts (10s limit) and errors |
+| `api/client.ts` | **The waiter** — sends GET/POST/PUT/DELETE requests to the backend with the JWT token, handles timeouts (30s — Railway cold start) and errors |
 | `storage/secure-store.ts` | **The locker** — saves the JWT token to secure storage (or web storage), reads it back, and deletes it on logout |
 
 ### State (`stores/`)
@@ -262,7 +262,7 @@ Alert pops up: "Are you sure you want to sign out?"
 |---|---|
 | `app.json` | **App ID card** — tells Expo the app name, Android package name, iOS bundle ID, and which plugins to use |
 | `package.json` | **Shopping list** — lists every library the app needs (React Native, Expo, Zustand, etc.) |
-| `.env` | **Secret address** — stores the backend URL (`http://localhost:8080`) |
+| `.env` | **Secret address** — stores the backend URL (`https://roundup-app-production.up.railway.app`) |
 | `tsconfig.json` | **Grammar checker** — TypeScript settings that catch mistakes before you run the app |
 
 ---
@@ -398,4 +398,4 @@ Together they work like a **bouncer + clipboard** at a club:
 
 ---
 
-> **Next up:** The RoundUp transaction feature — where the app starts tracking your purchases and rounding up spare change into savings. But first, you now understand how the login system works end-to-end. 🎉
+> **Next up:** the design overhaul — a celebration screen with confetti after every payment, dark-mode theming, savings streaks, and a goal progress ring. This guide explains the core architecture; those features build on the exact same patterns you just learned. 🎉

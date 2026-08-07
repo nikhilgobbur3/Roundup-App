@@ -16,7 +16,6 @@ export default function TabLayout() {
           backgroundColor: colors.tabBar.background,
           borderTopColor: colors.border,
         },
-        headerLargeTitle: true,
         headerBackButtonDisplayMode: "minimal",
       }}
     >

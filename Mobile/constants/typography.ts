@@ -7,6 +7,7 @@ export const typography = {
     xl: 24,
     xxl: 32,
     xxxl: 40,
+    display: 52,
   },
   weights: {
     regular: "400" as const,

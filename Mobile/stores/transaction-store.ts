@@ -17,7 +17,11 @@ export const useTransactionStore = create<TransactionState>((set) => ({
   fetchTransactions: async () => {
     set({ isLoading: true });
     try {
-      const transactions = await transactionsApi.list();
+      const [transactions, balance] = await Promise.all([
+        transactionsApi.list(),
+        transactionsApi.getBalance(),
+      ]);
+      useAuthStore.getState().updateBalance(balance.balance, balance.savings);
       set({ transactions, isLoading: false });
     } catch {
       set({ isLoading: false });

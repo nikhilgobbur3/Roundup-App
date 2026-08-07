@@ -8,6 +8,12 @@ Backend/target/
 Backend/data/
 Backend/*.log
 
+# Expo dev artifacts
+Mobile/expo-server.log
+Mobile/expo-build.log
+Mobile/expo-output.txt
+Mobile/expo-qr.png
+
 # Environment
 .env
 *.env

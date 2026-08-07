@@ -19,7 +19,7 @@ import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import { typography } from "../../constants/typography";
 import { api, ApiError } from "../../services/api/client";
-import { saveToken } from "../../services/storage/secure-store";
+import { saveToken, saveUser } from "../../services/storage/secure-store";
 import { useAuthStore } from "../../stores/auth-store";
 import type { AuthResponse } from "../../types";
 
@@ -66,8 +66,9 @@ export default function SignupScreen() {
         email: data.email,
         password: data.password,
       });
-      await saveToken(res.token);
-      setAuth({ id: res.userId, name: res.name, email: res.email }, res.token);
+      const user = { id: res.userId, name: res.name, email: res.email, balance: res.balance, savings: res.savings };
+      await Promise.all([saveToken(res.token), saveUser(user)]);
+      setAuth(user, res.token);
       router.replace("/(tabs)/home");
     } catch (err) {
       if (err instanceof ApiError && err.status === 409) {

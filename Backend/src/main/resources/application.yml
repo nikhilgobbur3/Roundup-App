@@ -82,12 +82,12 @@ spring:
 #
 # jwt.expiration:
 #   - Token lifetime in milliseconds
-#   - 86400000 ms = 24 hours (1 day)
+#   - 2592000000 ms = 30 days
 #   - Users must log in again after token expires
 #   - For production, consider shorter expiration + refresh tokens
 jwt:
   secret: MySuperSecretKeyForJWTTokenGeneration2026RoundUpApp
-  expiration: 86400000
+  expiration: 2592000000
 
 # -----------------------------------------------------------------------------
 # Razorpay Configuration

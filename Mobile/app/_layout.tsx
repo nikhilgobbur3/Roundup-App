@@ -2,21 +2,12 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { View, ActivityIndicator, StyleSheet } from "react-native";
-import * as Notifications from "expo-notifications";
 import { useAuthStore } from "../stores/auth-store";
-import { getToken } from "../services/storage/secure-store";
-import { api } from "../services/api/client";
+import { getToken, getUser, clearToken, clearUser } from "../services/storage/secure-store";
+import { api, ApiError } from "../services/api/client";
 import { colors } from "../constants/colors";
-
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-  }),
-});
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -25,20 +16,39 @@ const queryClient = new QueryClient({
 });
 
 function AuthGate({ children }: { children: React.ReactNode }) {
-  const { setAuth, clearAuth, setLoading } = useAuthStore();
+  const { setAuth, clearAuth } = useAuthStore();
 
   useEffect(() => {
     (async () => {
-      const token = await getToken();
+      const [token, cachedUser] = await Promise.all([getToken(), getUser()]);
+
+      if (token && cachedUser) {
+        setAuth(cachedUser, token);
+
+        try {
+          const freshUser = await api.get<{ id: number; name: string; email: string; balance: number; savings: number }>("/api/auth/me");
+          setAuth(freshUser, token);
+        } catch (err) {
+          if (err instanceof ApiError && (err.status === 401 || err.status === 403)) {
+            await Promise.all([clearToken(), clearUser()]);
+            clearAuth();
+          }
+        }
+        return;
+      }
+
       if (token) {
         try {
           const user = await api.get<{ id: number; name: string; email: string; balance: number; savings: number }>("/api/auth/me");
           setAuth(user, token);
           return;
-        } catch {
-          await clearAuth();
+        } catch (err) {
+          if (err instanceof ApiError && (err.status === 401 || err.status === 403)) {
+            await clearToken();
+          }
         }
       }
+
       clearAuth();
     })();
   }, []);
@@ -48,30 +58,9 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
 export default function RootLayout() {
   const [ready, setReady] = useState(false);
-  const notificationListener = useRef<Notifications.Subscription>();
-  const responseListener = useRef<Notifications.Subscription>();
 
   useEffect(() => {
     setReady(true);
-
-    Notifications.requestPermissionsAsync();
-
-    notificationListener.current = Notifications.addNotificationReceivedListener(
-      () => {}
-    );
-
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(
-      () => {}
-    );
-
-    return () => {
-      if (notificationListener.current) {
-        Notifications.removeNotificationSubscription(notificationListener.current);
-      }
-      if (responseListener.current) {
-        Notifications.removeNotificationSubscription(responseListener.current);
-      }
-    };
   }, []);
 
   if (!ready) {

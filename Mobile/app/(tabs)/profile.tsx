@@ -6,7 +6,7 @@ import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import { typography } from "../../constants/typography";
 import { useAuthStore } from "../../stores/auth-store";
-import { clearToken } from "../../services/storage/secure-store";
+import { clearToken, clearUser } from "../../services/storage/secure-store";
 
 export default function ProfileScreen() {
   const router = useRouter();
@@ -15,7 +15,7 @@ export default function ProfileScreen() {
 
   const handleLogout = async () => {
     setShowLogoutModal(false);
-    await clearToken();
+    await Promise.all([clearToken(), clearUser()]);
     clearAuth();
     router.replace("/(auth)/login");
   };

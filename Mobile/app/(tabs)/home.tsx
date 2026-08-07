@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter, useFocusEffect, useNavigation } from "expo-router";
 import * as Clipboard from "expo-clipboard";
-import * as Notifications from "expo-notifications";
 import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import { typography } from "../../constants/typography";
@@ -54,18 +53,6 @@ export default function HomeScreen() {
         markAsSeen(result.raw);
         await addTransaction(result.amount, result.merchant ?? "Auto-detected");
         await fetchTransactions();
-
-        const roundedUp = Math.ceil(result.amount / CURRENCY.roundUpTo) * CURRENCY.roundUpTo;
-        const roundupSavings = roundedUp - result.amount;
-
-        await Notifications.scheduleNotificationAsync({
-          content: {
-            title: "Transaction Detected",
-            body: `${CURRENCY.symbol}${result.amount.toFixed(2)}${result.merchant ? " at " + result.merchant : ""} — ${CURRENCY.symbol}${roundupSavings.toFixed(2)} spare change saved`,
-            data: { type: "transaction_detected" },
-          },
-          trigger: null,
-        });
       }
     } catch {
     } finally {
@@ -84,15 +71,15 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.balanceCard}>
-        <Text style={styles.balanceLabel}>Current Balance</Text>
+        <Text style={styles.balanceLabel}>Your Wealth</Text>
         <Text style={styles.balanceAmount}>
-          {formatCurrency(user?.balance ?? 0)}
+          {formatCurrency(user?.savings ?? 0)}
         </Text>
         <View style={styles.balanceMeta}>
           <View style={styles.balanceMetaItem}>
-            <Ionicons name="piggy-outline" size={16} color={colors.text.inverse} />
+            <Ionicons name="save-outline" size={16} color={colors.text.inverse} />
             <Text style={styles.balanceMetaText}>
-              Savings: {formatCurrency(user?.savings ?? 0)}
+              Saved up with roundups
             </Text>
           </View>
         </View>
@@ -124,7 +111,7 @@ export default function HomeScreen() {
               >
                 <View style={styles.transactionIcon}>
                   <Ionicons
-                    name={t.type === "ROUNDUP_SAVING" ? "piggy-outline" : "cart-outline"}
+                    name={t.type === "ROUNDUP_SAVING" ? "save-outline" : "cart-outline"}
                     size={22}
                     color={t.type === "ROUNDUP_SAVING" ? colors.secondary : colors.text.primary}
                   />
@@ -197,7 +184,7 @@ const styles = StyleSheet.create({
     opacity: 0.8,
   },
   balanceAmount: {
-    fontSize: typography.sizes.xxxl,
+    fontSize: typography.sizes.display,
     fontWeight: typography.weights.bold,
     color: colors.text.inverse,
     marginTop: spacing.xs,
