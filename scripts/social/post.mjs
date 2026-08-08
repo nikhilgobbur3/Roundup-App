@@ -27,7 +27,9 @@ const CHECK = process.argv.includes('--check');
 
 const SOURCES = [
   { file: 'devto.md', platform: 'Dev.to' },
-  { file: 'hashnode.md', platform: 'Hashnode' },
+  // Hashnode paused: free GraphQL API retired May 2026 (Pro/paid required).
+  // Re-enable when a paid Hashnode plan is active:
+  // { file: 'hashnode.md', platform: 'Hashnode' },
   { file: 'reddit.md', platform: 'Reddit' },
   { file: 'video.md', platform: 'LinkedIn' },
 ];
