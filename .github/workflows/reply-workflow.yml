@@ -1,0 +1,43 @@
+name: AI Reply Assistant
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  reply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Check for new comments
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/replies/reply-check.mjs
+
+      - name: Post approved replies
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/replies/approve-replies.mjs
+
+      - name: Commit seen state
+        run: |
+          git config user.name "roundup-bot"
+          git config user.email "roundup-bot@users.noreply.github.com"
+          git add scripts/replies/seen.json
+          git diff --cached --quiet || git commit -m "chore: update reply seen state [skip ci]"
+          git push
