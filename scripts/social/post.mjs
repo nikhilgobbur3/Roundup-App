@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 // Auto-post "ready" drafts from Mobile/devto.md, Mobile/hashnode.md,
 // Mobile/reddit.md, Mobile/video.md to Dev.to, Hashnode, Reddit and LinkedIn.
+// All posting goes through Composio (REST API v3.1) using the platform
+// "connected accounts" the user authorizes once at app.composio.dev.
 // Plain Node ESM, zero dependencies. Node >= 18 (native fetch).
+//
+// Secrets: COMPOSIO_API_KEY (required). Optional HASHNODE_PUBLICATION_ID
+// to pin which Hashnode publication to publish to (otherwise auto-detected).
 //
 // Usage:
 //   node scripts/social/post.mjs --check   # parse + print ready drafts only
@@ -15,7 +20,6 @@ const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ENV_FILE = path.join(ROOT, 'scripts', '.env');
 const MOBILE_DIR = path.join(ROOT, 'Mobile');
 const BASE_IMAGE_URL = 'https://raw.githubusercontent.com/nikhilgobbur3/Roundup-App/main/';
-const REDDIT_UA = 'roundup-bot/1.0';
 
 const CHECK = process.argv.includes('--check');
 
@@ -230,172 +234,113 @@ async function readJson(res) {
 }
 
 // ---------------------------------------------------------------------------
-// platform posting
+// Composio client (REST API v3.1, x-api-key auth, native fetch)
+// ---------------------------------------------------------------------------
+
+const COMPOSIO_BASE = 'https://backend.composio.dev/api/v3.1';
+
+const accountCache = new Map();
+
+async function getAccountId(toolkitSlug) {
+  if (accountCache.has(toolkitSlug)) return accountCache.get(toolkitSlug);
+  const url =
+    `${COMPOSIO_BASE}/connected_accounts` +
+    `?toolkit_slugs=${encodeURIComponent(toolkitSlug)}&statuses=ACTIVE`;
+  const res = await fetch(url, { headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY') } });
+  const data = await readJson(res);
+  if (!res.ok) throw new HttpError(res.status, await shortBody(res));
+  const item = (data?.items || []).find((i) => i.id);
+  accountCache.set(toolkitSlug, item?.id || '');
+  return item?.id || '';
+}
+
+async function executeTool(toolSlug, toolkitSlug, args) {
+  const accountId = await getAccountId(toolkitSlug);
+  if (!accountId) {
+    throw new Error(`${toolkitSlug} not connected in Composio. Connect it once at app.composio.dev.`);
+  }
+  const res = await fetch(`${COMPOSIO_BASE}/tools/execute/${toolSlug}`, {
+    method: 'POST',
+    headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY'), 'Content-Type': 'application/json' },
+    body: JSON.stringify({ connected_account_id: accountId, arguments: args }),
+  });
+  const data = await readJson(res);
+  if (!res.ok) throw new HttpError(res.status, data?.error?.message || (await shortBody(res)));
+  if (!data?.successful) {
+    const msg = typeof data?.error === 'string' ? data.error : (data?.error?.message || data?.error || 'tool execution failed');
+    throw new HttpError(200, msg);
+  }
+  return data?.data;
+}
+
+function parseData(raw) {
+  if (typeof raw === 'string') {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return raw;
+    }
+  }
+  return raw;
+}
+
+// ---------------------------------------------------------------------------
+// platform posting (all via Composio tools)
 // ---------------------------------------------------------------------------
 
 async function postDevto(sec) {
-  if (!getEnv('DEVTO_API_KEY')) return SKIP;
-  const res = await fetch('https://dev.to/api/articles', {
-    method: 'POST',
-    headers: {
-      'api-key': getEnv('DEVTO_API_KEY'),
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      article: {
-        title: (sec.fields.title || '').trim(),
-        published: true,
-        tags: parseTags(sec.fields.tags)
-          .map((t) => t.toLowerCase().replace(/[^a-z0-9]/g, ''))
-          .filter(Boolean)
-          .slice(0, 4),
-        body_markdown: resolveImages(bodyOf(sec)),
-      },
-    }),
+  if (!getEnv('COMPOSIO_API_KEY')) return SKIP;
+  await executeTool('DEVTO_CREATE_ARTICLE', 'devto', {
+    title: (sec.fields.title || '').trim(),
+    published: true,
+    body_markdown: resolveImages(bodyOf(sec)),
+    tags: parseTags(sec.fields.tags).slice(0, 4),
   });
-  if (!res.ok) throw new HttpError(res.status, await shortBody(res));
   return true;
 }
 
 async function postHashnode(sec) {
-  if (!getEnv('HASHNODE_API_TOKEN') || !getEnv('HASHNODE_PUBLICATION_ID')) return SKIP;
-  const res = await fetch('https://api.hashnode.com', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${getEnv('HASHNODE_API_TOKEN')}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: 'mutation Publish($input: CreatePostInput!) { publishPost(input: $input) { post { id } } }',
-      variables: {
-        input: {
-          title: (sec.fields.title || '').trim(),
-          contentMarkdown: resolveImages(bodyOf(sec)),
-          publicationId: getEnv('HASHNODE_PUBLICATION_ID'),
-          tags: parseTags(sec.fields.tags).map((name) => ({ name })),
-        },
-      },
-    }),
-  });
-  const data = await readJson(res);
-  if (!res.ok || data?.errors) {
-    const msg = data?.errors?.[0]?.message || (await shortBody(res));
-    throw new HttpError(res.status, msg);
+  if (!getEnv('COMPOSIO_API_KEY')) return SKIP;
+  let publicationId = getEnv('HASHNODE_PUBLICATION_ID');
+  if (!publicationId) {
+    const pubs = parseData(await executeTool('HASHNODE_LIST_PUBLICATIONS', 'hashnode', {}));
+    publicationId = pubs?.publications?.[0]?.id || pubs?.data?.publications?.[0]?.id || '';
+    if (!publicationId) {
+      throw new Error('No Hashnode publication found. Set HASHNODE_PUBLICATION_ID to pick one.');
+    }
   }
-  return true;
-}
-
-async function getRedditToken() {
-  const auth = Buffer.from(`${getEnv('REDDIT_CLIENT_ID')}:${getEnv('REDDIT_CLIENT_SECRET')}`).toString('base64');
-  const res = await fetch('https://www.reddit.com/api/v1/access_token', {
-    method: 'POST',
-    headers: { Authorization: `Basic ${auth}`, 'User-Agent': REDDIT_UA },
-    body: new URLSearchParams({ grant_type: 'refresh_token', refresh_token: getEnv('REDDIT_REFRESH_TOKEN') }),
+  await executeTool('HASHNODE_PUBLISH_POST', 'hashnode', {
+    title: (sec.fields.title || '').trim(),
+    contentMarkdown: resolveImages(bodyOf(sec)),
+    publicationId,
   });
-  const data = await readJson(res);
-  if (!res.ok || !data?.access_token) {
-    throw new HttpError(res.status, data?.message || 'no access_token');
-  }
-  return data.access_token;
-}
-
-async function submitReddit(token, sub, title, text) {
-  const form = new URLSearchParams({
-    api_type: 'json',
-    sr: sub.replace(/^r\//i, ''),
-    kind: 'self',
-    title,
-    text,
-    resubmit: 'true',
-  });
-  const res = await fetch('https://oauth.reddit.com/api/submit', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${token}`, 'User-Agent': REDDIT_UA },
-    body: form,
-  });
-  const data = await readJson(res);
-  if (!res.ok) throw new HttpError(res.status, await shortBody(res));
-  const errors = data?.json?.errors;
-  if (errors && errors.length) {
-    throw new HttpError(res.status, String(errors[0][1] || errors[0][0]));
-  }
   return true;
 }
 
 async function postReddit(sec) {
-  if (!getEnv('REDDIT_CLIENT_ID') || !getEnv('REDDIT_CLIENT_SECRET') || !getEnv('REDDIT_REFRESH_TOKEN')) {
-    return SKIP;
-  }
-  const token = await getRedditToken();
+  if (!getEnv('COMPOSIO_API_KEY')) return SKIP;
   const subreddits = parseTags(sec.fields.subreddits);
   for (const sub of subreddits) {
     const subSection = sec.subsections.find((s) => s.heading.toLowerCase().includes(sub.toLowerCase()));
     const target = subSection || sec;
     const title = (target.fields.title || sec.fields.title || '').trim();
     const text = resolveImages(bodyOf(target)).trim();
-    await submitReddit(token, sub, title, text);
+    await executeTool('REDDIT_CREATE_REDDIT_POST', 'reddit', {
+      title,
+      subreddit: sub.replace(/^r\//i, ''),
+      kind: 'self',
+      text,
+    });
     await sleep(2000); // be kind to reddit's rate limiter
   }
   return true;
 }
 
-async function getLinkedInToken() {
-  const res = await fetch('https://www.linkedin.com/oauth/v2/accessToken', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: new URLSearchParams({
-      grant_type: 'refresh_token',
-      refresh_token: getEnv('LINKEDIN_REFRESH_TOKEN'),
-      client_id: getEnv('LINKEDIN_CLIENT_ID'),
-      client_secret: getEnv('LINKEDIN_CLIENT_SECRET'),
-    }),
-  });
-  const data = await readJson(res);
-  if (!res.ok || !data?.access_token) {
-    throw new HttpError(res.status, data?.error_description || 'no access_token');
-  }
-  return data.access_token;
-}
-
-async function linkedinInitImage(token, owner, imageUrl) {
-  const res = await fetch('https://api.linkedin.com/rest/images?action=initializeUpload', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'X-Restli-Protocol-Version': '2.0.0',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ owner }),
-  });
-  const data = await readJson(res);
-  if (!res.ok || !data?.value?.uploadUrl || !data?.value?.image) {
-    throw new HttpError(res.status, data?.message || 'image initializeUpload failed');
-  }
-  const imgRes = await fetch(imageUrl);
-  if (!imgRes.ok) throw new HttpError(imgRes.status, 'failed to fetch image bytes');
-  const up = await fetch(data.value.uploadUrl, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'image/png' },
-    body: await imgRes.arrayBuffer(),
-  });
-  if (up.status < 200 || up.status >= 300) {
-    throw new HttpError(up.status, 'image upload failed');
-  }
-  return data.value.image;
-}
-
 async function postLinkedIn(sec) {
-  if (!getEnv('LINKEDIN_CLIENT_ID') || !getEnv('LINKEDIN_CLIENT_SECRET') || !getEnv('LINKEDIN_REFRESH_TOKEN')) {
-    return SKIP;
-  }
-  const token = await getLinkedInToken();
-
-  const me = await fetch('https://api.linkedin.com/v2/userinfo', {
-    headers: { Authorization: `Bearer ${token}` },
-  });
-  const meData = await readJson(me);
-  if (!me.ok || !meData?.sub) throw new HttpError(me.status, 'userinfo failed');
-  const author = `urn:li:person:${meData.sub}`;
+  if (!getEnv('COMPOSIO_API_KEY')) return SKIP;
+  const me = parseData(await executeTool('LINKEDIN_GET_MY_INFO', 'linkedin', {}));
+  const personId = me?.sub || me?.id || (typeof me === 'string' ? me : '');
+  if (!personId) throw new Error('Could not resolve LinkedIn person id from GET_MY_INFO.');
 
   const raw = bodyOf(sec);
   const imgUrl = findImageUrl(raw);
@@ -403,33 +348,15 @@ async function postLinkedIn(sec) {
     .replace(/!\[[^\]]*\]\([^)]*\)/g, '') // strip markdown image syntax from text
     .replace(/\n{3,}/g, '\n\n')
     .trim();
-  const post = {
-    author,
-    lifecycleState: 'PUBLISHED',
+
+  const args = {
+    author: `urn:li:person:${personId}`,
     commentary,
     visibility: 'PUBLIC',
-    distribution: {
-      feedDistribution: 'MAIN_FEED',
-      targetEntities: [],
-      thirdPartyDistributionChannels: [],
-    },
+    lifecycleState: 'PUBLISHED',
   };
-
-  if (imgUrl) {
-    const imageId = await linkedinInitImage(token, author, imgUrl);
-    post.content = { media: { id: imageId } };
-  }
-
-  const res = await fetch('https://api.linkedin.com/rest/posts', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-      'X-Restli-Protocol-Version': '2.0.0',
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(post),
-  });
-  if (!res.ok) throw new HttpError(res.status, await shortBody(res));
+  if (imgUrl) args.images = [imgUrl]; // Composio uploads the image for us
+  await executeTool('LINKEDIN_CREATE_LINKED_IN_POST', 'linkedin', args);
   return true;
 }
 
@@ -465,6 +392,11 @@ if (CHECK) {
 
 let hadFailure = false;
 const marksByFile = new Map(); // filePath -> [lineIndex...]
+
+if (!getEnv('COMPOSIO_API_KEY')) {
+  console.log('COMPOSIO_API_KEY is not set — nothing posted. (skip all platforms)');
+  process.exit(0);
+}
 
 for (const d of drafts) {
   console.log(`- ${d.src.file}: ${d.sec.heading} (${d.sec.fields.date.trim()})`);
