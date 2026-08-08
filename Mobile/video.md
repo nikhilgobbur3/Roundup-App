@@ -272,7 +272,7 @@ Home screen — the "Your Wealth" number grew.
 
 **Date:** 2026-08-08
 **Note:** set Date to today when the phone screenshots in `media/screenshots/` are added
-**Posted:** ❌
+**Posted:** ✅ 2026-08-08
 
 **Body:**
 

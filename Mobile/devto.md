@@ -15,7 +15,7 @@
 ## Post 1: Building RoundUp — A UPI Expense Tracker That Saves Your Spare Change
 
 **Date:** 2026-08-07
-**Posted:** ❌
+**Posted:** ✅ 2026-08-08
 **Tags:** reactnative, expo, springboot, fintech, upi
 
 **Title:** Building RoundUp — A Full-Stack UPI App That Saves Your Spare Change (React Native + Spring Boot)

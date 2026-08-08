@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 // Auto-post "ready" drafts from Mobile/devto.md, Mobile/hashnode.md,
 // Mobile/reddit.md, Mobile/video.md to Dev.to, Hashnode, Reddit and LinkedIn.
-// All posting goes through Composio (REST API v3.1) using the platform
-// "connected accounts" the user authorizes once at app.composio.dev.
+// All posting goes through Composio via its Connect/MCP endpoint
+// (https://connect.composio.dev/mcp) using the platform "connected accounts"
+// the user authorizes once at composio.dev. The MCP endpoint accepts the
+// scoped API keys that the raw REST backend rejects (401).
 // Plain Node ESM, zero dependencies. Node >= 18 (native fetch).
 //
 // Secrets: COMPOSIO_API_KEY (required). Optional HASHNODE_PUBLICATION_ID
@@ -234,43 +236,80 @@ async function readJson(res) {
 }
 
 // ---------------------------------------------------------------------------
-// Composio client (REST API v3.1, x-api-key auth, native fetch)
+// Composio client via the Connect/MCP endpoint (JSON-RPC over Streamable HTTP)
 // ---------------------------------------------------------------------------
 
-const COMPOSIO_BASE = 'https://backend.composio.dev/api/v3.1';
+const MCP_URL = 'https://connect.composio.dev/mcp';
+let mcpId = 0;
 
-const accountCache = new Map();
-
-async function getAccountId(toolkitSlug) {
-  if (accountCache.has(toolkitSlug)) return accountCache.get(toolkitSlug);
-  const url =
-    `${COMPOSIO_BASE}/connected_accounts` +
-    `?toolkit_slugs=${encodeURIComponent(toolkitSlug)}&statuses=ACTIVE`;
-  const res = await fetch(url, { headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY') } });
-  const data = await readJson(res);
-  if (!res.ok) throw new HttpError(res.status, await shortBody(res));
-  const item = (data?.items || []).find((i) => i.id);
-  accountCache.set(toolkitSlug, item?.id || '');
-  return item?.id || '';
-}
-
-async function executeTool(toolSlug, toolkitSlug, args) {
-  const accountId = await getAccountId(toolkitSlug);
-  if (!accountId) {
-    throw new Error(`${toolkitSlug} not connected in Composio. Connect it once at app.composio.dev.`);
-  }
-  const res = await fetch(`${COMPOSIO_BASE}/tools/execute/${toolSlug}`, {
+async function mcpCall(method, params) {
+  const res = await fetch(MCP_URL, {
     method: 'POST',
-    headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY'), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ connected_account_id: accountId, arguments: args }),
+    headers: {
+      'x-consumer-api-key': getEnv('COMPOSIO_API_KEY'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json, text/event-stream',
+    },
+    body: JSON.stringify({ jsonrpc: '2.0', id: ++mcpId, method, params }),
   });
-  const data = await readJson(res);
-  if (!res.ok) throw new HttpError(res.status, data?.error?.message || (await shortBody(res)));
-  if (!data?.successful) {
-    const msg = typeof data?.error === 'string' ? data.error : (data?.error?.message || data?.error || 'tool execution failed');
+  const text = await res.text();
+  if (!res.ok) throw new HttpError(res.status, text.slice(0, 120));
+  const data = text
+    .split(/\r?\n/)
+    .filter((l) => l.startsWith('data: '))
+    .map((l) => l.slice(6))
+    .join('\n');
+  let payload;
+  try {
+    payload = JSON.parse(data);
+  } catch {
+    throw new HttpError(200, text.slice(0, 160) || 'empty MCP response');
+  }
+  if (payload.error) {
+    const msg = typeof payload.error === 'string' ? payload.error : JSON.stringify(payload.error);
     throw new HttpError(200, msg);
   }
-  return data?.data;
+  return payload.result;
+}
+
+function extractToolText(result) {
+  const content = result?.content;
+  if (Array.isArray(content)) {
+    const texts = content.filter((c) => c?.type === 'text').map((c) => c.text || '');
+    return texts.length ? texts.join('\n') : (content.find((c) => c?.text)?.text || '');
+  }
+  return result?.content?.text || '';
+}
+
+async function executeTool(toolSlug, _toolkitSlug, args) {
+  const result = await mcpCall('tools/call', {
+    name: 'COMPOSIO_MULTI_EXECUTE_TOOL',
+    arguments: {
+      tools: [{ tool_slug: toolSlug, arguments: args }],
+      sync_response_to_workbench: false,
+      thought: `Execute ${toolSlug} for the RoundUp auto-posting pipeline.`,
+      memory: {},
+      current_step: 'POSTING',
+      current_step_metric: '1/1',
+    },
+  });
+  const text = extractToolText(result);
+  let j;
+  try {
+    j = JSON.parse(text);
+  } catch {
+    throw new HttpError(200, text.slice(0, 160) || 'no tool result');
+  }
+  const entry = j?.data?.results?.[0]?.response;
+  if (!entry) {
+    const errMsg = j?.data?.error || j?.error || text.slice(0, 160);
+    throw new HttpError(200, typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg));
+  }
+  if (!entry.successful) {
+    const errMsg = entry.error?.message || entry.error || entry.message || 'tool execution failed';
+    throw new HttpError(200, typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg));
+  }
+  return entry.data;
 }
 
 function parseData(raw) {
