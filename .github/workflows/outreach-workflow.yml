@@ -1,0 +1,43 @@
+name: Startup Outreach
+
+on:
+  schedule:
+    - cron: '30 1 * * *'
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/outreach/**'
+      - '.github/workflows/outreach-workflow.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  outreach:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch startups and draft notes
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          node scripts/outreach/fetch-startups.mjs
+          node scripts/outreach/draft-outreach.mjs
+
+      - name: Commit outreach state
+        run: |
+          git config user.name "roundup-bot"
+          git config user.email "roundup-bot@users.noreply.github.com"
+          git add scripts/outreach/state.json scripts/outreach/pack.json
+          git diff --cached --quiet || git commit -m "chore: update outreach state [skip ci]"
+          git push

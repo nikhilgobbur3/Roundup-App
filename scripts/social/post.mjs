@@ -193,6 +193,7 @@ function resolveImages(md) {
 function findImageUrl(md) {
   const inline = md.match(/!\[[^\]]*\]\(([^)]+)\)/);
   if (inline && /^https?:\/\//i.test(inline[1])) return inline[1];
+  if (inline && /^media\//.test(inline[1])) return BASE_IMAGE_URL + inline[1];
   const direct = md.match(/https?:\/\/[^\s)]+\.(?:png|jpe?g|gif|webp)(?:\?[^\s)]*)?/i);
   return direct ? direct[0] : null;
 }
