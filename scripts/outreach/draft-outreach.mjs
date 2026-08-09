@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Phase 2 of the startup outreach assistant. Turns the batch in pack.json into
 // GitHub issues, one per company, each listing the founders, their LinkedIn
-// URLs and a <190 char Gemini-drafted connection note. Also retires issues
-// where you commented "done" or "skip".
+// URLs, a <190 char Gemini-drafted connection note, and a follow-up message to
+// send after the founder accepts. Also retires issues where you commented
+// "done" or "skip".
 //
 // Needs: GEMINI_API_KEY (drafting), GITHUB_TOKEN + GITHUB_REPOSITORY (issues).
 // Optional: GEMINI_MODEL (default gemini-3.5-flash).
@@ -19,6 +20,7 @@ const PACK_FILE = path.join(ROOT, 'scripts', 'outreach', 'pack.json');
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 const MAX_NOTE = 190;
+const MAX_FOLLOWUP = 400;
 const REPO = process.env.GITHUB_REPOSITORY || '';
 
 // ---------------------------------------------------------------------------
@@ -83,31 +85,36 @@ function readProfile() {
 // gemini
 // ---------------------------------------------------------------------------
 
-function trimNote(note) {
-  let s = String(note || '').replace(/\s+/g, ' ').trim();
-  if (s.length > MAX_NOTE) {
-    const cut = s.slice(0, MAX_NOTE);
+function trimTo(s, max) {
+  let t = String(s || '').replace(/\s+/g, ' ').trim();
+  if (t.length > max) {
+    const cut = t.slice(0, max);
     const lastSpace = cut.lastIndexOf(' ');
-    s = (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trim();
+    t = (lastSpace > 40 ? cut.slice(0, lastSpace) : cut).trim();
   }
-  return s;
+  return t;
 }
 
-async function draftNote(founder, company, profile) {
+async function draftMessages(founder, company, profile) {
   const prompt = [
-    `You write LinkedIn connection-request notes for ${profile.intro ? 'a software engineer with this intro: "' + profile.intro + '"' : 'a software engineer'}.`,
+    `You write LinkedIn messages for ${profile.intro ? 'a software engineer with this intro: "' + profile.intro + '"' : 'a software engineer'}.`,
     profile.repo ? `Their public project: ${profile.repo}.` : '',
     profile.rules ? `Extra rules: ${profile.rules}` : '',
     '',
-    `Write ONE short, genuine LinkedIn connection note from them to ${founder.name}, ${founder.title} at ${company.name} (${company.one_liner}).`,
+    `The recipient is ${founder.name}, ${founder.title} at ${company.name} (${company.one_liner}).`,
     '',
-    'Requirements:',
-    '- Plain text only, no markdown, no emojis, no hashtags, no line breaks.',
-    '- First person, polite, warm, startup-friendly.',
-    '- Briefly tie it to THEIR work (' + company.one_liner + '), then one line about who you are.',
-    `- Must be ${MAX_NOTE} characters or fewer. Count carefully.`,
-    '- Do NOT ask for a job, referral, or anything. Just introduce and connect.',
-    '- Output ONLY the note text, nothing else.',
+    'Write TWO short, genuine, first-person messages from the engineer:',
+    '1. "note": the LinkedIn connection-request note (sent with the Connect button).',
+    `   - ${MAX_NOTE} characters or fewer.`,
+    '   - Tie it briefly to THEIR work (' + company.one_liner + '), then one line about who you are.',
+    '   - Do NOT ask for anything. Just introduce and connect.',
+    `2. "followup": the message to send AFTER the recipient accepts the connection.`,
+    `   - ${MAX_FOLLOWUP} characters or fewer, 2-4 sentences.`,
+    '   - Warm, thank them briefly, restate genuine interest in their startup, and end with a soft question they can answer easily.',
+    '   - Still first person, still no job, referral, or favor request.',
+    '',
+    'Rules for both: plain text, no markdown, no emojis, no hashtags, no line breaks.',
+    'Return strictly valid JSON: {"note":"...","followup":"..."}',
   ].filter(Boolean).join('\n');
 
   const res = await fetch(
@@ -117,7 +124,7 @@ async function draftNote(founder, company, profile) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.8 },
+        generationConfig: { temperature: 0.8, responseMimeType: 'application/json' },
       }),
     }
   );
@@ -129,10 +136,23 @@ async function draftNote(founder, company, profile) {
     }
   })();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (text) return trimNote(text);
+  if (text) {
+    let parsed = null;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      const note = text.match(/"note"\s*:\s*"((?:\\.|[^"\\])*)"/);
+      const followup = text.match(/"followup"\s*:\s*"((?:\\.|[^"\\])*)"/);
+      parsed = { note: note ? note[1] : '', followup: followup ? followup[1] : '' };
+    }
+    return {
+      note: trimTo(parsed?.note, MAX_NOTE),
+      followup: trimTo(parsed?.followup, MAX_FOLLOWUP),
+    };
+  }
   const err = data?.error?.message || (data ? JSON.stringify(data).slice(0, 200) : `HTTP ${res.status}`);
   console.log(`    [gemini ${MODEL}] draft failed: ${err}`);
-  return '';
+  return { note: '', followup: '' };
 }
 
 // ---------------------------------------------------------------------------
@@ -189,11 +209,14 @@ async function openIssue(company) {
     } else {
       sections.push(`**Connect:** LinkedIn URL not published — search **"${f.name} ${company.name}"** on LinkedIn and send the note.`);
     }
-    sections.push(`**Send:** ${f.note}`, '');
+    sections.push(`**Send:** ${f.note}`);
+    if (f.followup) sections.push(`**After they accept — send:** ${f.followup}`);
+    sections.push('');
   });
   sections.push(
     '- Open each LinkedIn link above and hit "Connect", then paste the "Send" note.',
-    '- When you have sent every request for a company, comment `done` on its issue.',
+    '- If a founder accepts, send them the "After they accept — send:" message.',
+    '- When a company is fully handled, comment `done` on its issue.',
     '- To skip a company, comment `skip`. The daily bot closes both.',
     '',
     'OUTREACH:START',
@@ -267,18 +290,20 @@ for (const company of pack) {
   if (CHECK) {
     console.log(`\n=== ${company.name} (${company.batch}) ===`);
     for (const f of company.founders) {
-      const note = await draftNote(f, company, profile);
+      const m = await draftMessages(f, company, profile);
       console.log(`  ${f.name} | ${f.title}`);
       console.log(`  linkedin: ${f.linkedin_url || '(none)'}`);
-      console.log(`  note(${note.length}): ${note}`);
+      console.log(`  note(${m.note.length}): ${m.note}`);
+      if (m.followup) console.log(`  followup(${m.followup.length}): ${m.followup}`);
     }
     continue;
   }
   let ok = true;
   for (const f of company.founders) {
-    const note = await draftNote(f, company, profile);
-    if (!note) { ok = false; break; }
-    f.note = note;
+    const m = await draftMessages(f, company, profile);
+    if (!m.note) { ok = false; break; }
+    f.note = m.note;
+    if (m.followup) f.followup = m.followup;
   }
   if (!ok) {
     console.log(`  ${company.name}: note draft failed, keeping for next run`);

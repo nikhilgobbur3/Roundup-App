@@ -9,9 +9,9 @@ auto-sent (LinkedIn blocks bots, and we refuse to risk your account).
 
 1. `fetch-startups.mjs` — picks companies we haven't contacted yet and saves
    them to `pack.json`.
-2. `draft-outreach.mjs` — asks Gemini to write a <190 char note per founder,
-   opens one issue per company (`Outreach: <Company>`), then empties
-   `pack.json`.
+2. `draft-outreach.mjs` — asks Gemini to write a <190 char note **plus a
+   follow-up message** per founder, opens one issue per company
+   (`Outreach: <Company>`), then empties `pack.json`.
 3. The workflow commits the updated state.
 
 ## What you do (from your phone)
@@ -19,9 +19,12 @@ auto-sent (LinkedIn blocks bots, and we refuse to risk your account).
 1. Open the repo → **Issues**. Look for new issues titled `Outreach: ...`.
 2. For each founder listed, tap their **Connect** link, hit "Connect", and
    paste the **Send** note (it's already under 190 characters).
-3. When a company is fully handled, comment **`done`** on its issue. To skip a
+3. If a founder **accepts**, send them the **"After they accept — send:"**
+   message — that second message is what turns a connection into a real
+   conversation.
+4. When a company is fully handled, comment **`done`** on its issue. To skip a
    company, comment **`skip`**. The next daily run closes both.
-4. Expect roughly 1-2 companies (2-6 notes) per day — under LinkedIn's weekly
+5. Expect roughly 1-2 companies (2-6 notes) per day — under LinkedIn's weekly
    connection limits, so you stay safe.
 
 ## Customize the notes
