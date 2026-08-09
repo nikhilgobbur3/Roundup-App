@@ -5,7 +5,7 @@
 // approve-replies.mjs on a later run.
 //
 // Needs: COMPOSIO_API_KEY, GEMINI_API_KEY, GITHUB_TOKEN.
-// Optional: GEMINI_MODEL (default gemini-2.0-flash).
+// Optional: GEMINI_MODEL (default gemini-3.5-flash).
 // Plain Node ESM, zero dependencies.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -17,7 +17,7 @@ const ENV_FILE = path.join(ROOT, 'scripts', '.env');
 const SEEN_FILE = path.join(ROOT, 'scripts', 'replies', 'seen.json');
 const COMPOSIO_BASE = 'https://backend.composio.dev/api/v3.1';
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const SEEN = { reddit: [], linkedin: [] };
 

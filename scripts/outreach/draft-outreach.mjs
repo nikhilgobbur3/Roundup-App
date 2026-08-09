@@ -5,7 +5,7 @@
 // where you commented "done" or "skip".
 //
 // Needs: GEMINI_API_KEY (drafting), GITHUB_TOKEN + GITHUB_REPOSITORY (issues).
-// Optional: GEMINI_MODEL (default gemini-2.0-flash).
+// Optional: GEMINI_MODEL (default gemini-3.5-flash).
 // Plain Node ESM, zero dependencies.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
@@ -17,7 +17,7 @@ const ENV_FILE = path.join(ROOT, 'scripts', '.env');
 const PROFILE_FILE = path.join(ROOT, 'scripts', 'outreach', 'profile.md');
 const PACK_FILE = path.join(ROOT, 'scripts', 'outreach', 'pack.json');
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
-const MODEL = process.env.GEMINI_MODEL || 'gemini-2.0-flash';
+const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 const MAX_NOTE = 190;
 const REPO = process.env.GITHUB_REPOSITORY || '';
 
@@ -129,7 +129,10 @@ async function draftNote(founder, company, profile) {
     }
   })();
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  return text ? trimNote(text) : '';
+  if (text) return trimNote(text);
+  const err = data?.error?.message || (data ? JSON.stringify(data).slice(0, 200) : `HTTP ${res.status}`);
+  console.log(`    [gemini ${MODEL}] draft failed: ${err}`);
+  return '';
 }
 
 // ---------------------------------------------------------------------------
