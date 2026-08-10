@@ -62,19 +62,27 @@ const COUNT = Math.max(1, Number(env.OUTREACH_COMPANIES_PER_DAY) || 2);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 async function getJson(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': UA } });
-  if (!res.ok) return null;
   try {
-    return await res.json();
+    const res = await fetch(url, { headers: { 'User-Agent': UA } });
+    if (!res.ok) return null;
+    try {
+      return await res.json();
+    } catch {
+      return null;
+    }
   } catch {
     return null;
   }
 }
 
 async function getPage(url) {
-  const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' } });
-  if (!res.ok) return '';
-  return res.text();
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': UA, Accept: 'text/html' } });
+    if (!res.ok) return '';
+    return res.text();
+  } catch {
+    return '';
+  }
 }
 
 function htmlDecode(str) {
@@ -147,9 +155,21 @@ async function openOutreachCount() {
   let count = 0;
   let url = `https://api.github.com/repos/${REPO}/issues?state=open&per_page=100`;
   while (url) {
-    const res = await fetch(url, { headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/vnd.github+json' } });
+    let res;
+    try {
+      res = await fetch(url, { headers: { Authorization: `Bearer ${TOKEN}`, Accept: 'application/vnd.github+json' } });
+    } catch {
+      break;
+    }
     if (!res.ok) break;
-    const items = await res.json();
+    const items = await (async () => {
+      try {
+        return await res.json();
+      } catch {
+        return null;
+      }
+    })();
+    if (!Array.isArray(items)) break;
     for (const item of items) {
       if ((item.body || '').includes('OUTREACH:START')) count++;
     }

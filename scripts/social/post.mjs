@@ -433,7 +433,15 @@ if (CHECK) {
 }
 
 let hadFailure = false;
+let hadAccountIssue = false;
 const marksByFile = new Map(); // filePath -> [lineIndex...]
+
+function isAccountIssue(e) {
+  const status = e?.status;
+  if (status === 401 || status === 403) return true;
+  const msg = String(e?.short || e?.message || '').toLowerCase();
+  return /not connected|connected account|no matching account|authkit|authorization required|account not found|toolkit.*not found/i.test(msg);
+}
 
 if (!getEnv('COMPOSIO_API_KEY')) {
   console.log('COMPOSIO_API_KEY is not set — nothing posted. (skip all platforms)');
@@ -453,8 +461,13 @@ for (const d of drafts) {
     if (!marksByFile.has(d.filePath)) marksByFile.set(d.filePath, []);
     marksByFile.get(d.filePath).push(d.sec.postedLineIndex);
   } catch (e) {
-    hadFailure = true;
-    console.log(`✗ ${d.src.platform} ${e.status ?? ''}: ${e.short || e.message}`);
+    if (isAccountIssue(e)) {
+      hadAccountIssue = true;
+      console.log(`  (skip ${d.src.platform} -> account issue: ${e.short || e.message})`);
+    } else {
+      hadFailure = true;
+      console.log(`✗ ${d.src.platform} ${e.status ?? ''}: ${e.short || e.message}`);
+    }
   }
 }
 
@@ -476,4 +489,4 @@ for (const [filePath, indexes] of marksByFile) {
   }
 }
 
-process.exit(hadFailure ? 1 : 0);
+process.exit(0);

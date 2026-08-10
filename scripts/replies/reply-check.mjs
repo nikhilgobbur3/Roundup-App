@@ -15,7 +15,6 @@ import { fileURLToPath } from 'node:url';
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ENV_FILE = path.join(ROOT, 'scripts', '.env');
 const SEEN_FILE = path.join(ROOT, 'scripts', 'replies', 'seen.json');
-const COMPOSIO_BASE = 'https://backend.composio.dev/api/v3.1';
 const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
 const MODEL = process.env.GEMINI_MODEL || 'gemini-3.5-flash';
 const REPO = process.env.GITHUB_REPOSITORY || '';
@@ -73,45 +72,105 @@ function parseData(raw) {
 }
 
 // ---------------------------------------------------------------------------
-// composio
+// composio (via the Connect/MCP endpoint — the scoped key rejects REST v3.1)
 // ---------------------------------------------------------------------------
 
-const accountCache = new Map();
+const MCP_URL = 'https://connect.composio.dev/mcp';
+let mcpId = 0;
 
-async function getAccountId(toolkitSlug) {
-  if (accountCache.has(toolkitSlug)) return accountCache.get(toolkitSlug);
-  const url = `${COMPOSIO_BASE}/connected_accounts?toolkit_slugs=${encodeURIComponent(toolkitSlug)}&statuses=ACTIVE`;
-  const res = await fetch(url, { headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY') } });
-  const data = await readJson(res);
-  const id = (data?.items || []).find((i) => i.id)?.id || '';
-  accountCache.set(toolkitSlug, id);
-  return id;
+async function mcpCall(method, params) {
+  const res = await fetch(MCP_URL, {
+    method: 'POST',
+    headers: {
+      'x-consumer-api-key': getEnv('COMPOSIO_API_KEY'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json, text/event-stream',
+    },
+    body: JSON.stringify({ jsonrpc: '2.0', id: ++mcpId, method, params }),
+  });
+  const text = await res.text();
+  if (!res.ok) throw new Error(text.slice(0, 120));
+  const data = text
+    .split(/\r?\n/)
+    .filter((l) => l.startsWith('data: '))
+    .map((l) => l.slice(6))
+    .join('\n');
+  let payload;
+  try {
+    payload = JSON.parse(data);
+  } catch {
+    throw new Error(text.slice(0, 160) || 'empty MCP response');
+  }
+  if (payload.error) {
+    const msg = typeof payload.error === 'string' ? payload.error : JSON.stringify(payload.error);
+    throw new Error(msg);
+  }
+  return payload.result;
 }
 
-async function executeTool(toolSlug, toolkitSlug, args) {
-  const accountId = await getAccountId(toolkitSlug);
-  if (!accountId) return null;
-  const res = await fetch(`${COMPOSIO_BASE}/tools/execute/${toolSlug}`, {
-    method: 'POST',
-    headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY'), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ connected_account_id: accountId, arguments: args }),
-  });
-  const data = await readJson(res);
-  if (!res.ok || !data?.successful) return null;
-  return parseData(data.data);
+function extractToolText(result) {
+  const content = result?.content;
+  if (Array.isArray(content)) {
+    const texts = content.filter((c) => c?.type === 'text').map((c) => c.text || '');
+    return texts.length ? texts.join('\n') : (content.find((c) => c?.text)?.text || '');
+  }
+  return result?.content?.text || '';
 }
 
-async function proxyGet(toolkitSlug, endpoint) {
-  const accountId = await getAccountId(toolkitSlug);
-  if (!accountId) return null;
-  const res = await fetch(`${COMPOSIO_BASE}/tools/execute/proxy`, {
-    method: 'POST',
-    headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY'), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ connected_account_id: accountId, endpoint, method: 'GET' }),
-  });
-  const data = await readJson(res);
-  if (!res.ok || !data?.successful) return null;
-  return data.data;
+async function executeTool(toolSlug, _toolkitSlug, args) {
+  try {
+    const result = await mcpCall('tools/call', {
+      name: 'COMPOSIO_MULTI_EXECUTE_TOOL',
+      arguments: {
+        tools: [{ tool_slug: toolSlug, arguments: args }],
+        sync_response_to_workbench: false,
+        thought: `Execute ${toolSlug} for the RoundUp reply pipeline.`,
+        memory: {},
+        current_step: 'REPLY_CHECK',
+        current_step_metric: '1/1',
+      },
+    });
+    const text = extractToolText(result);
+    let j;
+    try {
+      j = JSON.parse(text);
+    } catch {
+      return null;
+    }
+    const entry = j?.data?.results?.[0]?.response;
+    if (!entry || !entry.successful) return null;
+    return parseData(entry.data);
+  } catch {
+    return null;
+  }
+}
+
+async function proxyGet(_toolkitSlug, endpoint) {
+  try {
+    const result = await mcpCall('tools/call', {
+      name: 'COMPOSIO_MULTI_EXECUTE_TOOL',
+      arguments: {
+        tools: [{ tool_slug: 'HTTPRequest', arguments: { url: `https://api.linkedin.com${endpoint}`, method: 'GET' } }],
+        sync_response_to_workbench: false,
+        thought: 'Proxy GET for the RoundUp reply pipeline.',
+        memory: {},
+        current_step: 'REPLY_CHECK',
+        current_step_metric: '1/1',
+      },
+    });
+    const text = extractToolText(result);
+    let j;
+    try {
+      j = JSON.parse(text);
+    } catch {
+      return null;
+    }
+    const entry = j?.data?.results?.[0]?.response;
+    if (!entry || !entry.successful) return null;
+    return parseData(entry.data);
+  } catch {
+    return null;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -132,17 +191,26 @@ async function draftReplies(commentText) {
     commentText,
   ].join('\n');
 
-  const res = await fetch(
-    `${GEMINI_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(getEnv('GEMINI_API_KEY'))}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.7, responseMimeType: 'application/json' },
-      }),
-    }
-  );
+  let res;
+  try {
+    res = await Promise.race([
+      fetch(
+        `${GEMINI_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(getEnv('GEMINI_API_KEY'))}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.7, responseMimeType: 'application/json' },
+          }),
+        }
+      ),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('Gemini request timed out')), 45000)),
+    ]);
+  } catch (err) {
+    console.log(`  [gemini] request failed: ${err.message}`);
+    return [];
+  }
   const data = await readJson(res);
   const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
   if (!text) return [];
@@ -184,11 +252,16 @@ async function openIssue(meta) {
     'REPLY-DRAFT:END',
   ].filter(Boolean).join('\n');
 
-  const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
-    method: 'POST',
-    headers: ghHeaders(),
-    body: JSON.stringify({ title: `Reply needed: ${meta.title}`, body }),
-  });
+  let res;
+  try {
+    res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+      method: 'POST',
+      headers: ghHeaders(),
+      body: JSON.stringify({ title: `Reply needed: ${meta.title}`, body }),
+    });
+  } catch {
+    return false;
+  }
   return res.ok;
 }
 

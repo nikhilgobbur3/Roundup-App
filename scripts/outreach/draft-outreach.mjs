@@ -117,17 +117,26 @@ async function draftMessages(founder, company, profile) {
     'Return strictly valid JSON: {"note":"...","followup":"..."}',
   ].filter(Boolean).join('\n');
 
-  const res = await fetch(
-    `${GEMINI_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(GEMINI_KEY)}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { temperature: 0.8, responseMimeType: 'application/json' },
-      }),
-    }
-  );
+  let res;
+  try {
+    res = await Promise.race([
+      fetch(
+        `${GEMINI_BASE}/${MODEL}:generateContent?key=${encodeURIComponent(GEMINI_KEY)}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { temperature: 0.8, responseMimeType: 'application/json' },
+          }),
+        }
+      ),
+      new Promise((_, rej) => setTimeout(() => rej(new Error('Gemini request timed out')), 45000)),
+    ]);
+  } catch (err) {
+    console.log(`  [gemini] request failed: ${err.message}`);
+    return { note: '', followup: '' };
+  }
   const data = await (async () => {
     try {
       return await res.json();
@@ -167,9 +176,21 @@ async function listOpenIssues() {
   const items = [];
   let url = `https://api.github.com/repos/${REPO}/issues?state=open&per_page=100`;
   while (url) {
-    const res = await fetch(url, { headers: ghHeaders() });
+    let res;
+    try {
+      res = await fetch(url, { headers: ghHeaders() });
+    } catch {
+      break;
+    }
     if (!res.ok) break;
-    const page = await res.json();
+    const page = await (async () => {
+      try {
+        return await res.json();
+      } catch {
+        return null;
+      }
+    })();
+    if (!Array.isArray(page)) break;
     items.push(...page);
     const m = (res.headers.get('link') || '').match(/<([^>]+)>;\s*rel="next"/);
     url = m ? m[1] : '';
@@ -178,17 +199,31 @@ async function listOpenIssues() {
 }
 
 async function listComments(issueNumber) {
-  const res = await fetch(`https://api.github.com/repos/${REPO}/issues/${issueNumber}/comments`, { headers: ghHeaders() });
+  let res;
+  try {
+    res = await fetch(`https://api.github.com/repos/${REPO}/issues/${issueNumber}/comments`, { headers: ghHeaders() });
+  } catch {
+    return [];
+  }
   if (!res.ok) return [];
-  return res.json();
+  const data = await (async () => {
+    try {
+      return await res.json();
+    } catch {
+      return null;
+    }
+  })();
+  return Array.isArray(data) ? data : [];
 }
 
 async function closeIssue(issueNumber) {
-  await fetch(`https://api.github.com/repos/${REPO}/issues/${issueNumber}`, {
-    method: 'PATCH',
-    headers: ghHeaders(),
-    body: JSON.stringify({ state: 'closed' }),
-  });
+  try {
+    await fetch(`https://api.github.com/repos/${REPO}/issues/${issueNumber}`, {
+      method: 'PATCH',
+      headers: ghHeaders(),
+      body: JSON.stringify({ state: 'closed' }),
+    });
+  } catch {}
 }
 
 async function openIssue(company) {
@@ -224,12 +259,16 @@ async function openIssue(company) {
     'OUTREACH:END'
   );
 
-  const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
-    method: 'POST',
-    headers: ghHeaders(),
-    body: JSON.stringify({ title: `Outreach: ${company.name}`, body: sections.filter(Boolean).join('\n') }),
-  });
-  return res.ok;
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
+      method: 'POST',
+      headers: ghHeaders(),
+      body: JSON.stringify({ title: `Outreach: ${company.name}`, body: sections.filter(Boolean).join('\n') }),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -253,6 +292,8 @@ if (retireSkipped) {
     }
   }
 }
+
+const founders = (c) => (Array.isArray(c?.founders) ? c.founders : []);
 
 // 2) turn pack.json into issues
 const pack = readJsonFile(PACK_FILE, []);
@@ -289,7 +330,7 @@ for (const company of pack) {
   }
   if (CHECK) {
     console.log(`\n=== ${company.name} (${company.batch}) ===`);
-    for (const f of company.founders) {
+    for (const f of founders(company)) {
       const m = await draftMessages(f, company, profile);
       console.log(`  ${f.name} | ${f.title}`);
       console.log(`  linkedin: ${f.linkedin_url || '(none)'}`);
@@ -299,7 +340,7 @@ for (const company of pack) {
     continue;
   }
   let ok = true;
-  for (const f of company.founders) {
+  for (const f of founders(company)) {
     const m = await draftMessages(f, company, profile);
     if (!m.note) { ok = false; break; }
     f.note = m.note;

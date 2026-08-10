@@ -12,7 +12,6 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('../../', import.meta.url));
 const ENV_FILE = path.join(ROOT, 'scripts', '.env');
-const COMPOSIO_BASE = 'https://backend.composio.dev/api/v3.1';
 const REPO = process.env.GITHUB_REPOSITORY || '';
 const BOT_LOGINS = new Set(['github-actions[bot]', 'roundup-bot']);
 
@@ -56,32 +55,92 @@ async function readJson(res) {
   }
 }
 
-const accountCache = new Map();
+// ---------------------------------------------------------------------------
+// composio (via the Connect/MCP endpoint — the scoped key rejects REST v3.1)
+// ---------------------------------------------------------------------------
 
-async function getAccountId(toolkitSlug) {
-  if (accountCache.has(toolkitSlug)) return accountCache.get(toolkitSlug);
-  const url = `${COMPOSIO_BASE}/connected_accounts?toolkit_slugs=${encodeURIComponent(toolkitSlug)}&statuses=ACTIVE`;
-  const res = await fetch(url, { headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY') } });
-  const data = await readJson(res);
-  const id = (data?.items || []).find((i) => i.id)?.id || '';
-  accountCache.set(toolkitSlug, id);
-  return id;
+const MCP_URL = 'https://connect.composio.dev/mcp';
+let mcpId = 0;
+
+async function mcpCall(method, params) {
+  const res = await fetch(MCP_URL, {
+    method: 'POST',
+    headers: {
+      'x-consumer-api-key': getEnv('COMPOSIO_API_KEY'),
+      'Content-Type': 'application/json',
+      Accept: 'application/json, text/event-stream',
+    },
+    body: JSON.stringify({ jsonrpc: '2.0', id: ++mcpId, method, params }),
+  });
+  const text = await res.text();
+  if (!res.ok) throw new Error(text.slice(0, 120));
+  const data = text
+    .split(/\r?\n/)
+    .filter((l) => l.startsWith('data: '))
+    .map((l) => l.slice(6))
+    .join('\n');
+  let payload;
+  try {
+    payload = JSON.parse(data);
+  } catch {
+    throw new Error(text.slice(0, 160) || 'empty MCP response');
+  }
+  if (payload.error) {
+    const msg = typeof payload.error === 'string' ? payload.error : JSON.stringify(payload.error);
+    throw new Error(msg);
+  }
+  return payload.result;
 }
 
-async function executeTool(toolSlug, toolkitSlug, args) {
-  const accountId = await getAccountId(toolkitSlug);
-  if (!accountId) throw new Error(`${toolkitSlug} not connected in Composio.`);
-  const res = await fetch(`${COMPOSIO_BASE}/tools/execute/${toolSlug}`, {
-    method: 'POST',
-    headers: { 'x-api-key': getEnv('COMPOSIO_API_KEY'), 'Content-Type': 'application/json' },
-    body: JSON.stringify({ connected_account_id: accountId, arguments: args }),
-  });
-  const data = await readJson(res);
-  if (!res.ok || !data?.successful) {
-    const msg = data?.error?.message || data?.error || `HTTP ${res.status}`;
-    throw new Error(typeof msg === 'string' ? msg : JSON.stringify(msg));
+function extractToolText(result) {
+  const content = result?.content;
+  if (Array.isArray(content)) {
+    const texts = content.filter((c) => c?.type === 'text').map((c) => c.text || '');
+    return texts.length ? texts.join('\n') : (content.find((c) => c?.text)?.text || '');
   }
-  return data.data;
+  return result?.content?.text || '';
+}
+
+async function executeTool(toolSlug, _toolkitSlug, args) {
+  const result = await mcpCall('tools/call', {
+    name: 'COMPOSIO_MULTI_EXECUTE_TOOL',
+    arguments: {
+      tools: [{ tool_slug: toolSlug, arguments: args }],
+      sync_response_to_workbench: false,
+      thought: `Execute ${toolSlug} for the RoundUp reply pipeline.`,
+      memory: {},
+      current_step: 'POSTING',
+      current_step_metric: '1/1',
+    },
+  });
+  const text = extractToolText(result);
+  let j;
+  try {
+    j = JSON.parse(text);
+  } catch {
+    throw new Error(text.slice(0, 160) || 'no tool result');
+  }
+  const entry = j?.data?.results?.[0]?.response;
+  if (!entry) {
+    const errMsg = j?.data?.error || j?.error || text.slice(0, 160);
+    throw new Error(typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg));
+  }
+  if (!entry.successful) {
+    const errMsg = entry.error?.message || entry.error || entry.message || 'tool execution failed';
+    throw new Error(typeof errMsg === 'string' ? errMsg : JSON.stringify(errMsg));
+  }
+  return parseData(entry.data);
+}
+
+function parseData(raw) {
+  if (typeof raw === 'string') {
+    try {
+      return JSON.parse(raw);
+    } catch {
+      return raw;
+    }
+  }
+  return raw;
 }
 
 function ghHeaders() {
@@ -89,11 +148,17 @@ function ghHeaders() {
 }
 
 async function gh(pathname, options = {}) {
-  const res = await fetch(`https://api.github.com${pathname}`, {
-    method: options.method || 'GET',
-    headers: ghHeaders(),
-    body: options.body ? JSON.stringify(options.body) : undefined,
-  });
+  let res;
+  try {
+    res = await fetch(`https://api.github.com${pathname}`, {
+      method: options.method || 'GET',
+      headers: ghHeaders(),
+      body: options.body ? JSON.stringify(options.body) : undefined,
+    });
+  } catch (err) {
+    console.log(`  [github] ${options.method || 'GET'} ${pathname} -> network error: ${String(err?.message || err).slice(0, 120)}`);
+    return { status: 0, data: null };
+  }
   const data = await readJson(res);
   if (!res.ok) {
     const msg = data?.message || data?.error || `HTTP ${res.status}`;

@@ -1,0 +1,112 @@
+[
+  {
+    "slug": "yenmo",
+    "name": "Yenmo",
+    "one_liner": "Secured consumer lending in India",
+    "batch": "Winter 2024",
+    "team_size": 5,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://yenmo.in",
+    "email": "support@yenmo.in",
+    "email_type": "contact"
+  },
+  {
+    "slug": "clickpe",
+    "name": "ClickPe",
+    "one_liner": "Finance on a Click",
+    "batch": "Winter 2023",
+    "team_size": 2,
+    "locations": "Surat, GJ, India",
+    "website": "https://clickpe.ai",
+    "email": "grievance@clickpe.ai",
+    "email_type": "contact"
+  },
+  {
+    "slug": "coupl",
+    "name": "Coupl",
+    "one_liner": "Banking designed for Indian couples.",
+    "batch": "Summer 2022",
+    "team_size": 8,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://coupl.money",
+    "email": "support@coupl.money",
+    "email_type": "contact"
+  },
+  {
+    "slug": "apollo-3",
+    "name": "Apollo",
+    "one_liner": " Payments & Loyalty Infrastructure ",
+    "batch": "Winter 2022",
+    "team_size": 11,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://www.apollofirst.xyz",
+    "email": "talent@apollofirst.xyz",
+    "email_type": "hr"
+  },
+  {
+    "slug": "salt",
+    "name": "SALT",
+    "one_liner": "B2B Cross-Border Payment & Compliance Platform",
+    "batch": "Winter 2022",
+    "team_size": 14,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://salt.pe",
+    "email": "careers@salt.pe",
+    "email_type": "hr"
+  },
+  {
+    "slug": "gullak-money",
+    "name": "Gullak Money",
+    "one_liner": "Gullak automates savings & invests these in gold",
+    "batch": "Summer 2022",
+    "team_size": 15,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://gullak.money",
+    "email": "support@gullak.money",
+    "email_type": "contact"
+  },
+  {
+    "slug": "inferedge",
+    "name": "InferEdge",
+    "one_liner": "Agentic AI for buy-side firms",
+    "batch": "Winter 2022",
+    "team_size": 20,
+    "locations": "MH, India",
+    "website": "https://www.inferedge.com",
+    "email": "support@inferedge.com",
+    "email_type": "contact"
+  },
+  {
+    "slug": "landeed",
+    "name": "Landeed",
+    "one_liner": "Landeed is India’s digital infrastructure for property intelligence,…",
+    "batch": "Summer 2022",
+    "team_size": 35,
+    "locations": "Hyderabad, Telangana, India",
+    "website": "https://www.landeed.com",
+    "email": "customers@landeed.com",
+    "email_type": "contact"
+  },
+  {
+    "slug": "frontpage",
+    "name": "FrontPage",
+    "one_liner": "Community for 100M Indian Financial Market Traders & Investors",
+    "batch": "Summer 2021",
+    "team_size": 5,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://front.page",
+    "email": "contact@front.page",
+    "email_type": "contact"
+  },
+  {
+    "slug": "gimbooks",
+    "name": "GimBooks",
+    "one_liner": "GimBooks makes Bookkeeping Easy for small business owners",
+    "batch": "Winter 2021",
+    "team_size": 16,
+    "locations": "Raipur, CT, India",
+    "website": "https://gimbooks.com",
+    "email": "contact@gimbooks.com",
+    "email_type": "contact"
+  }
+]
