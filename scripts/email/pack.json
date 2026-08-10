@@ -8,7 +8,9 @@
     "locations": "Bengaluru, KA, India",
     "website": "https://yenmo.in",
     "email": "support@yenmo.in",
-    "email_type": "contact"
+    "email_type": "contact",
+    "subject": "Yenmo engineering",
+    "body": "Love Yenmo's work in secured consumer lending in India. I built RoundUp, an open-source UPI expense tracker that rounds up spare (github.com/nikhilgobbur3/Roundup-App). Open to a quick chat?"
   },
   {
     "slug": "clickpe",
@@ -19,7 +21,9 @@
     "locations": "Surat, GJ, India",
     "website": "https://clickpe.ai",
     "email": "grievance@clickpe.ai",
-    "email_type": "contact"
+    "email_type": "contact",
+    "subject": "UPI dev / ClickPe",
+    "body": "ClickPe makes finance on a click easy. I built RoundUp, an open-source UPI expense tracker that rounds up spare (github.com/nikhilgobbur3/Roundup-App). Open to a quick chat? - Nikhil"
   },
   {
     "slug": "coupl",
@@ -30,7 +34,9 @@
     "locations": "Bengaluru, KA, India",
     "website": "https://coupl.money",
     "email": "support@coupl.money",
-    "email_type": "contact"
+    "email_type": "contact",
+    "subject": "Building shared finance at Coupl",
+    "body": "I've been following how Coupl is reimagining banking for Indian couples, especially around shared expense management. I'm a software engineer, and I built RoundUp (https://github.com/nikhilgobbur3/Roundup-App), an open-source UPI expense tracker that rounds up spare change. Given your focus on joint finances, I'd love to bring my experience with UPI and micro-savings to your engineering team. Are you currently looking for developers who love building in the fintech space?"
   },
   {
     "slug": "apollo-3",
@@ -41,7 +47,8 @@
     "locations": "Bengaluru, KA, India",
     "website": "https://www.apollofirst.xyz",
     "email": "talent@apollofirst.xyz",
-    "email_type": "hr"
+    "email_type": "hr",
+    "draftTries": 1
   },
   {
     "slug": "salt",
@@ -52,7 +59,8 @@
     "locations": "Bengaluru, KA, India",
     "website": "https://salt.pe",
     "email": "careers@salt.pe",
-    "email_type": "hr"
+    "email_type": "hr",
+    "draftTries": 1
   },
   {
     "slug": "gullak-money",
@@ -63,7 +71,8 @@
     "locations": "Bengaluru, KA, India",
     "website": "https://gullak.money",
     "email": "support@gullak.money",
-    "email_type": "contact"
+    "email_type": "contact",
+    "draftTries": 1
   },
   {
     "slug": "inferedge",
@@ -74,7 +83,8 @@
     "locations": "MH, India",
     "website": "https://www.inferedge.com",
     "email": "support@inferedge.com",
-    "email_type": "contact"
+    "email_type": "contact",
+    "draftTries": 1
   },
   {
     "slug": "landeed",
@@ -85,7 +95,8 @@
     "locations": "Hyderabad, Telangana, India",
     "website": "https://www.landeed.com",
     "email": "customers@landeed.com",
-    "email_type": "contact"
+    "email_type": "contact",
+    "draftTries": 1
   },
   {
     "slug": "frontpage",
@@ -96,7 +107,8 @@
     "locations": "Bengaluru, KA, India",
     "website": "https://front.page",
     "email": "contact@front.page",
-    "email_type": "contact"
+    "email_type": "contact",
+    "draftTries": 1
   },
   {
     "slug": "gimbooks",
@@ -107,6 +119,7 @@
     "locations": "Raipur, CT, India",
     "website": "https://gimbooks.com",
     "email": "contact@gimbooks.com",
-    "email_type": "contact"
+    "email_type": "contact",
+    "draftTries": 1
   }
 ]
