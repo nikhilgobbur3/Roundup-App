@@ -139,7 +139,7 @@ if (!REPO) {
   process.exit(0);
 }
 
-const issues = await gh('/issues?state=open&per_page=50');
+const issues = await gh(`/repos/${REPO}/issues?state=open&per_page=50`);
 let processed = 0;
 
 for (const issue of asArray(issues.data)) {
@@ -155,7 +155,7 @@ for (const issue of asArray(issues.data)) {
   }
   if (!meta.platform || !meta.replies?.length) continue;
 
-  const comments = await gh(`/issues/${issue.number}/comments`);
+  const comments = await gh(`/repos/${REPO}/issues/${issue.number}/comments`);
   let decision = null;
   for (const c of asArray(comments.data)) {
     if (BOT_LOGINS.has(c.user?.login)) continue;
@@ -176,8 +176,8 @@ for (const issue of asArray(issues.data)) {
   if (!decision) continue;
 
   if (decision.kind === 'skip') {
-    await gh(`/issues/${issue.number}/comments`, { method: 'POST', body: { body: 'Skipped — no reply posted.' } });
-    await gh(`/issues/${issue.number}`, { method: 'PATCH', body: { state: 'closed' } });
+    await gh(`/repos/${REPO}/issues/${issue.number}/comments`, { method: 'POST', body: { body: 'Skipped — no reply posted.' } });
+    await gh(`/repos/${REPO}/issues/${issue.number}`, { method: 'PATCH', body: { state: 'closed' } });
     console.log(`- skipped #${issue.number}`);
     processed++;
     continue;
@@ -188,8 +188,8 @@ for (const issue of asArray(issues.data)) {
 
   try {
     await postReply(meta, reply);
-    await gh(`/issues/${issue.number}/comments`, { method: 'POST', body: { body: `Posted ✅ (${meta.platform})` } });
-    await gh(`/issues/${issue.number}`, { method: 'PATCH', body: { state: 'closed' } });
+    await gh(`/repos/${REPO}/issues/${issue.number}/comments`, { method: 'POST', body: { body: `Posted ✅ (${meta.platform})` } });
+    await gh(`/repos/${REPO}/issues/${issue.number}`, { method: 'PATCH', body: { state: 'closed' } });
     console.log(`✓ posted #${issue.number} (${meta.platform})`);
   } catch (e) {
     console.log(`✗ #${issue.number}: ${e.message}`);
