@@ -44,4 +44,9 @@ jobs:
           git config user.email "roundup-bot@users.noreply.github.com"
           git add scripts/email/state.json scripts/email/pack.json
           git diff --cached --quiet || git commit -m "chore: update email state [skip ci]"
-          git push
+          for i in 1 2 3 4 5; do
+            git pull --rebase origin main >/dev/null 2>&1 || true
+            git push >/dev/null 2>&1 && break
+            sleep 2
+          done
+          true
