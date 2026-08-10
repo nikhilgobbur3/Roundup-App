@@ -94,7 +94,16 @@ async function gh(pathname, options = {}) {
     headers: ghHeaders(),
     body: options.body ? JSON.stringify(options.body) : undefined,
   });
-  return { status: res.status, data: await readJson(res) };
+  const data = await readJson(res);
+  if (!res.ok) {
+    const msg = data?.message || data?.error || `HTTP ${res.status}`;
+    console.log(`  [github] ${options.method || 'GET'} ${pathname} -> ${res.status}: ${typeof msg === 'string' ? msg : JSON.stringify(msg)}`);
+  }
+  return { status: res.status, data };
+}
+
+function asArray(data) {
+  return Array.isArray(data) ? data : [];
 }
 
 async function postReply(meta, reply) {
@@ -133,7 +142,7 @@ if (!REPO) {
 const issues = await gh('/issues?state=open&per_page=50');
 let processed = 0;
 
-for (const issue of issues.data || []) {
+for (const issue of asArray(issues.data)) {
   if (issue.pull_request) continue;
   const m = String(issue.body || '').match(/REPLY-DRAFT:START\s*([\s\S]*?)\s*REPLY-DRAFT:END/);
   if (!m) continue;
@@ -148,7 +157,7 @@ for (const issue of issues.data || []) {
 
   const comments = await gh(`/issues/${issue.number}/comments`);
   let decision = null;
-  for (const c of comments.data || []) {
+  for (const c of asArray(comments.data)) {
     if (BOT_LOGINS.has(c.user?.login)) continue;
     const text = (c.body || '').trim();
     const pick = text.match(/^\s*([123])\b/);
