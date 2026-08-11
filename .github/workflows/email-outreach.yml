@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   email:
@@ -25,18 +26,17 @@ jobs:
         with:
           node-version: 20
 
-      - name: Find emails, draft, and send
+      - name: Find emails, draft, and queue issues
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
-          EMAIL_FROM_NAME: ${{ secrets.EMAIL_FROM_NAME }}
-          EMAIL_FROM_ADDRESS: ${{ secrets.EMAIL_FROM_ADDRESS }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
           EMAIL_SEND_PER_DAY: ${{ vars.EMAIL_SEND_PER_DAY }}
           EMAIL_COMPANIES_PER_DAY: ${{ vars.EMAIL_COMPANIES_PER_DAY }}
         run: |
           node scripts/email/find-emails.mjs
           node scripts/email/draft-email.mjs
-          node scripts/email/send-email.mjs
+          node scripts/email/issue-emails.mjs
 
       - name: Sync progress to Notion
         env:

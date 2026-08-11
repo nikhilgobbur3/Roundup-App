@@ -153,23 +153,59 @@ const clip = (s, n) => String(s || '').replace(/\s+/g, ' ').trim().slice(0, n);
 
 function emailRows() {
   const pack = readJsonFile(EMAIL_PACK, []);
-  const state = readJsonFile(EMAIL_STATE, { sent: {}, used: {} });
-  const sent = state.sent || {};
+  const issuedEmails = new Set(emailIssues.value.map((i) => i.email));
   const rows = [];
   for (const item of pack) {
     const email = String(item.email || '').trim();
-    if (!email) continue;
-    const status = sent[email] ? 'Sent' : item.subject && item.body ? 'Drafted' : 'Pending';
+    if (!email || issuedEmails.has(email)) continue;
     rows.push({
       name: `${item.name || item.slug || email} (${email})`,
       type: 'Email',
       company: item.name || item.slug || '',
-      status,
+      status: item.subject && item.body ? 'Drafted' : 'Pending',
       url: item.website || '',
       notes: [item.subject ? `Subject: ${item.subject}` : '', item.body ? clip(item.body, 300) : ''].filter(Boolean).join('\n'),
     });
   }
+  for (const issue of emailIssues.value) {
+    const email = issue.email;
+    if (!email) continue;
+    const name = issue.name || email;
+    rows.push({
+      name: `${name} (${email})`,
+      type: 'Email',
+      company: name,
+      status: issue.closed ? 'Sent' : 'Drafted',
+      url: issue.url || '',
+      notes: [issue.subject ? `Subject: ${issue.subject}` : '', issue.body ? clip(issue.body, 300) : ''].filter(Boolean).join('\n'),
+    });
+  }
   return rows;
+}
+
+const emailIssues = { value: [] };
+
+function collectEmailIssues(issues) {
+  for (const issue of issues) {
+    const body = String(issue.body || '');
+    if (!body.includes('EMAIL:START')) continue;
+    let item = null;
+    const m = body.match(/EMAIL:START\s*(\{.*?\})\s*EMAIL:END/s);
+    if (m) {
+      try {
+        item = JSON.parse(m[1]);
+      } catch {}
+    }
+    if (!item?.email) continue;
+    emailIssues.value.push({
+      email: String(item.email || '').trim(),
+      name: String(item.name || '').trim(),
+      subject: String(item.subject || ''),
+      body: String(item.body || ''),
+      url: issue.html_url || '',
+      closed: issue.state === 'closed',
+    });
+  }
 }
 
 function parseFounders(company) {
@@ -195,7 +231,7 @@ function founderRows(company) {
 }
 
 async function gitHubRows() {
-  const issues = await fetchAllIssues();
+  const issues = await allIssues();
   const rows = [];
   for (const issue of issues) {
     const body = String(issue.body || '');
@@ -219,6 +255,16 @@ async function gitHubRows() {
     if (company) rows.push(...founderRows(company));
   }
   return rows;
+}
+
+let allIssuesCache = null;
+async function allIssues() {
+  if (!allIssuesCache) {
+    const issues = await fetchAllIssues();
+    collectEmailIssues(issues);
+    allIssuesCache = issues;
+  }
+  return allIssuesCache;
 }
 
 async function fetchAllIssues() {
@@ -322,7 +368,8 @@ if (!getEnv('COMPOSIO_API_KEY')) {
   process.exit(0);
 }
 
-const rows = [...emailRows(), ...(await gitHubRows())];
+const github = await gitHubRows();
+const rows = [...emailRows(), ...github];
 
 if (CHECK) {
   console.log(`notion-sync CHECK: ${rows.length} row(s) would be synced.`);
