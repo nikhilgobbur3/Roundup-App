@@ -48,7 +48,8 @@
     "website": "https://www.apollofirst.xyz",
     "email": "talent@apollofirst.xyz",
     "email_type": "hr",
-    "draftTries": 1
+    "subject": "Exploring engineering roles",
+    "body": "I love Apollo's payments & loyalty infrastructure. I built RoundUp, an open-source UPI expense tracker that rounds up spare: https://github.com/nikhilgobbur3/Roundup-App. Open to a chat?"
   },
   {
     "slug": "salt",
@@ -60,7 +61,8 @@
     "website": "https://salt.pe",
     "email": "careers@salt.pe",
     "email_type": "hr",
-    "draftTries": 1
+    "subject": "Joining the engineering team at Salt",
+    "body": "I've been following how Salt is simplifying B2B cross-border payments and compliance.\\n\\nI'm a software engineer and recently built RoundUp (https://github.com/nikhilgobbur3/Roundup-App), an open-source UPI expense tracker that rounds up spare change. Working on transaction data made me appreciate the complexity of building robust financial infrastructure.\\n\\nAre you open to a brief chat about potential engineering roles at Salt?"
   },
   {
     "slug": "gullak-money",
@@ -72,7 +74,8 @@
     "website": "https://gullak.money",
     "email": "support@gullak.money",
     "email_type": "contact",
-    "draftTries": 1
+    "subject": "Automating spare change savings",
+    "body": "Love Gullak's automated gold savings. I built RoundUp, an open-source UPI expense tracker that rounds up spare: https://github.com/nikhilgobbur3/Roundup-App. Open to a brief tech chat?"
   },
   {
     "slug": "inferedge",
@@ -84,7 +87,8 @@
     "website": "https://www.inferedge.com",
     "email": "support@inferedge.com",
     "email_type": "contact",
-    "draftTries": 1
+    "subject": "Engineering at InferEdge",
+    "body": "I love InferEdge's agentic AI for buy-side firms. I built RoundUp, an open-source UPI expense tracker that rounds up spare: https://github.com/nikhilgobbur3/Roundup-App. Open to a brief chat?"
   },
   {
     "slug": "landeed",
@@ -96,7 +100,8 @@
     "website": "https://www.landeed.com",
     "email": "customers@landeed.com",
     "email_type": "contact",
-    "draftTries": 1
+    "subject": "Engineering at Landeed",
+    "body": "Love Landeed's property intelligence infra. I built RoundUp, an open-source UPI expense tracker that rounds up spare: https://github.com/nikhilgobbur3/Roundup-App. Open to a chat?"
   },
   {
     "slug": "frontpage",
@@ -108,7 +113,8 @@
     "website": "https://front.page",
     "email": "contact@front.page",
     "email_type": "contact",
-    "draftTries": 1
+    "subject": "Fintech engineer / FrontPage",
+    "body": "FrontPage is amazing for 100M Indian traders. I built RoundUp, an open-source UPI expense tracker that rounds up spare: https://github.com/nikhilgobbur3/Roundup-App. Open to a brief chat?"
   },
   {
     "slug": "gimbooks",
@@ -120,6 +126,7 @@
     "website": "https://gimbooks.com",
     "email": "contact@gimbooks.com",
     "email_type": "contact",
-    "draftTries": 1
+    "subject": "Engineering at GimBooks",
+    "body": "GimBooks makes bookkeeping easy for small businesses. I built RoundUp, an open-source UPI expense tracker that rounds up spare (github.com/nikhilgobbur3/Roundup-App). Open to a quick chat?"
   }
 ]
