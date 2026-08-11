@@ -34,6 +34,13 @@ jobs:
           node scripts/outreach/fetch-startups.mjs
           node scripts/outreach/draft-outreach.mjs
 
+      - name: Sync progress to Notion
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/tracking/notion-sync.mjs
+
       - name: Commit outreach state
         run: |
           git config user.name "roundup-bot"

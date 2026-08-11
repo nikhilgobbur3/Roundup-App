@@ -38,6 +38,13 @@ jobs:
           node scripts/email/draft-email.mjs
           node scripts/email/send-email.mjs
 
+      - name: Sync progress to Notion
+        env:
+          COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/tracking/notion-sync.mjs
+
       - name: Commit email state
         run: |
           git config user.name "roundup-bot"
