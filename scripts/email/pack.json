@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "slug": "swadesh",
+    "name": "Swadesh",
+    "one_liner": "We setup Immigrants with a free US Bank Account, Credit Card, SIM…",
+    "batch": "Summer 2019",
+    "team_size": 10,
+    "locations": "New York City, NY, USA; New Delhi, DL, India",
+    "website": "http://www.swadesh.co",
+    "email": "help@swadesh.co",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
