@@ -157,12 +157,11 @@ function NativeScanner({ onScan }: { onScan: (code: string) => void }) {
                 onScan(data);
               }
         }
-      >
-        <View style={styles.overlay}>
-          <View style={styles.frame} />
-          <Text style={styles.hint}>Point camera at merchant QR code</Text>
-        </View>
-      </CameraView>
+      />
+      <View style={styles.overlay}>
+        <View style={styles.frame} />
+        <Text style={styles.hint}>Point camera at merchant QR code</Text>
+      </View>
 
       {scanned && (
         <Pressable style={styles.rescanButton} onPress={() => setScanned(false)}>
