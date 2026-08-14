@@ -1,20 +1,33 @@
-// we are importing tabs (Buttons) so we can build navigation between pages
 import { Tabs } from "expo-router";
-// Impoting icons library to use icons
 import { Ionicons } from "@expo/vector-icons";
-// importing colors that are already we told easted of writing everywhere we are using like this
 import { colors } from "../../constants/colors";
-// this is an defoult component that is returning tabs
+
 export default function TabLayout() {
   return (
     <Tabs
-    // Screen OPtions like General Settings
       screenOptions={{
         tabBarActiveTintColor: colors.tabBar.active,
         tabBarInactiveTintColor: colors.tabBar.inactive,
+        tabBarLabelStyle: {
+          fontWeight: "600",
+          fontSize: 11,
+        },
         tabBarStyle: {
+          position: "absolute",
+          left: 16,
+          right: 16,
+          bottom: 18,
+          height: 64,
+          borderRadius: 24,
           backgroundColor: colors.tabBar.background,
-          borderTopColor: colors.border,
+          borderTopWidth: 0,
+          paddingTop: 8,
+          paddingBottom: 8,
+          shadowColor: "#000000",
+          shadowOffset: { width: 0, height: 8 },
+          shadowOpacity: 0.12,
+          shadowRadius: 20,
+          elevation: 16,
         },
         headerBackButtonDisplayMode: "minimal",
       }}

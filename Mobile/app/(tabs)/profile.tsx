@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, Pressable, Modal } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { colors } from "../../constants/colors";
@@ -24,50 +25,68 @@ export default function ProfileScreen() {
     <ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.container}
+      contentContainerStyle={{ paddingBottom: 110 }}
     >
       <View style={styles.profileHeader}>
-        <View style={styles.avatar}>
-          <Ionicons name="person" size={40} color={colors.primary} />
-        </View>
+        <LinearGradient
+          colors={[colors.hero.start, colors.hero.mid, colors.hero.end]}
+          start={{ x: 0.1, y: 0 }}
+          end={{ x: 0.95, y: 1 }}
+          style={styles.avatar}
+        >
+          <Text style={styles.avatarText}>{(user?.name ?? "U").charAt(0).toUpperCase()}</Text>
+        </LinearGradient>
         <Text style={styles.name}>{user?.name ?? "User"}</Text>
         <Text style={styles.email}>{user?.email ?? ""}</Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Account</Text>
+        <View style={styles.sectionCard}>
+          <View style={styles.row}>
+            <View style={styles.rowIcon}>
+              <Ionicons name="person-outline" size={20} color={colors.primary} />
+            </View>
+            <Text style={styles.rowText}>Edit Profile</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.tertiary} />
+          </View>
 
-        <View style={styles.row}>
-          <Ionicons name="person-outline" size={22} color={colors.text.secondary} />
-          <Text style={styles.rowText}>Edit Profile</Text>
-          <Ionicons name="chevron-forward" size={20} color={colors.text.tertiary} />
-        </View>
+          <View style={styles.row}>
+            <View style={styles.rowIcon}>
+              <Ionicons name="notifications-outline" size={20} color={colors.primary} />
+            </View>
+            <Text style={styles.rowText}>Notifications</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.tertiary} />
+          </View>
 
-        <View style={styles.row}>
-          <Ionicons name="notifications-outline" size={22} color={colors.text.secondary} />
-          <Text style={styles.rowText}>Notifications</Text>
-          <Ionicons name="chevron-forward" size={20} color={colors.text.tertiary} />
-        </View>
-
-        <View style={styles.row}>
-          <Ionicons name="lock-closed-outline" size={22} color={colors.text.secondary} />
-          <Text style={styles.rowText}>Security</Text>
-          <Ionicons name="chevron-forward" size={20} color={colors.text.tertiary} />
+          <View style={styles.row}>
+            <View style={styles.rowIcon}>
+              <Ionicons name="lock-closed-outline" size={20} color={colors.primary} />
+            </View>
+            <Text style={styles.rowText}>Security</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.tertiary} />
+          </View>
         </View>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.sectionTitle}>Support</Text>
+        <View style={styles.sectionCard}>
+          <View style={styles.row}>
+            <View style={styles.rowIcon}>
+              <Ionicons name="help-circle-outline" size={20} color={colors.primary} />
+            </View>
+            <Text style={styles.rowText}>Help Center</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.tertiary} />
+          </View>
 
-        <View style={styles.row}>
-          <Ionicons name="help-circle-outline" size={22} color={colors.text.secondary} />
-          <Text style={styles.rowText}>Help Center</Text>
-          <Ionicons name="chevron-forward" size={20} color={colors.text.tertiary} />
-        </View>
-
-        <View style={styles.row}>
-          <Ionicons name="information-circle-outline" size={22} color={colors.text.secondary} />
-          <Text style={styles.rowText}>About</Text>
-          <Ionicons name="chevron-forward" size={20} color={colors.text.tertiary} />
+          <View style={styles.row}>
+            <View style={styles.rowIcon}>
+              <Ionicons name="information-circle-outline" size={20} color={colors.primary} />
+            </View>
+            <Text style={styles.rowText}>About</Text>
+            <Ionicons name="chevron-forward" size={18} color={colors.text.tertiary} />
+          </View>
         </View>
       </View>
 
@@ -118,13 +137,17 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xl,
   },
   avatar: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: colors.surface,
+    width: 84,
+    height: 84,
+    borderRadius: 42,
     alignItems: "center",
     justifyContent: "center",
     marginBottom: spacing.md,
+  },
+  avatarText: {
+    fontSize: typography.sizes.xxxl,
+    fontWeight: typography.weights.bold,
+    color: "#FFFFFF",
   },
   name: {
     fontSize: typography.sizes.xl,
@@ -149,15 +172,27 @@ const styles = StyleSheet.create({
     marginBottom: spacing.sm,
     marginLeft: spacing.sm,
   },
+  sectionCard: {
+    backgroundColor: colors.surface,
+    borderRadius: 16,
+    overflow: "hidden",
+    gap: 1,
+  },
   row: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: spacing.sm + 2,
     paddingHorizontal: spacing.md,
-    backgroundColor: colors.surface,
-    borderRadius: 12,
-    marginBottom: 1,
+    backgroundColor: colors.row.background,
     gap: spacing.sm + 4,
+  },
+  rowIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: colors.stat.iconTint,
+    alignItems: "center",
+    justifyContent: "center",
   },
   rowText: {
     flex: 1,
@@ -172,9 +207,10 @@ const styles = StyleSheet.create({
     marginHorizontal: spacing.lg,
     marginTop: spacing.md,
     paddingVertical: spacing.sm + 4,
-    borderRadius: 12,
+    borderRadius: 14,
     borderWidth: 1,
     borderColor: colors.error,
+    backgroundColor: colors.surface,
   },
   logoutText: {
     fontSize: typography.sizes.md,

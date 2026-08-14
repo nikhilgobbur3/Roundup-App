@@ -7,9 +7,12 @@ import {
   StyleSheet,
   ScrollView,
   ActivityIndicator,
+  Platform,
 } from "react-native";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import { typography } from "../../constants/typography";
@@ -182,30 +185,40 @@ export default function PayScreen() {
         style={styles.container}
         keyboardShouldPersistTaps="handled"
       >
-        <View style={styles.merchantCard}>
+        <LinearGradient
+          colors={[colors.hero.start, colors.hero.mid, colors.hero.end]}
+          start={{ x: 0.1, y: 0 }}
+          end={{ x: 0.95, y: 1 }}
+          style={styles.merchantCard}
+        >
           <View style={styles.merchantIcon}>
-            <Ionicons name="storefront" size={32} color={colors.primary} />
+            <Ionicons name="storefront" size={28} color={colors.hero.accent} />
           </View>
           <Text style={styles.merchantName}>{payeeName}</Text>
           {upiId ? (
             <Text style={styles.merchantUpi}>UPI: {upiId}</Text>
-          ) : null}
-        </View>
+          ) : (
+            <Text style={styles.merchantUpi}>RoundUp merchant</Text>
+          )}
+        </LinearGradient>
 
         <View style={styles.form}>
           <Text style={styles.label}>Amount ({CURRENCY.symbol})</Text>
-          <TextInput
-            style={styles.amountInput}
-            value={amount}
-            onChangeText={setAmount}
-            placeholder="0.00"
-            keyboardType="decimal-pad"
-            autoFocus
-            accessibilityLabel="Amount"
-          />
+          <View style={styles.amountRow}>
+            <Text style={styles.amountPrefix}>{CURRENCY.symbol}</Text>
+            <TextInput
+              style={styles.amountInput}
+              value={amount}
+              onChangeText={setAmount}
+              placeholder="0.00"
+              keyboardType="decimal-pad"
+              autoFocus
+              accessibilityLabel="Amount"
+            />
+          </View>
 
           {amount && !isNaN(numAmount) && numAmount > 0 && (
-            <View style={styles.roundupPreview}>
+            <Animated.View entering={FadeInDown.duration(300)} style={styles.roundupPreview}>
               <View style={styles.roundupRow}>
                 <Text style={styles.roundupLabel}>You'll pay (rounded up)</Text>
                 <Text style={styles.roundupValue}>
@@ -213,14 +226,15 @@ export default function PayScreen() {
                 </Text>
               </View>
               {roundupAmount > 0 && (
-                <View style={styles.roundupRow}>
-                  <Text style={styles.roundupLabel}>Spare change saved</Text>
-                  <Text style={styles.roundupHighlight}>
+                <View style={styles.savedRow}>
+                  <Ionicons name="sparkles" size={14} color={colors.row.roundupText} />
+                  <Text style={styles.savedLabel}>Spare change saved</Text>
+                  <Text style={styles.savedValue}>
                     +{CURRENCY.symbol}{roundupAmount.toFixed(2)}
                   </Text>
                 </View>
               )}
-            </View>
+            </Animated.View>
           )}
 
           {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -230,10 +244,17 @@ export default function PayScreen() {
             onPress={handlePay}
             disabled={loading || !numAmount}
           >
-            <Ionicons name="card-outline" size={18} color={colors.text.inverse} />
-            <Text style={styles.payButtonText}>
-              Pay {numAmount > 0 ? `${CURRENCY.symbol}${numAmount.toFixed(2)}` : ""}
-            </Text>
+            <LinearGradient
+              colors={[colors.primary, colors.primaryDark]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.payGradient}
+            >
+              <Ionicons name="card-outline" size={18} color={colors.text.inverse} />
+              <Text style={styles.payButtonText}>
+                Pay {numAmount > 0 ? `${CURRENCY.symbol}${numAmount.toFixed(2)}` : ""}
+              </Text>
+            </LinearGradient>
           </Pressable>
         </View>
       </ScrollView>
@@ -269,14 +290,25 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xl,
     marginHorizontal: spacing.lg,
     marginTop: spacing.lg,
-    backgroundColor: colors.surface,
-    borderRadius: 16,
+    borderRadius: 20,
+    overflow: "hidden",
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.25,
+        shadowRadius: 18,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   merchantIcon: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: colors.background,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
+    backgroundColor: "rgba(255,255,255,0.14)",
     alignItems: "center",
     justifyContent: "center",
     marginBottom: spacing.md,
@@ -284,11 +316,11 @@ const styles = StyleSheet.create({
   merchantName: {
     fontSize: typography.sizes.xl,
     fontWeight: typography.weights.bold,
-    color: colors.text.primary,
+    color: "#FFFFFF",
   },
   merchantUpi: {
     fontSize: typography.sizes.sm,
-    color: colors.text.secondary,
+    color: colors.hero.textMuted,
     marginTop: spacing.xs,
   },
   form: {
@@ -299,25 +331,38 @@ const styles = StyleSheet.create({
   label: {
     fontSize: typography.sizes.sm,
     fontWeight: typography.weights.medium,
-    color: colors.text.primary,
+    color: colors.text.secondary,
   },
-  amountInput: {
+  amountRow: {
+    flexDirection: "row",
+    alignItems: "center",
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 12,
-    paddingHorizontal: spacing.md,
-    paddingVertical: spacing.sm + 4,
+    borderRadius: 16,
+    backgroundColor: colors.surface,
+    paddingHorizontal: spacing.lg,
+  },
+  amountPrefix: {
     fontSize: typography.sizes.xxl,
     fontWeight: typography.weights.bold,
+    color: colors.text.tertiary,
+    marginRight: spacing.sm,
+  },
+  amountInput: {
+    flex: 1,
+    paddingVertical: spacing.sm + 6,
+    fontSize: typography.sizes.xxxl,
+    fontWeight: typography.weights.bold,
     color: colors.text.primary,
-    backgroundColor: colors.surface,
     textAlign: "center",
   },
   roundupPreview: {
-    backgroundColor: colors.surface,
-    borderRadius: 12,
+    backgroundColor: colors.stat.background,
+    borderRadius: 16,
     padding: spacing.md,
     gap: spacing.sm,
+    borderWidth: 1,
+    borderColor: colors.border,
   },
   roundupRow: {
     flexDirection: "row",
@@ -333,10 +378,25 @@ const styles = StyleSheet.create({
     fontWeight: typography.weights.semibold,
     color: colors.text.primary,
   },
-  roundupHighlight: {
+  savedRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: colors.row.roundup,
+    borderRadius: 12,
+    paddingHorizontal: spacing.sm + 2,
+    paddingVertical: spacing.sm,
+    gap: spacing.xs,
+  },
+  savedLabel: {
+    flex: 1,
+    fontSize: typography.sizes.sm,
+    color: colors.row.roundupText,
+    fontWeight: typography.weights.medium,
+  },
+  savedValue: {
     fontSize: typography.sizes.md,
-    fontWeight: typography.weights.semibold,
-    color: colors.secondary,
+    fontWeight: typography.weights.bold,
+    color: colors.row.roundupText,
   },
   error: {
     fontSize: typography.sizes.sm,
@@ -344,14 +404,27 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   payButton: {
+    borderRadius: 16,
+    overflow: "hidden",
+    marginTop: spacing.sm,
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 14,
+      },
+      android: {
+        elevation: 6,
+      },
+    }),
+  },
+  payGradient: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    paddingVertical: spacing.sm + 4,
+    paddingVertical: spacing.md,
     gap: spacing.sm,
-    marginTop: spacing.sm,
   },
   payButtonDisabled: { opacity: 0.6 },
   payButtonText: {

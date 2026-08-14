@@ -1,5 +1,12 @@
 import { useRef, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  RefreshControl,
+} from "react-native";
+import Animated, { useSharedValue, useAnimatedScrollHandler } from "react-native-reanimated";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter, useFocusEffect, useNavigation } from "expo-router";
 import * as Clipboard from "expo-clipboard";
@@ -11,17 +18,21 @@ import { useAuthStore } from "../../stores/auth-store";
 import { useTransactionStore } from "../../stores/transaction-store";
 import { parseClipboard, markAsSeen } from "../../utils/clipboard-parser";
 import type { Transaction } from "../../types";
-
-function formatCurrency(amount: number): string {
-  return `${CURRENCY.symbol}${amount.toFixed(2)}`;
-}
+import SavingsHero from "../../components/SavingsHero";
+import StatPill from "../../components/StatPill";
+import TransactionRow from "../../components/TransactionRow";
 
 export default function HomeScreen() {
   const router = useRouter();
   const navigation = useNavigation();
   const user = useAuthStore((s) => s.user);
-  const { transactions, fetchTransactions, addTransaction } = useTransactionStore();
+  const { transactions, isLoading, fetchTransactions, addTransaction, hydrateFromCache } = useTransactionStore();
   const checkingRef = useRef(false);
+  const scrollY = useSharedValue(0);
+
+  const scrollHandler = useAnimatedScrollHandler((event) => {
+    scrollY.value = event.contentOffset.y;
+  });
 
   useEffect(() => {
     navigation.setOptions({
@@ -38,6 +49,7 @@ export default function HomeScreen() {
 
   useFocusEffect(
     useCallback(() => {
+      hydrateFromCache();
       fetchTransactions();
       checkClipboard();
     }, [])
@@ -60,40 +72,85 @@ export default function HomeScreen() {
     }
   };
 
+  const savingsTxns = transactions.filter((t) => t.type === "ROUNDUP_SAVING");
+  const totalSaved = savingsTxns.reduce((sum, t) => sum + t.amount, 0);
+  const now = new Date();
+  const savedThisMonth = savingsTxns
+    .filter((t) => {
+      const d = new Date(t.date);
+      return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+    })
+    .reduce((sum, t) => sum + t.amount, 0);
+  const avgRoundup = savingsTxns.length ? totalSaved / savingsTxns.length : 0;
+
+  const initial = (user?.name ?? "U").charAt(0).toUpperCase();
+
   return (
-    <ScrollView
+    <Animated.ScrollView
       contentInsetAdjustmentBehavior="automatic"
       style={styles.container}
+      onScroll={scrollHandler}
+      scrollEventThrottle={16}
+      refreshControl={
+        <RefreshControl
+          refreshing={isLoading}
+          onRefresh={fetchTransactions}
+          tintColor={colors.primary}
+          colors={[colors.primary]}
+        />
+      }
     >
       <View style={styles.header}>
-        <Text style={styles.greeting}>Hello, {user?.name ?? "there"}</Text>
-        <Text style={styles.subtitle}>Your RoundUp account</Text>
-      </View>
-
-      <View style={styles.balanceCard}>
-        <Text style={styles.balanceLabel}>Your Wealth</Text>
-        <Text style={styles.balanceAmount}>
-          {formatCurrency(user?.savings ?? 0)}
-        </Text>
-        <View style={styles.balanceMeta}>
-          <View style={styles.balanceMetaItem}>
-            <Ionicons name="save-outline" size={16} color={colors.text.inverse} />
-            <Text style={styles.balanceMetaText}>
-              Saved up with roundups
-            </Text>
+        <View style={styles.avatarRow}>
+          <View style={styles.avatar}>
+            <Text style={styles.avatarText}>{initial}</Text>
+          </View>
+          <View>
+            <Text style={styles.greeting}>Hello, {user?.name ?? "there"}</Text>
+            <Text style={styles.subtitle}>Welcome back to RoundUp</Text>
           </View>
         </View>
+      </View>
+
+      <SavingsHero savings={user?.savings ?? 0} scrollY={scrollY} />
+
+      <View style={styles.statsRow}>
+        <StatPill
+          icon="leaf"
+          value={`${savingsTxns.length}`}
+          label="Roundups"
+          delay={80}
+        />
+        <StatPill
+          icon="calendar"
+          value={`${CURRENCY.symbol}${savedThisMonth.toFixed(2)}`}
+          label="This month"
+          delay={160}
+        />
+        <StatPill
+          icon="trending-up"
+          value={`${CURRENCY.symbol}${avgRoundup.toFixed(2)}`}
+          label="Avg roundup"
+          delay={240}
+        />
       </View>
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Transactions</Text>
-          <Text style={styles.autoHint}>Auto-detected from clipboard</Text>
+          <View style={styles.autoPill}>
+            <Ionicons name="clipboard-outline" size={12} color={colors.text.secondary} />
+            <Text style={styles.autoHint}>Auto-detected</Text>
+          </View>
         </View>
 
         {transactions.length === 0 ? (
           <View style={styles.emptyState}>
-            <Ionicons name="receipt-outline" size={48} color={colors.text.tertiary} />
+            <View style={styles.emptyIconWrap}>
+              <View style={styles.emptyIconRing}>
+                <Ionicons name="receipt-outline" size={40} color={colors.primary} />
+              </View>
+            </View>
             <Text style={styles.emptyText}>No transactions yet</Text>
             <Text style={styles.emptySubtext}>
               Copy a bank SMS or UPI confirmation, then open RoundUp to auto-detect it
@@ -101,45 +158,13 @@ export default function HomeScreen() {
           </View>
         ) : (
           <View style={styles.transactionList}>
-            {transactions.map((t: Transaction) => (
-              <View
-                key={t.id}
-                style={[
-                  styles.transactionRow,
-                  t.type === "ROUNDUP_SAVING" && styles.savingRow,
-                ]}
-              >
-                <View style={styles.transactionIcon}>
-                  <Ionicons
-                    name={t.type === "ROUNDUP_SAVING" ? "save-outline" : "cart-outline"}
-                    size={22}
-                    color={t.type === "ROUNDUP_SAVING" ? colors.secondary : colors.text.primary}
-                  />
-                </View>
-                <View style={styles.transactionInfo}>
-                  <Text style={styles.transactionDesc}>{t.description}</Text>
-                  <Text style={styles.transactionDate}>
-                    {new Date(t.date).toLocaleDateString("en-IN", {
-                      day: "numeric",
-                      month: "short",
-                    })}
-                  </Text>
-                </View>
-                <Text
-                  style={[
-                    styles.transactionAmount,
-                    t.type === "ROUNDUP_SAVING" && styles.savingAmount,
-                  ]}
-                >
-                  {t.type === "ROUNDUP_SAVING" ? "+" : "-"}
-                  {formatCurrency(t.amount)}
-                </Text>
-              </View>
+            {transactions.map((t: Transaction, index) => (
+              <TransactionRow key={t.id} transaction={t} index={index} />
             ))}
           </View>
         )}
       </View>
-    </ScrollView>
+    </Animated.ScrollView>
   );
 }
 
@@ -152,6 +177,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.lg,
     paddingBottom: spacing.md,
+  },
+  avatarRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.sm + 2,
+  },
+  avatar: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: colors.stat.iconTint,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  avatarText: {
+    fontSize: typography.sizes.lg,
+    fontWeight: typography.weights.bold,
+    color: colors.primary,
   },
   greeting: {
     fontSize: typography.sizes.xl,
@@ -171,41 +214,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginRight: 4,
   },
-  balanceCard: {
-    backgroundColor: colors.primary,
-    marginHorizontal: spacing.lg,
-    borderRadius: 16,
-    padding: spacing.lg,
+  statsRow: {
+    flexDirection: "row",
+    gap: spacing.sm,
+    paddingHorizontal: spacing.lg,
     marginBottom: spacing.lg,
-  },
-  balanceLabel: {
-    fontSize: typography.sizes.sm,
-    color: colors.text.inverse,
-    opacity: 0.8,
-  },
-  balanceAmount: {
-    fontSize: typography.sizes.display,
-    fontWeight: typography.weights.bold,
-    color: colors.text.inverse,
-    marginTop: spacing.xs,
-  },
-  balanceMeta: {
-    marginTop: spacing.md,
-    flexDirection: "row",
-  },
-  balanceMetaItem: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.xs,
-  },
-  balanceMetaText: {
-    fontSize: typography.sizes.sm,
-    color: colors.text.inverse,
-    opacity: 0.85,
   },
   section: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xxl,
+    paddingBottom: 110,
   },
   sectionHeader: {
     flexDirection: "row",
@@ -218,21 +235,45 @@ const styles = StyleSheet.create({
     fontWeight: typography.weights.semibold,
     color: colors.text.primary,
   },
+  autoPill: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    backgroundColor: colors.surface,
+    borderRadius: 12,
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+  },
   autoHint: {
     fontSize: typography.sizes.xs,
-    color: colors.text.tertiary,
-    fontStyle: "italic",
+    color: colors.text.secondary,
   },
   emptyState: {
     alignItems: "center",
     paddingVertical: spacing.xxl,
-    backgroundColor: colors.surface,
-    borderRadius: 16,
+    backgroundColor: colors.stat.background,
+    borderRadius: 20,
+  },
+  emptyIconWrap: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    backgroundColor: colors.stat.iconTint,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  emptyIconRing: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: "#FFFFFF",
+    alignItems: "center",
+    justifyContent: "center",
   },
   emptyText: {
     fontSize: typography.sizes.md,
-    fontWeight: typography.weights.medium,
-    color: colors.text.secondary,
+    fontWeight: typography.weights.semibold,
+    color: colors.text.primary,
     marginTop: spacing.md,
   },
   emptySubtext: {
@@ -244,47 +285,5 @@ const styles = StyleSheet.create({
   },
   transactionList: {
     gap: 1,
-    borderRadius: 12,
-    overflow: "hidden",
-  },
-  transactionRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    backgroundColor: colors.surface,
-    paddingVertical: spacing.sm + 4,
-    paddingHorizontal: spacing.md,
-    gap: spacing.sm + 2,
-  },
-  savingRow: {
-    backgroundColor: "#F0FFF0",
-  },
-  transactionIcon: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: colors.background,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  transactionInfo: {
-    flex: 1,
-  },
-  transactionDesc: {
-    fontSize: typography.sizes.md,
-    fontWeight: typography.weights.medium,
-    color: colors.text.primary,
-  },
-  transactionDate: {
-    fontSize: typography.sizes.xs,
-    color: colors.text.tertiary,
-    marginTop: 2,
-  },
-  transactionAmount: {
-    fontSize: typography.sizes.md,
-    fontWeight: typography.weights.semibold,
-    color: colors.error,
-  },
-  savingAmount: {
-    color: colors.secondary,
   },
 });

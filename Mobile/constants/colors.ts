@@ -20,6 +20,25 @@ export const colors = {
     active: "#0A84FF",
     inactive: "#8E8E93",
   },
+  hero: {
+    start: "#0B1526",
+    mid: "#123258",
+    end: "#0A84FF",
+    glow: "rgba(10,132,255,0.35)",
+    accent: "#F5B301",
+    ring: "rgba(255,255,255,0.09)",
+    textMuted: "rgba(255,255,255,0.72)",
+  },
+  stat: {
+    background: "#F7F8FB",
+    iconTint: "#EAF2FF",
+  },
+  row: {
+    background: "#FFFFFF",
+    roundup: "#E9F9EF",
+    roundupText: "#1E9E4F",
+  },
+  shadow: "#0A84FF",
 } as const;
 
 export type ColorKeys = keyof typeof colors;

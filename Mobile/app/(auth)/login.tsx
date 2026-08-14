@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { useForm, Controller } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -78,6 +79,16 @@ export default function LoginScreen() {
         style={styles.flex}
       >
         <View style={styles.container}>
+          <View style={styles.brandMark}>
+            <LinearGradient
+              colors={[colors.hero.start, colors.hero.mid, colors.hero.end]}
+              start={{ x: 0.1, y: 0 }}
+              end={{ x: 0.95, y: 1 }}
+              style={styles.brandIcon}
+            >
+              <Ionicons name="trending-up" size={26} color="#FFFFFF" />
+            </LinearGradient>
+          </View>
           <Text style={styles.title}>Welcome back</Text>
           <Text style={styles.subtitle}>Sign in to your RoundUp account</Text>
 
@@ -151,11 +162,18 @@ export default function LoginScreen() {
               onPress={handleSubmit(onSubmit)}
               disabled={isSubmitting}
             >
-              {isSubmitting ? (
-                <ActivityIndicator color={colors.text.inverse} />
-              ) : (
-                <Text style={styles.buttonText}>Sign In</Text>
-              )}
+              <LinearGradient
+                colors={[colors.primary, colors.primaryDark]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.buttonGradient}
+              >
+                {isSubmitting ? (
+                  <ActivityIndicator color={colors.text.inverse} />
+                ) : (
+                  <Text style={styles.buttonText}>Sign In</Text>
+                )}
+              </LinearGradient>
             </Pressable>
           </View>
 
@@ -175,31 +193,56 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: spacing.lg,
-    paddingTop: spacing.xxl,
+    paddingTop: spacing.xl,
     paddingBottom: spacing.xl,
+  },
+  brandMark: {
+    alignItems: "center",
+    marginBottom: spacing.lg,
+  },
+  brandIcon: {
+    width: 64,
+    height: 64,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 14,
+      },
+      android: {
+        elevation: 8,
+      },
+    }),
   },
   title: {
     fontSize: typography.sizes.xxl,
     fontWeight: typography.weights.bold,
     color: colors.text.primary,
     marginBottom: spacing.xs,
+    textAlign: "center",
   },
   subtitle: {
     fontSize: typography.sizes.md,
     color: colors.text.secondary,
     marginBottom: spacing.xl,
+    textAlign: "center",
   },
   form: { gap: spacing.md },
   field: { gap: spacing.xs },
   label: {
     fontSize: typography.sizes.sm,
     fontWeight: typography.weights.medium,
-    color: colors.text.primary,
+    color: colors.text.secondary,
+    marginLeft: spacing.xs,
   },
   input: {
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 12,
+    borderRadius: 14,
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm + 2,
     fontSize: typography.sizes.md,
@@ -211,7 +254,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderWidth: 1,
     borderColor: colors.border,
-    borderRadius: 12,
+    borderRadius: 14,
     backgroundColor: colors.surface,
   },
   passwordInput: {
@@ -228,6 +271,7 @@ const styles = StyleSheet.create({
   error: {
     fontSize: typography.sizes.xs,
     color: colors.error,
+    marginLeft: spacing.xs,
   },
   rootError: {
     fontSize: typography.sizes.sm,
@@ -236,11 +280,24 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.sm,
   },
   button: {
-    backgroundColor: colors.primary,
-    borderRadius: 12,
-    paddingVertical: spacing.sm + 4,
-    alignItems: "center",
+    borderRadius: 16,
+    overflow: "hidden",
     marginTop: spacing.sm,
+    ...Platform.select({
+      ios: {
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 0, height: 8 },
+        shadowOpacity: 0.3,
+        shadowRadius: 14,
+      },
+      android: {
+        elevation: 6,
+      },
+    }),
+  },
+  buttonGradient: {
+    paddingVertical: spacing.md,
+    alignItems: "center",
   },
   buttonDisabled: { opacity: 0.6 },
   buttonText: {

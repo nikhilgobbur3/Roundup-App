@@ -11,9 +11,35 @@ import {
 import { useRouter } from "expo-router";
 import { CameraView, useCameraPermissions } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  withRepeat,
+  Easing,
+} from "react-native-reanimated";
 import { colors } from "../../constants/colors";
 import { spacing } from "../../constants/spacing";
 import { typography } from "../../constants/typography";
+
+function ScanLine() {
+  const y = useSharedValue(0);
+
+  useEffect(() => {
+    y.value = withRepeat(
+      withTiming(230, { duration: 1800, easing: Easing.inOut(Easing.quad) }),
+      -1,
+      true
+    );
+  }, []);
+
+  const style = useAnimatedStyle(() => ({
+    transform: [{ translateY: y.value }],
+  }));
+
+  return <Animated.View style={[styles.scanLine, style]} />;
+}
 
 function parseUpiQr(data: string): Record<string, string> | null {
   if (!data.startsWith("upi://pay")) return null;
@@ -131,7 +157,14 @@ function NativeScanner({ onScan }: { onScan: (code: string) => void }) {
   if (!permission.granted) {
     return (
       <View style={styles.center}>
-        <Ionicons name="camera-outline" size={64} color={colors.text.tertiary} />
+        <LinearGradient
+          colors={[colors.hero.start, colors.hero.mid, colors.hero.end]}
+          start={{ x: 0.1, y: 0 }}
+          end={{ x: 0.95, y: 1 }}
+          style={styles.permissionIconWrap}
+        >
+          <Ionicons name="camera-outline" size={34} color="#FFFFFF" />
+        </LinearGradient>
         <Text style={styles.permissionTitle}>Camera Access Needed</Text>
         <Text style={styles.permissionText}>
           Allow camera access to scan merchant QR codes
@@ -159,7 +192,10 @@ function NativeScanner({ onScan }: { onScan: (code: string) => void }) {
         }
       />
       <View style={styles.overlay}>
-        <View style={styles.frame} />
+        <View style={styles.frameWrap}>
+          <View style={styles.frame} />
+          {!scanned && <ScanLine />}
+        </View>
         <Text style={styles.hint}>Point camera at merchant QR code</Text>
       </View>
 
@@ -239,23 +275,46 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  frame: {
+  frameWrap: {
     width: 250,
     height: 250,
-    borderWidth: 2,
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+  frame: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderWidth: 3,
     borderColor: "#FFF",
-    borderRadius: 16,
+    borderRadius: 24,
     backgroundColor: "transparent",
+  },
+  scanLine: {
+    position: "absolute",
+    top: 0,
+    left: 10,
+    right: 10,
+    height: 3,
+    borderRadius: 2,
+    backgroundColor: colors.secondary,
+    shadowColor: colors.secondary,
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.9,
+    shadowRadius: 6,
+    elevation: 4,
   },
   hint: {
     color: "#FFF",
     fontSize: typography.sizes.sm,
     marginTop: spacing.lg,
     textAlign: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0,0,0,0.55)",
     paddingHorizontal: spacing.md,
     paddingVertical: spacing.sm,
-    borderRadius: 8,
+    borderRadius: 10,
     overflow: "hidden",
   },
   webInputRow: {
@@ -293,6 +352,14 @@ const styles = StyleSheet.create({
     color: colors.text.tertiary,
     marginVertical: spacing.md,
   },
+  permissionIconWrap: {
+    width: 76,
+    height: 76,
+    borderRadius: 38,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: spacing.md,
+  },
   permissionTitle: {
     fontSize: typography.sizes.xl,
     fontWeight: typography.weights.bold,
@@ -307,7 +374,7 @@ const styles = StyleSheet.create({
   },
   permissionButton: {
     backgroundColor: colors.primary,
-    borderRadius: 12,
+    borderRadius: 14,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.sm + 4,
   },
@@ -320,8 +387,8 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 80,
     alignSelf: "center",
-    backgroundColor: colors.primary,
-    borderRadius: 12,
+    backgroundColor: "rgba(10,132,255,0.92)",
+    borderRadius: 14,
     paddingHorizontal: spacing.xl,
     paddingVertical: spacing.sm + 4,
   },
