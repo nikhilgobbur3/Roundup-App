@@ -1,8 +1,11 @@
 #!/usr/bin/env node
-// Phase 2: scan Reddit + LinkedIn for new comments/mentions on our posts,
-// have Gemini draft polite replies, and open a GitHub issue per comment so the
-// user approves (comment "1"/"2"/"3" or "skip"). Posting happens in
-// approve-replies.mjs on a later run.
+// Phase 2: scan Reddit for new comments on our posts, have Gemini draft polite
+// replies, and open a GitHub issue per comment so the user approves (comment
+// "1"/"2"/"3" or "skip"). Posting happens in approve-replies.mjs on a later run.
+//
+// Reddit only for scanning: the Composio LinkedIn toolkit has no tool to list
+// the user's own posts/comments, and the HTTPRequest proxy tool is not available
+// to this account, so LinkedIn comment scanning is skipped (posting still works).
 //
 // Needs: COMPOSIO_API_KEY, GEMINI_API_KEY, GITHUB_TOKEN.
 // Optional: GEMINI_MODEL (default gemini-3.5-flash).
@@ -140,35 +143,8 @@ async function executeTool(toolSlug, _toolkitSlug, args) {
     const entry = j?.data?.results?.[0]?.response;
     if (!entry || !entry.successful) return null;
     return parseData(entry.data);
-  } catch {
-    return null;
-  }
-}
-
-async function proxyGet(_toolkitSlug, endpoint) {
-  try {
-    const result = await mcpCall('tools/call', {
-      name: 'COMPOSIO_MULTI_EXECUTE_TOOL',
-      arguments: {
-        tools: [{ tool_slug: 'HTTPRequest', arguments: { url: `https://api.linkedin.com${endpoint}`, method: 'GET' } }],
-        sync_response_to_workbench: false,
-        thought: 'Proxy GET for the RoundUp reply pipeline.',
-        memory: {},
-        current_step: 'REPLY_CHECK',
-        current_step_metric: '1/1',
-      },
-    });
-    const text = extractToolText(result);
-    let j;
-    try {
-      j = JSON.parse(text);
-    } catch {
-      return null;
-    }
-    const entry = j?.data?.results?.[0]?.response;
-    if (!entry || !entry.successful) return null;
-    return parseData(entry.data);
-  } catch {
+  } catch (err) {
+    console.log(`  [composio] ${toolSlug} failed: ${String(err?.message || err).slice(0, 160)}`);
     return null;
   }
 }
@@ -271,8 +247,11 @@ async function openIssue(meta) {
 
 async function collectReddit() {
   const me = await executeTool('REDDIT_GET_REDDIT_USER_ABOUT', 'reddit', { username: 'me' });
-  const username = me?.name || '';
-  if (!username) return [];
+  const username = me?.data?.name || me?.name || '';
+  if (!username) {
+    console.log('  [reddit] could not resolve username — skipping.');
+    return [];
+  }
 
   const posts = await executeTool('REDDIT_SEARCH_ACROSS_SUBREDDITS', 'reddit', {
     search_query: `author:${username}`,
@@ -280,11 +259,12 @@ async function collectReddit() {
     sort: 'new',
     limit: 10,
   });
-  const children = posts?.data?.children || posts?.children || [];
+  // Composio transforms the Reddit listing: posts are under `data.posts`.
+  const list = posts?.data?.posts || posts?.posts || [];
   const found = [];
 
-  for (const child of children) {
-    const post = child?.data || child;
+  for (const raw of list) {
+    const post = raw?.data || raw;
     const postId = post?.id;
     if (!postId) continue;
     const comments = await executeTool('REDDIT_RETRIEVE_POST_COMMENTS', 'reddit', {
@@ -292,8 +272,10 @@ async function collectReddit() {
       sort: 'new',
       limit: 50,
     });
-    const list = comments?.data?.children || comments?.children || [];
-    for (const c of list) {
+    // Composio nests comments under `comments_listing.data.children`.
+    const children =
+      comments?.comments_listing?.data?.children || comments?.data?.children || [];
+    for (const c of children) {
       const d = c?.data;
       if (!d || !d.id) continue;
       if (d.author === username || d.author === '[deleted]' || d.author === '[removed]') continue;
@@ -301,7 +283,8 @@ async function collectReddit() {
       const fullname = `t1_${d.id}`;
       if (SEEN.reddit.includes(fullname)) continue;
       SEEN.reddit.push(fullname);
-      const url = `https://www.reddit.com${post.permalink || ''}#${fullname}`;
+      const permalink = post.permalink || '';
+      const url = `${/^https?:/.test(permalink) ? '' : 'https://www.reddit.com'}${permalink}#${fullname}`;
       found.push({
         platform: 'reddit',
         thing_id: fullname,
@@ -316,40 +299,13 @@ async function collectReddit() {
 }
 
 async function collectLinkedIn() {
-  const me = await executeTool('LINKEDIN_GET_MY_INFO', 'linkedin', {});
-  const personId = me?.sub || me?.id || (typeof me === 'string' ? me : '');
-  if (!personId) return [];
-  const authorUrn = `urn:li:person:${personId}`;
-
-  const posts = await proxyGet('linkedin', `/rest/posts?q=author&author=${encodeURIComponent(authorUrn)}&count=10`);
-  const elements = posts?.data?.elements || posts?.elements || [];
-  const found = [];
-
-  for (const post of elements) {
-    const postUrn = post?.id;
-    if (!postUrn) continue;
-    const comments = await proxyGet('linkedin', `/rest/socialActions/${encodeURIComponent(postUrn)}/comments?count=20`);
-    for (const cm of comments?.data?.elements || comments?.elements || []) {
-      const id = cm?.id;
-      if (!id) continue;
-      const text = cm?.message?.text || '';
-      const actor = cm?.actor || '';
-      if (!text || actor === authorUrn) continue;
-      if (SEEN.linkedin.includes(id)) continue;
-      SEEN.linkedin.push(id);
-      found.push({
-        platform: 'linkedin',
-        thing_id: id,
-        target_urn: postUrn,
-        object: postUrn,
-        url: postUrn,
-        title: `LinkedIn comment on ${postUrn}`,
-        from: actor,
-        content: text,
-      });
-    }
-  }
-  return found;
+  // LinkedIn comment scanning is unavailable. The Composio LinkedIn toolkit has
+  // no tool that lists the user's own posts/comments, and the generic
+  // HTTPRequest proxy tool is not available to this account ("Tool HTTPREQUEST
+  // not found"). Replying to a KNOWN comment still works in
+  // approve-replies.mjs via LINKEDIN_CREATE_COMMENT_ON_POST.
+  console.log('  [linkedin] comment scanning unavailable (no Composio tool to list posts/comments) — skipping.');
+  return [];
 }
 
 // ---------------------------------------------------------------------------
