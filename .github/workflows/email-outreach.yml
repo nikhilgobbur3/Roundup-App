@@ -41,6 +41,7 @@ jobs:
       - name: Sync progress to Notion
         env:
           COMPOSIO_API_KEY: ${{ secrets.COMPOSIO_API_KEY }}
+          NOTION_DATABASE_ID: 3b93042e-33cd-8178-a83b-cf9b7af32700
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: node scripts/tracking/notion-sync.mjs

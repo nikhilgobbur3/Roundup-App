@@ -13,8 +13,10 @@
 //     Status, so the user can flip Accepted/Replied/etc. in Notion freely.
 //
 // Needs: COMPOSIO_API_KEY (Notion via Connect/MCP). Optional: NOTION_DATABASE_ID
-// (default: auto-search by title), GITHUB_TOKEN + GITHUB_REPOSITORY (GitHub rows).
-// Plain Node ESM, zero dependencies. Never exits non-zero.
+// (default: known "RoundUp Tracking" DB id, then auto-search by title), GITHUB_TOKEN +
+// GITHUB_REPOSITORY (GitHub rows). Plain Node ESM, zero dependencies.
+// Safety: NEVER exits non-zero (the workflow must stay green and keep committing
+// state); failures are logged loudly instead.
 
 import { readFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
@@ -26,6 +28,10 @@ const EMAIL_PACK = path.join(ROOT, 'scripts', 'email', 'pack.json');
 const EMAIL_STATE = path.join(ROOT, 'scripts', 'email', 'state.json');
 const MCP_URL = 'https://connect.composio.dev/mcp';
 const DB_TITLE = 'RoundUp Tracking';
+// Known id of the "RoundUp Tracking" database. Used as a fallback so the sync
+// never depends on NOTION_SEARCH_NOTION_PAGE (whose transient failure silently
+// skipped row creation on 2026-08-12..14).
+const DEFAULT_DATABASE_ID = '3b93042e-33cd-8178-a83b-cf9b7af32700';
 
 // ---------------------------------------------------------------------------
 // env
@@ -309,7 +315,7 @@ async function findDatabaseId() {
   for (const r of results) {
     if (r?.object === 'database') return r.id;
   }
-  return null;
+  return DEFAULT_DATABASE_ID;
 }
 
 function propsFor(row) {
@@ -384,10 +390,13 @@ if (rows.length === 0) {
 
 const databaseId = await findDatabaseId();
 if (!databaseId) {
-  console.log('notion-sync: database not found — create "RoundUp Tracking" in Notion or set NOTION_DATABASE_ID.');
+  console.log('notion-sync ERROR: database not found — check NOTION_DATABASE_ID / the "RoundUp Tracking" DB.');
   process.exit(0);
 }
 
 const { created, updated } = await upsertRows(databaseId, rows);
+if (rows.length > 0 && created + updated === 0) {
+  console.log(`notion-sync ERROR: ${rows.length} row(s) pending but nothing was created/updated — Notion upsert failed silently.`);
+}
 console.log(`notion-sync done: ${rows.length} row(s), ${created} created, ${updated} updated (db ${databaseId}).`);
 process.exit(0);
