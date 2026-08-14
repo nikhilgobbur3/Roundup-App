@@ -43,12 +43,19 @@ Mobile/
 │   ├── index.tsx           ← THE GATE — if logged in → Home; if not → Login
 │   ├── (auth)/             ← LOGIN/SIGNUP screens (no tabs shown here)
 │   │   ├── _layout.tsx     ← Auth screen header (back button, title)
-│   │   ├── login.tsx       ← Sign In form
-│   │   └── signup.tsx      ← Create Account form
+│   │   ├── login.tsx       ← Sign In form (gradient logo + rounded inputs + gradient button)
+│   │   └── signup.tsx      ← Create Account form (same polished style)
 │   └── (tabs)/             ← MAIN APP screens (bottom tab bar visible)
-│       ├── _layout.tsx     ← Tab bar setup (Home + Profile tabs at bottom)
-│       ├── home.tsx        ← Home screen (balance card, activity list)
-│       └── profile.tsx     ← Profile screen (your info, settings, log out)
+│       ├── _layout.tsx     ← Floating rounded pill tab bar (Home + Profile)
+│       ├── home.tsx        ← Home screen (gradient savings hero, stat pills, activity list)
+│       └── profile.tsx     ← Profile screen (gradient avatar, settings cards, log out)
+│
+├── components/             ← Reusable UI PIECES (used by the screens above)
+│   ├── SavingsHero.tsx     ← The gradient "wealth" card on Home (counts up, glows, parallax)
+│   ├── StatPill.tsx        ← A single stat card (Roundups / This month / Avg roundup)
+│   ├── TransactionRow.tsx  ← One row in the activity list (with the green "+₹" badge)
+│   ├── CelebrationOverlay.tsx ← The confetti success screen after a payment
+│   └── RazorpayWebView.tsx ← The payment sheet (checkout.js in a WebView)
 │
 ├── services/               ← The WAITERS (talk to the backend)
 │   ├── api/
@@ -57,13 +64,14 @@ Mobile/
 │       └── secure-store.ts ← Saves/reads/deletes the JWT token on your phone
 │
 ├── stores/
-│   └── auth-store.ts       ← THE MANAGER — remembers "who is logged in" across screens
+│   ├── auth-store.ts       ← THE MANAGER — remembers "who is logged in" across screens
+│   └── transaction-store.ts ← ALSO the manager — transactions/savings, plus a local cache so Home opens instantly
 │
 ├── types/
 │   └── index.ts            ← THE MENU — defines what User, Login, Signup look like
 │
 ├── constants/              ← THE DESIGN RULEBOOK
-│   ├── colors.ts           ← All colors (blue=primary, green=secondary, etc.)
+│   ├── colors.ts           ← All colors (blue=primary, green=secondary, + hero/stat/row/shadow)
 │   ├── spacing.ts          ← All spacing sizes (4px, 8px, 16px, etc.)
 │   └── typography.ts       ← All font sizes and weights
 │
@@ -223,11 +231,21 @@ Alert pops up: "Are you sure you want to sign out?"
 | `_layout.tsx` | **Root wrapper** — sets up gesture support, React Query, and runs AuthGate (checks if already logged in) |
 | `index.tsx` | **The gate** — if logged in → go Home; if not → go Login |
 | `(auth)/_layout.tsx` | **Auth screen wrapper** — adds a header bar with back button |
-| `login.tsx` | **Sign In page** — email + password form, sends to backend, on success → saves token → goes Home |
-| `signup.tsx` | **Create Account page** — name + email + password + confirm, validates rules, sends to backend |
-| `(tabs)/_layout.tsx` | **Bottom tab bar** — puts [Home] and [Profile] tabs at the bottom of the screen |
-| `home.tsx` | **Home dashboard** — shows "Hello [name]", the "Your Wealth" savings hero, QR button (scan-to-pay), and the activity list |
-| `profile.tsx` | **Profile page** — shows your avatar, name, email, settings rows, and Sign Out button |
+| `login.tsx` | **Sign In page** — email + password form with a gradient logo tile and gradient Sign In button; on success → saves token → goes Home |
+| `signup.tsx` | **Create Account page** — name + email + password + confirm, validates rules, sends to backend (same gradient style) |
+| `(tabs)/_layout.tsx` | **Floating pill tab bar** — puts [Home] and [Profile] in a rounded, floating bar at the bottom |
+| `home.tsx` | **Home dashboard** — gradient "wealth" hero (counts up + pulses), 3 stat pills (Roundups / This month / Avg roundup), QR button (scan-to-pay), and the animated activity list; pulls the cached data instantly, then refreshes |
+| `profile.tsx` | **Profile page** — gradient avatar with your initial, grouped settings cards, and Sign Out button |
+
+### Reusable pieces (`components/`)
+
+| File | One-sentence job |
+|---|---|
+| `SavingsHero.tsx` | The **gradient wealth card** on Home — big ₹ total that counts up, a soft glow, and a scroll parallax effect |
+| `StatPill.tsx` | A **stat card** used three times on Home (Roundups, This month, Avg roundup) |
+| `TransactionRow.tsx` | One **activity row** — icon in a colored circle + the green "+₹" roundup badge |
+| `CelebrationOverlay.tsx` | The **confetti success screen** shown after a payment |
+| `RazorpayWebView.tsx` | The **payment sheet** that loads Razorpay's checkout inside a WebView |
 
 ### Services (`services/`)
 
@@ -241,6 +259,7 @@ Alert pops up: "Are you sure you want to sign out?"
 | File | One-sentence job |
 |---|---|
 | `auth-store.ts` | **The manager** — remembers who is logged in (user + token) across ALL screens, provides setAuth/clearAuth |
+| `transaction-store.ts` | **The second manager** — holds transactions + savings, and caches the last fetch on the phone so Home opens instantly even when the backend is slow |
 
 ### Types (`types/`)
 
@@ -252,7 +271,7 @@ Alert pops up: "Are you sure you want to sign out?"
 
 | File | One-sentence job |
 |---|---|
-| `colors.ts` | **The paint guide** — defines every color (blue buttons, gray text, red errors, white backgrounds) |
+| `colors.ts` | **The paint guide** — defines every color (blue buttons, gray text, red errors, white backgrounds) plus the new `hero`/`stat`/`row`/`shadow` tokens used by the redesigned Home |
 | `spacing.ts` | **The ruler** — defines spacing sizes (4px, 8px, 16px, 24px, etc.) so everything lines up |
 | `typography.ts` | **The font guide** — defines font sizes (12px to 40px) and weights (regular to bold) |
 
@@ -398,4 +417,4 @@ Together they work like a **bouncer + clipboard** at a club:
 
 ---
 
-> **Next up:** the design overhaul — a celebration screen with confetti after every payment, dark-mode theming, savings streaks, and a goal progress ring. This guide explains the core architecture; those features build on the exact same patterns you just learned. 🎉
+> **Already shipped:** the design overhaul — a gradient "wealth" hero, floating tab bar, celebration screen with confetti after every payment, and polished Pay/Scan/Profile/Login screens. **Still to come (same patterns):** dark-mode theming, savings streaks, and a goal progress ring. This guide explains the core architecture; those features build on the exact same patterns you just learned. 🎉

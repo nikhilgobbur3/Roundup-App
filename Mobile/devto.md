@@ -4,8 +4,9 @@
 
 | # | Topic | Type | Date | Posted |
 |---|-------|------|------|--------|
-| 1 | Building RoundUp — full-stack UPI app | Article | 2026-08-07 | ❌ |
+| 1 | Building RoundUp — full-stack UPI app | Article | 2026-08-08 | ✅ |
 | 2 | Auth deep-dive: the 401-vs-403 trap | Article | TBD | ❌ |
+| 3 | The design overhaul — making saving feel like a product | Article | TBD | ❌ |
 | 3 | | | | |
 
 > **How auto-posting works:** the GitHub Action posts this article when `**Date:**` is set (not TBD) and `**Posted:**` is `❌`. After posting it flips to `✅`.
@@ -116,6 +117,51 @@ If you're building something similar — or have a take on the product decisions
 **Body:**
 
 [To be written — covers the AuthenticationEntryPoint fix, why 403 vs 401, and session clearing on both statuses.]
+
+---
+
+## Post 3: The Design Overhaul — Making Saving Feel Like a Product
+
+**Date:** TBD
+**Posted:** ❌
+**Tags:** reactnative, expo, reanimated, fintech, uiux
+
+**Title:** I Redesigned My Fintech App's UI — Gradients, Micro-Animations, and a Floating Tab Bar (React Native + Reanimated)
+
+**Body:**
+
+### Executive Summary
+
+I shipped a full visual overhaul of **RoundUp**, my UPI expense-tracking app, and the goal was simple: make saving feel like a product, not a ledger. The home screen now opens with a gradient "wealth" card that counts up, three stat pills, and an activity list where every row shows the spare change it saved. Payments end in confetti. The tab bar floats. And the app now opens instantly because it renders from a local cache first.
+
+A ₹153 payment still becomes ₹160 — ₹7 quietly saved. But now the app *feels* like the ₹7 matters.
+
+![RoundUp new home screen](media/screenshots/home.png)
+
+### What Changed
+
+- **Gradient "wealth" hero** — the savings number counts up when it appears, has a soft pulsing glow, and parallax-scrolls behind the list. Built with `expo-linear-gradient` + Reanimated.
+- **3 stat pills** — Roundups (count), saved this month (₹), and avg roundup (₹). Instant context without opening anything.
+- **Animated transaction rows** — each row has an icon in a colored circle and a green "+₹" badge showing exactly what it saved you.
+- **Floating tab bar** — a rounded pill instead of a full-width strip; it looks native to the glassy fintech style.
+- **Pay/Scan/Profile/Auth polish** — gradient merchant card + ₹-prefixed amount input + animated roundup pill on Pay; rounded camera frame with an animated scan line; gradient avatar + grouped cards on Profile; gradient brand tiles on Login/Signup.
+- **Instant open** — the transaction store caches its last fetch to AsyncStorage, so Home renders immediately and refreshes in the background. No more blank screen while Railway's free tier wakes up.
+
+![RoundUp pay screen with roundup pill](media/screenshots/pay.png)
+
+### The Animation Rules I Followed
+
+1. **Only animate `transform` and `opacity`** — everything stays GPU-composited, no layout thrash.
+2. **Count-up with `withTiming`** on a shared value, rendered through a run-on-JS-UI hook — the number eases instead of jumping.
+3. **Staggered entrances** — hero first, then pills, then rows fade up in sequence. Feels choreographed, not chaotic.
+
+### What I'd Do Differently
+
+Dark mode and a savings-goal progress ring are next. The patterns are all in place — it's just tokens and data at this point.
+
+**Repo:** https://github.com/nikhilgobbur3/Roundup-App
+
+If you've designed a fintech UI — what's the one detail that made the biggest difference for your users?
 
 ---
 

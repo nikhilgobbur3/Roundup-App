@@ -19,7 +19,8 @@
 | 1 | App Walkthrough | ~60s | TBD | ❌ |
 | 2 | QR Scan + Dummy Pay Demo | ~30s | TBD | ❌ |
 | 3 | Celebration Screen + "Your Wealth" Redesign | ~30s | TBD | ❌ |
-| 4 | | | | |
+| 4 | UI Overhaul — gradient wealth card, floating tab bar, ₹ badges | ~30s | TBD | ❌ |
+| 5 | | | | |
 
 ---
 
@@ -244,16 +245,50 @@ Home screen — the "Your Wealth" number grew.
 
 ---
 
-# Episode 4: [Feature Name]
+# Episode 4: UI Overhaul — Gradient Wealth Card, Floating Tab Bar, ₹ Badges
 
 **Date:** TBD
-**Duration:** ~XX seconds
+**Duration:** ~30 seconds
 
-### Screen Recording:
-[To be filled when recording]
+## Script
 
-### Script:
-[To be filled when recording]
+### 0:00 – 0:08 | New Home
+
+**Screen Recording:**
+Open the app on home screen. The gradient "wealth" hero counts up from ₹0, soft glow, 3 stat pills below (Roundups / This month / Avg roundup), then the activity list fades in row by row.
+
+**Script:**
+"RoundUp got a redesign. The home screen now opens with your wealth in a gradient card that counts up the moment it loads — because the number you see first is the number you grow."
+
+---
+
+### 0:08 – 0:16 | Make a Payment
+
+**Screen Recording:**
+Tap the QR button, scan or type a UPI ID, enter ₹153. The green roundup pill appears: "Spare change saved +₹7.00". Tap the gradient "Pay ₹153.00" button.
+
+**Script:**
+"Make a payment — ₹153. The app shows you the roundup instantly: ₹7 heading to savings."
+
+---
+
+### 0:16 – 0:26 | Celebration + New Details
+
+**Screen Recording:**
+Celebration screen (confetti, checkmark, "+₹7.00 invested in savings"). Then back on Home — the activity row for this payment shows a green "+₹7.00" badge. Switch to Profile: gradient avatar, grouped settings cards. Note the floating rounded tab bar.
+
+**Script:**
+"Confetti, a buzz, and the ₹7 is already invested. Back on Home, every transaction shows exactly what it saved you. The tab bar floats, Profile got grouped cards — it's the same RoundUp, but now it feels like a product."
+
+---
+
+### 0:26 – 0:30 | Outro
+
+**Screen Recording:**
+Home screen with the updated wealth number + stats.
+
+**Script:**
+"Small change, big future. RoundUp — round up your expenses, effortlessly."
 
 ---
 
@@ -293,5 +328,39 @@ What everyday habit would you build an app around?
 #Fintech #UPI #ReactNative #FullStackEngineer
 
 ---
+
+## LinkedIn Post 2: UI Overhaul
+
+**Date:** TBD
+**Posted:** ❌
+
+**Body:**
+
+I gave RoundUp a full visual overhaul this week — same money math, a completely different feel.
+
+The home screen now opens with a gradient "wealth" card that counts up the moment it loads, three quick stat pills (roundups, saved this month, average roundup), and an activity list where every row shows exactly what it saved you in green.
+
+![RoundUp home screen - new gradient wealth card](media/screenshots/home.png)
+
+The details matter:
+
+- Floating rounded tab bar instead of a full-width strip
+- Rounded camera frame with an animated scan line
+- Gradient merchant card + animated roundup pill on the Pay screen
+- Gradient avatar and grouped settings on Profile
+- Home opens instantly from a local cache, then refreshes in the background — no blank screen while the backend wakes up
+
+Built with Reanimated 4 + expo-linear-gradient, following one rule: only animate `transform` and `opacity`. Count-up via `withTiming`, staggered entrances, zero layout thrash.
+
+The core still does the same job — every ₹153 payment becomes ₹160, and ₹7 quietly moves into savings. It just feels like the ₹7 matters now.
+
+Code is public: https://github.com/nikhilgobbur3/Roundup-App
+
+What's the one thing that makes a finance app feel trustworthy to you — the numbers, or the design around them?
+
+#Fintech #UIUX #ReactNative #MobileDesign #FullStackEngineer
+
+> **Note:** set Date to today when the phone screenshots in `media/screenshots/` are added.
+
 
 *Updated automatically with each session.*

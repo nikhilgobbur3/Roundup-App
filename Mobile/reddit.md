@@ -5,6 +5,7 @@
 | # | Topic | Subreddit | Date | Posted |
 |---|-------|-----------|------|--------|
 | 1 | App Showcase | r/reactnative, r/developersIndia, r/SideProject | 2026-08-07 | ❌ |
+| 2 | UI Overhaul Showcase | r/reactnative, r/developersIndia, r/SideProject | TBD | ❌ |
 | 2 | | | | |
 
 > **How auto-posting works:** the GitHub Action posts each subreddit draft below when `**Date:**` is set (not TBD) and `**Posted:**` is `❌`. After posting it flips to `✅`.
@@ -83,6 +84,82 @@ The part I'm proudest of: design decisions that create a habit. Every payment en
 Repo: https://github.com/nikhilgobbur3/Roundup-App
 
 What would you have built differently? Feedback welcome.
+
+---
+
+## Post 2: UI Overhaul Showcase
+
+**Date:** TBD
+**Posted:** ❌
+**Subreddits:** r/reactnative, r/developersIndia, r/SideProject
+
+### r/reactnative
+
+**Title:** Gave my React Native fintech app a full UI overhaul — gradient hero, floating tab bar, micro-animations (Reanimated 4). Before/after inside.
+
+**Body:**
+
+Heads up, r/reactnative — I just redesigned **RoundUp** (a UPI expense tracker that rounds up every payment to the nearest ₹10 and saves the spare change). The goal was to make *saving* feel like a product, not a ledger.
+
+What changed:
+
+- **Gradient "wealth" hero** on Home — the savings number **counts up** when it loads (Reanimated `withTiming` on a shared value), has a soft pulsing glow, and parallax-scrolls behind the list (`expo-linear-gradient` + `useAnimatedScrollHandler`).
+- **3 stat pills** — Roundups / saved this month / avg roundup.
+- **Animated transaction rows** — colored icon circles + green "+₹" badges per row, staggered fade-in entrance.
+- **Floating tab bar** — absolute rounded pill instead of the full-width strip.
+- **Instant open** — the transaction store caches to AsyncStorage and Home hydrates from cache first, then refreshes in the background. Kills the blank-screen-while-backend-wakes problem.
+
+![new home screen](media/screenshots/home.png)
+
+Rules I followed: only animate `transform`/`opacity` (GPU-composited), one shared value per animation, staggered entrances with `withDelay`.
+
+Repo: https://github.com/nikhilgobbur3/Roundup-App
+
+Questions I'd love input on: **do you keep gradient cards in fintech apps or is it too "consumer"? And did you hit Reanimated 4 worklets issues in Expo Go?**
+
+### r/developersIndia
+
+**Title:** Redesigned my UPI expense-tracking app's UI (React Native + Reanimated) — gradient wealth card, floating tab bar, ₹ roundup badges
+
+**Body:**
+
+Sharing a UI overhaul of **RoundUp** — the UPI expense tracker that rounds every payment up to the nearest ₹10 and saves the spare change. Same money math (₹153 → ₹160, ₹7 saved), but the app now *feels* premium:
+
+- Gradient savings hero that counts up + pulses on load
+- 3 stat pills (roundups, saved this month, avg roundup)
+- Transaction rows with green +₹ badges
+- Floating rounded tab bar
+- Pay/Scan/Profile/Login screens polished to match
+- Home opens instantly (AsyncStorage cache, then background refresh)
+
+![new home screen](media/screenshots/home.png)
+
+Built with React Native + Expo SDK 54, Reanimated 4, Spring Boot backend, Railway + Neon. Repo: https://github.com/nikhilgobbur3/Roundup-App
+
+Feedback welcome — what's the one fintech UI pattern you think is overrated?
+
+### r/SideProject
+
+**Title:** I redesigned my savings app's UI to make the "spare change" moment feel big — count-up hero, floating tab bar
+
+**Body:**
+
+**RoundUp** rounds up every UPI payment to the nearest ₹10 and moves the spare change to savings (₹153 → ₹160, ₹7 saved). The core flow worked; the design didn't match the idea. So I did a full UI pass:
+
+- Gradient "wealth" hero that counts up and glows
+- 3 quick stat pills on Home
+- Animated rows with green +₹ badges
+- Floating rounded tab bar
+- Confetti celebration after every payment
+- Instant-open caching so there's no loading blank
+
+![new home screen](media/screenshots/home.png)
+
+Full-stack, runs on my phone today (dummy payment mode — real Razorpay checkout built and ready behind one flag).
+
+Repo: https://github.com/nikhilgobbur3/Roundup-App
+
+What's your take — does a "celebration moment" actually change user behavior, or is it gimmick?
 
 ---
 

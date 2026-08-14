@@ -8,6 +8,7 @@
 | 2 | Dummy Payment Mode | Thread | TBD | ❌ |
 | 3 | Dummy Mode Fix — Transactions Now Recorded | Thread | TBD | ❌ |
 | 4 | Celebration Screen + "Your Wealth" + Connection Fixed | Thread | TBD | ❌ |
+| 5 | UI Overhaul — gradient wealth card, floating tab bar, ₹ badges | Thread | TBD | ❌ |
 | 5 | | | | |
 
 ---
@@ -107,6 +108,31 @@ Also finally fixed phone testing: the app now runs on my phone via Expo Go with 
 And a backend deep-dive: payments were failing with "HTTP 403" — Spring Security's default response for bad/unknown-user tokens, but the app only logged out on 401. Added a 401 JSON entry point and now handle 403 too.
 
 Result: pay ₹153 → +₹7 to wealth, end to end. 🚀
+
+---
+
+## Post 5: UI Overhaul — Gradient Wealth Card, Floating Tab Bar, ₹ Badges
+
+**Date:** TBD
+
+### Tweet 1
+RoundUp got a full visual overhaul. Same money math — but now it looks like the product it is. 🎨
+
+### Tweet 2
+Home now opens with a gradient "wealth" card that COUNTS UP when it loads, a soft glow, and 3 stat pills: roundups, saved this month, avg roundup. The number you want to watch grow, front and center.
+
+### Tweet 3
+Every transaction row shows its green "+₹" badge — the exact spare change it saved you. ₹7 here, ₹3 there — suddenly it adds up, visibly.
+
+### Tweet 4
+Floating tab bar, rounded camera frame with an animated scan line, gradient buttons everywhere. And Home opens instantly now (cached, then background refresh) — no blank screen while the backend wakes up.
+
+### Tweet 5
+Built with Reanimated 4 + expo-linear-gradient. Rule: only animate transform/opacity. Staggered entrances. Count-up via `withTiming`. Same patterns, polished to a product.
+
+Repo: https://github.com/nikhilgobbur3/Roundup-App
+
+Do gradient "wealth" cards make you save more, or is it just pretty? 👇
 
 ---
 

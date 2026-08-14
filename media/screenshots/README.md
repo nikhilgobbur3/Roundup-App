@@ -4,15 +4,17 @@ This folder holds screenshots of the RoundUp app taken on a real phone. These
 are used in social posts and marketing materials, so please keep them sharp and
 name them exactly as listed below.
 
-## The 5 screenshots we need
+## The screenshots we need (new UI — Session 41)
 
 | Filename        | Screen to capture                                                                                 |
 | --------------- | ------------------------------------------------------------------------------------------------- |
-| `home.png`      | Home screen: the "Your Wealth" hero number + activity list + bottom tabs.                        |
-| `scan.png`      | QR scanner screen (camera open, scanning a UPI QR code).                                         |
-| `pay.png`       | Pay screen: amount entered (e.g. ₹153), roundup preview showing ₹160 total and "+₹7.00" saved, and the "Pay ₹153.00" button. |
+| `home.png`      | Home screen: the **gradient "wealth" hero** (counts up + glows) + 3 stat pills (Roundups / This month / Avg roundup) + activity list + floating tab bar. |
+| `scan.png`      | QR scanner screen (camera open, rounded frame with the animated green scan line).                |
+| `pay.png`       | Pay screen: amount entered (e.g. ₹153), the **green roundup pill** ("Spare change saved +₹7.00"), and the gradient "Pay ₹153.00" button. |
 | `celebration.png` | Celebration screen: gold confetti, checkmark, "+₹7.00 invested in savings" pill, "Small change, big future" card, "Done" button. |
-| `profile.png`   | Profile screen with name/email/settings/Sign Out.                                                |
+| `profile.png`   | Profile screen: **gradient avatar with your initial**, grouped settings cards, Sign Out.         |
+| `login.png`     | (Optional) Login screen with the gradient logo tile + gradient "Sign In" button.                 |
+| `signup.png`    | (Optional) Sign Up screen with the same gradient style.                                          |
 
 ## How to take and save them
 
@@ -27,3 +29,6 @@ name them exactly as listed below.
 
 Tip: screenshots are easier to reuse if the phone is on a light background and
 the whole screen fits in frame. No editing needed.
+
+> If you already have an old-UI `home.png`, replace it with the new design so
+> every post shows the updated screens.
