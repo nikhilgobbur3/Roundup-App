@@ -76,10 +76,30 @@
     "imt-care": "2026-08-14",
     "compup": "2026-08-14",
     "coulomb-ai": "2026-08-14",
-    "tilt-2": "2026-08-14"
+    "tilt-2": "2026-08-14",
+    "waybill": "2026-08-15",
+    "neodocs": "2026-08-15",
+    "odwen": "2026-08-15",
+    "betterhalf": "2026-08-15",
+    "businessonbot": "2026-08-15",
+    "appx": "2026-08-15",
+    "unschool": "2026-08-15",
+    "docvita": "2026-08-15",
+    "zeo-route-planner": "2026-08-15",
+    "hiration": "2026-08-15",
+    "voosh": "2026-08-15",
+    "reclaim-protocol": "2026-08-15",
+    "zoko": "2026-08-15",
+    "spark-studio": "2026-08-15",
+    "rocketsdr": "2026-08-15",
+    "weekday": "2026-08-15",
+    "zingbus": "2026-08-15",
+    "algouniversity": "2026-08-15",
+    "salarybox": "2026-08-15",
+    "edurev": "2026-08-15"
   },
   "sent": {},
-  "lastFetch": "2026-08-14",
+  "lastFetch": "2026-08-15",
   "issued": {
     "support@yenmo.in": 9,
     "grievance@clickpe.ai": 10,
@@ -110,6 +130,12 @@
     "support@compup.io": 39,
     "info@coulomb.ai": 40,
     "support@tilt.bike": 41,
-    "hr@imt.care": 42
+    "hr@imt.care": 42,
+    "bilal@voosh.ai": 45,
+    "madhavan@reclaimprotocol.org": 46,
+    "contact@zoko.io": 47,
+    "hello@sparkstudio.co": 48,
+    "contact@rocketsdr.ai": 49,
+    "founders@weekday.works": 50
   }
 }
