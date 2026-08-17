@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "slug": "wareiq",
+    "name": "WareIQ",
+    "one_liner": "Amazon-prime like logistics for eCommerce companies in India",
+    "batch": "Summer 2020",
+    "team_size": 50,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://www.wareiq.com",
+    "email": "sales@wareiq.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "orangewood-labs",
+    "name": "Orangewood Labs",
+    "one_liner": "Orangewood Labs makes worlds most affordable and easiest AI robot arms",
+    "batch": "Winter 2018",
+    "team_size": 40,
+    "locations": "San Francisco, CA, USA; Noida, UP, India",
+    "website": "http://www.orangewood.co",
+    "email": "hellorobot@orangewood.co",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "wifi-dabba-inc",
+    "name": "Wifi Dabba, Inc.",
+    "one_liner": "Decentralised broadband connectivity.",
+    "batch": "Winter 2017",
+    "team_size": 21,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://dabba.com",
+    "email": "info@dabba.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "dost-education",
+    "name": "Dost Education",
+    "one_liner": "Getting kids ready for school in India.",
+    "batch": "Winter 2017",
+    "team_size": 30,
+    "locations": "Delhi, DL, India; Remote",
+    "website": "http://www.dosteducation.com",
+    "email": "work@dosteducation.com",
+    "email_type": "hr",
+    "draftTries": 1
+  }
+]
