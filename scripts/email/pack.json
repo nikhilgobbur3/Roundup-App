@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "slug": "taxgpt",
+    "name": "TaxGPT",
+    "one_liner": "AI tax assistant for professionals and businesses",
+    "batch": "Summer 2024",
+    "team_size": 45,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.taxgpt.com",
+    "email": "support@taxgpt.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "cedalio",
+    "name": "Cedalio",
+    "one_liner": "AI agents that automate AP, procurement, and finance",
+    "batch": "Summer 2023",
+    "team_size": 6,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://cedalio.com",
+    "email": "info@cedalio.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "invopop",
+    "name": "Invopop",
+    "one_liner": "We help global software companies comply with local tax reporting ",
+    "batch": "Winter 2023",
+    "team_size": 7,
+    "locations": "Madrid, Community of Madrid, Spain",
+    "website": "https://www.invopop.com",
+    "email": "billing+es@invopop.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "flex",
+    "name": "Flex",
+    "one_liner": "Stripe for HSA/FSA payments",
+    "batch": "Summer 2023",
+    "team_size": 8,
+    "locations": "Remote",
+    "website": "https://www.withflex.com/shop",
+    "email": "support@withflex.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
