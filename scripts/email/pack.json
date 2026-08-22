@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "slug": "invofox",
+    "name": "Invofox",
+    "one_liner": "Invofox is the document parsing and data extraction API for software…",
+    "batch": "Summer 2022",
+    "team_size": 12,
+    "locations": "Madrid, Community of Madrid, Spain; Remote",
+    "website": "https://invofox.com/?utm_source=yc",
+    "email": "support@invofox.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
