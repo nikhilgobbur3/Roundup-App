@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "slug": "mahaana-wealth",
+    "name": "Mahaana Wealth",
+    "one_liner": "Mahaana is first & only licensed digital wealth manager in Pakistan",
+    "batch": "Winter 2022",
+    "team_size": 30,
+    "locations": "Karachi, Sindh, Pakistan; Islamabad, Islamabad Capital Territory, Pakistan",
+    "website": "http://mahaana.com",
+    "email": "careers@mahaana.com",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "mono-2",
+    "name": "Mono",
+    "one_liner": "Embedded finance infrastructure for LatAm enterprises.",
+    "batch": "Winter 2022",
+    "team_size": 30,
+    "locations": "Bogotá, Bogota, Colombia; Remote",
+    "website": "https://mono.la",
+    "email": "ventas@mono.la",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "rever",
+    "name": "REVER",
+    "one_liner": "Changing the way people buy by giving superpowers to shoppers",
+    "batch": "Summer 2022",
+    "team_size": 35,
+    "locations": "Barcelona, CT, Spain; CT, Spain",
+    "website": "https://itsrever.com",
+    "email": "hello@itsrever.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "haddock",
+    "name": "haddock",
+    "one_liner": "AI agents to run restaurant operations",
+    "batch": "Winter 2022",
+    "team_size": 40,
+    "locations": "Barcelona, CT, Spain",
+    "website": "https://haddock.app",
+    "email": "capitan@haddock.app",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
