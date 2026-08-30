@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "slug": "inscribe",
+    "name": "Inscribe",
+    "one_liner": "AI Document Fraud Detection for Banks, Credit Unions & Lenders",
+    "batch": "Summer 2018",
+    "team_size": 35,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.inscribe.ai",
+    "email": "team@inscribe.ai.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "goodcover",
+    "name": "Goodcover",
+    "one_liner": "Digital Co-op Renters Insurance = half the price, better coverage.",
+    "batch": "Summer 2017",
+    "team_size": 1,
+    "locations": "San Francisco, CA, USA",
+    "website": "http://www.goodcover.com",
+    "email": "hello@goodcover.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "airfordable",
+    "name": "Airfordable",
+    "one_liner": "Buy flights for only a fraction upfront and pay off the rest in…",
+    "batch": "Summer 2016",
+    "team_size": 7,
+    "locations": "Chicago, IL, USA; Remote",
+    "website": "http://www.airfordable.com",
+    "email": "jobs@airfordable.com",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "smartpath",
+    "name": "SmartPath",
+    "one_liner": "Financial wellness for the middle class",
+    "batch": "Summer 2016",
+    "team_size": 16,
+    "locations": "Atlanta, GA, USA; Remote",
+    "website": "http://joinsmartpath.com",
+    "email": "careers@joinsmartpath.com",
+    "email_type": "hr",
+    "draftTries": 1
+  }
+]
