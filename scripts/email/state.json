@@ -401,10 +401,31 @@
     "linzumi": "2026-09-02",
     "legalos": "2026-09-02",
     "21st": "2026-09-02",
-    "opalite-health": "2026-09-02"
+    "opalite-health": "2026-09-02",
+    "brumby": "2026-09-04",
+    "marker": "2026-09-04",
+    "kelai": "2026-09-04",
+    "wondertx": "2026-09-04",
+    "amboras": "2026-09-04",
+    "openprose": "2026-09-04",
+    "youart": "2026-09-04",
+    "arlo-industries": "2026-09-04",
+    "ascii": "2026-09-04",
+    "imperfect": "2026-09-04",
+    "cignara": "2026-09-04",
+    "inth": "2026-09-04",
+    "rentahuman": "2026-09-04",
+    "lab0": "2026-09-04",
+    "armature": "2026-09-04",
+    "mochatrade": "2026-09-04",
+    "gigacatalyst": "2026-09-04",
+    "agency-tool-company": "2026-09-04",
+    "vernius-systems-inc": "2026-09-04",
+    "arc-prize-foundation": "2026-09-04",
+    "avoice": "2026-09-04"
   },
   "sent": {},
-  "lastFetch": "2026-09-02",
+  "lastFetch": "2026-09-04",
   "issued": {
     "support@yenmo.in": 9,
     "grievance@clickpe.ai": 10,
@@ -551,6 +572,12 @@
     "hello@linzumi.com": 159,
     "support@21st.dev": 160,
     "legalos@legalos.ai": 161,
-    "support@opalitehealth.com": 162
+    "support@opalitehealth.com": 162,
+    "support@mochatrade.com": 163,
+    "support@gigacatalyst.com": 164,
+    "mailbox@agencytool.com": 165,
+    "contact@vernius.systems": 166,
+    "team@arcprize.org": 167,
+    "hello@avoice.co": 168
   }
 }
