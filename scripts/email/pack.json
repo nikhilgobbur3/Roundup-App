@@ -9,19 +9,7 @@
     "website": "https://inth.com",
     "email": "support@inth.com",
     "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "rentahuman",
-    "name": "RentAHuman",
-    "one_liner": "Marketplace for AI agents to hire humans.",
-    "batch": "Spring 2026",
-    "team_size": 3,
-    "locations": "San Francisco, CA, USA",
-    "website": "https://rentahuman.ai",
-    "email": "support@rentahuman.ai",
-    "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "lab0",
@@ -33,7 +21,7 @@
     "website": "https://lab0.ai",
     "email": "founders@lab0.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "armature",
@@ -45,6 +33,6 @@
     "website": "https://armature.tech",
     "email": "contact@armature.tech",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
