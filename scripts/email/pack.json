@@ -1,1 +1,86 @@
-[]
+[
+  {
+    "slug": "ramain",
+    "name": "RamAIn",
+    "one_liner": "Automate any UI task with natural language",
+    "batch": "Winter 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://ramain.ai",
+    "email": "founders@ramain.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "adialante",
+    "name": "Adialante",
+    "one_liner": "Cancer screening without barriers",
+    "batch": "Spring 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA",
+    "website": "http://www.adialante.com",
+    "email": "careers@adialante.com",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "characterquilt",
+    "name": "CharacterQuilt",
+    "one_liner": "Computer use agents to deploy enterprise marketing campaigns",
+    "batch": "Spring 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://characterquilt.com",
+    "email": "hello@characterquilt.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "nebula-security",
+    "name": "Nebula Security",
+    "one_liner": "Autonomous AI defense system for cyber attack",
+    "batch": "Summer 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://nebusec.ai",
+    "email": "root@nebusec.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "instinct-xyz",
+    "name": "Instinct",
+    "one_liner": "Trade your instinct",
+    "batch": "Winter 2026",
+    "team_size": 5,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://instinct.xyz",
+    "email": "hello@instinct.xyz",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "kimpton",
+    "name": "Kimpton",
+    "one_liner": "Live Evaluation Arenas for Financial Work",
+    "batch": "Spring 2026",
+    "team_size": 5,
+    "locations": "New York City, NY, USA; Remote",
+    "website": "https://kimpton.ai",
+    "email": "info@kimpton.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "ooak-data",
+    "name": "Ooak Data",
+    "one_liner": "We turn company data into training data",
+    "batch": "Summer 2026",
+    "team_size": 5,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://ooakdata.com",
+    "email": "contact@ooakdata.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
