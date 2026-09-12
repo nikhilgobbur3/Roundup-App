@@ -1,14 +1,1 @@
-[
-  {
-    "slug": "paraquery",
-    "name": "ParaQuery",
-    "one_liner": "Managed GPU-accelerated Spark + SQL at 2x speed and half the cost",
-    "batch": "Spring 2025",
-    "team_size": 1,
-    "locations": "New York City, NY, USA; Remote",
-    "website": "https://paraquery.com",
-    "email": "support@paraquery.com",
-    "email_type": "contact",
-    "draftTries": 1
-  }
-]
+[]
