@@ -493,10 +493,28 @@
     "pinch": "2026-09-11",
     "dalus": "2026-09-11",
     "wavedash": "2026-09-11",
-    "nori": "2026-09-11"
+    "nori": "2026-09-11",
+    "modelence": "2026-09-13",
+    "uplift-ai": "2026-09-13",
+    "cortex-ai": "2026-09-13",
+    "bystreet": "2026-09-13",
+    "better-auth": "2026-09-13",
+    "shor": "2026-09-13",
+    "liva-ai": "2026-09-13",
+    "clidey": "2026-09-13",
+    "pangolin": "2026-09-13",
+    "onlook": "2026-09-13",
+    "rimba": "2026-09-13",
+    "lilac": "2026-09-13",
+    "deepaware-ai-robotics-center-of-silicon-valley": "2026-09-13",
+    "play-health": "2026-09-13",
+    "automax-ai": "2026-09-13",
+    "metorial": "2026-09-13",
+    "piggy-robotics": "2026-09-13",
+    "nomi": "2026-09-13"
   },
   "sent": {},
-  "lastFetch": "2026-09-11",
+  "lastFetch": "2026-09-13",
   "issued": {
     "support@yenmo.in": 9,
     "grievance@clickpe.ai": 10,
@@ -683,6 +701,9 @@
     "team@dalus.io": 199,
     "jobs@wavedash.com": 200,
     "help@nori.ai": 201,
-    "support@paraquery.com": 202
+    "support@paraquery.com": 202,
+    "contact@pangolin.net": 203,
+    "contact@onlook.com": 204,
+    "start@rimba.ai": 205
   }
 }
