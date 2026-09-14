@@ -1,77 +1,5 @@
 [
   {
-    "slug": "lilac",
-    "name": "Lilac",
-    "one_liner": "We sell GPUs.",
-    "batch": "Summer 2025",
-    "team_size": 4,
-    "locations": "San Francisco, CA, USA; Remote",
-    "website": "https://getlilac.com",
-    "email": "contact@getlilac.com",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "deepaware-ai-robotics-center-of-silicon-valley",
-    "name": "DeepAware AI (Robotics Center of Silicon Valley)",
-    "one_liner": "Robots, parts & RL envs & evals - delivered in 48 hrs / pickup in SF.",
-    "batch": "Summer 2025",
-    "team_size": 4,
-    "locations": "San Francisco, CA, USA",
-    "website": "https://roboticscenter.ai",
-    "email": "contact@roboticscenter.ai",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "play-health",
-    "name": "Play Health",
-    "one_liner": "Perimenopause Care Platform",
-    "batch": "Fall 2025",
-    "team_size": 4,
-    "locations": "Boulder, CO, USA",
-    "website": "http://playhealth.com",
-    "email": "andrea@playhealth.com",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "automax-ai",
-    "name": "Automax.ai",
-    "one_liner": "AI native real-estate appraisal firm",
-    "batch": "Fall 2025",
-    "team_size": 4,
-    "locations": "San Francisco, CA, USA",
-    "website": "https://automax.ai",
-    "email": "info@automax.ai",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "metorial",
-    "name": "Metorial",
-    "one_liner": "Agentic infrastructure to power AI-native companies.",
-    "batch": "Fall 2025",
-    "team_size": 4,
-    "locations": "Vienna, Vienna, Austria; Remote",
-    "website": "https://metorial.com",
-    "email": "hey@metorial.com",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "piggy-robotics",
-    "name": "Piggy Robotics",
-    "one_liner": "Humanoid robots that do your chores for the price of an iPhone!",
-    "batch": "Fall 2025",
-    "team_size": 5,
-    "locations": "London, England, United Kingdom",
-    "website": "https://piggyrobotics.com",
-    "email": "founders@piggyrobotics.com",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
     "slug": "nomi",
     "name": "Nomi",
     "one_liner": "Realtime Sales Copilot",
@@ -81,6 +9,6 @@
     "website": "https://www.nomi.so",
     "email": "contact@nomi.so",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
