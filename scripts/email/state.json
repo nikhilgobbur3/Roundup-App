@@ -511,10 +511,29 @@
     "automax-ai": "2026-09-13",
     "metorial": "2026-09-13",
     "piggy-robotics": "2026-09-13",
-    "nomi": "2026-09-13"
+    "nomi": "2026-09-13",
+    "national-finance-olympiad": "2026-09-16",
+    "writesonic": "2026-09-16",
+    "ignition-benefits": "2026-09-16",
+    "koyal": "2026-09-16",
+    "expected-parrot": "2026-09-16",
+    "lua-global-inc": "2026-09-16",
+    "helixdb": "2026-09-16",
+    "parsewise": "2026-09-16",
+    "probo": "2026-09-16",
+    "cardboard": "2026-09-16",
+    "nebusec": "2026-09-16",
+    "aviern": "2026-09-16",
+    "adentris": "2026-09-16",
+    "altur": "2026-09-16",
+    "avent": "2026-09-16",
+    "s2-dev": "2026-09-16",
+    "moss": "2026-09-16",
+    "awen": "2026-09-16",
+    "truthsystems": "2026-09-16"
   },
   "sent": {},
-  "lastFetch": "2026-09-13",
+  "lastFetch": "2026-09-16",
   "issued": {
     "support@yenmo.in": 9,
     "grievance@clickpe.ai": 10,
@@ -711,6 +730,14 @@
     "info@automax.ai": 209,
     "hey@metorial.com": 210,
     "founders@piggyrobotics.com": 211,
-    "contact@nomi.so": 212
+    "contact@nomi.so": 212,
+    "hiring@cardboard.ai": 213,
+    "hello@aviern.com": 214,
+    "sales@adentris.com": 215,
+    "careers@altur.io": 216,
+    "careers@aventindustrial.com": 217,
+    "hi@s2.dev": 218,
+    "contact@moss.dev": 219,
+    "thibault@awen.ai": 220
   }
 }
