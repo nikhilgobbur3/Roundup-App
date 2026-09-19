@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "slug": "movedot",
+    "name": "MOVEdot",
+    "one_liner": "AI Agents for Hardware Engineering",
+    "batch": "Fall 2025",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.movedot.ai",
+    "email": "careers@movedot.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  }
+]
