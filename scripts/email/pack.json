@@ -1,1 +1,38 @@
-[]
+[
+  {
+    "slug": "artificial-societies",
+    "name": "Artificial Societies",
+    "one_liner": "We build networks of AIs to simulate high-value audiences",
+    "batch": "Winter 2025",
+    "team_size": 12,
+    "locations": "London, England, United Kingdom",
+    "website": "https://societies.io",
+    "email": "careers@societies.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "fluently",
+    "name": "Fluently",
+    "one_liner": "Speaking coach for non-native English professionals",
+    "batch": "Winter 2024",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://getfluently.app",
+    "email": "team@getfluently.app",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "dropback",
+    "name": "Dropback",
+    "one_liner": "The front office software suite for college sports",
+    "batch": "Winter 2024",
+    "team_size": 2,
+    "locations": "Remote",
+    "website": "https://www.dropback.com",
+    "email": "hello@dropback.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
