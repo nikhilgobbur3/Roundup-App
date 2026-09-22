@@ -9,7 +9,7 @@
     "website": "https://societies.io",
     "email": "careers@societies.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "fluently",
@@ -21,7 +21,7 @@
     "website": "https://getfluently.app",
     "email": "team@getfluently.app",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "dropback",
@@ -33,6 +33,6 @@
     "website": "https://www.dropback.com",
     "email": "hello@dropback.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
