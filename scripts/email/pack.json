@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "slug": "gecko-security",
+    "name": "Gecko Security",
+    "one_liner": "The AI Security Engineer to Find and Fix Vulnerabilities ",
+    "batch": "Fall 2024",
+    "team_size": 2,
+    "locations": "London, England, United Kingdom",
+    "website": "https://gecko.security",
+    "email": "gecko@gecko.security",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
