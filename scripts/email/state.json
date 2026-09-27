@@ -611,10 +611,33 @@
     "gecko-security": "2026-09-24",
     "diffusion-studio": "2026-09-24",
     "happenstance": "2026-09-24",
-    "attunement": "2026-09-24"
+    "attunement": "2026-09-24",
+    "pandasai": "2026-09-27",
+    "risotto": "2026-09-27",
+    "camelai": "2026-09-27",
+    "silogy": "2026-09-27",
+    "kater-ai": "2026-09-27",
+    "glasskube": "2026-09-27",
+    "sagecare": "2026-09-27",
+    "hyrex": "2026-09-27",
+    "aminoanalytica": "2026-09-27",
+    "modus": "2026-09-27",
+    "hestus-inc": "2026-09-27",
+    "praxos": "2026-09-27",
+    "presti-ai": "2026-09-27",
+    "bentolabs-ai": "2026-09-27",
+    "openrelay": "2026-09-27",
+    "rhem-labs": "2026-09-27",
+    "pumpgtm": "2026-09-27",
+    "elevate-2": "2026-09-27",
+    "redouble-ai": "2026-09-27",
+    "autumn-labs": "2026-09-27",
+    "xtraffic": "2026-09-27",
+    "getcho": "2026-09-27",
+    "keye": "2026-09-27"
   },
   "sent": {},
-  "lastFetch": "2026-09-24",
+  "lastFetch": "2026-09-27",
   "issued": {
     "support@yenmo.in": 9,
     "grievance@clickpe.ai": 10,
@@ -848,6 +871,10 @@
     "contact@diffusion.studio": 246,
     "careers@happenstance.ai": 247,
     "jane@attunement.ai": 248,
-    "gecko@gecko.security": 249
+    "gecko@gecko.security": 249,
+    "support@openrelay.inc": 250,
+    "hello@useelevate.dev": 251,
+    "info@redouble.ai": 252,
+    "contact@keye.co": 253
   }
 }

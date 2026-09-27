@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "slug": "bentolabs-ai",
+    "name": "BentoLabs AI",
+    "one_liner": "Monitoring and learning layer for long-running agents",
+    "batch": "Spring 2026",
+    "team_size": 5,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://bentolabs.ai",
+    "email": "contact@bentolabs.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "rhem-labs",
+    "name": "Rhem Labs",
+    "one_liner": "Home care technology for aging parents and their families",
+    "batch": "Fall 2026",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://rhem.ai",
+    "email": "support@rhem.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "pumpgtm",
+    "name": "PumpGTM",
+    "one_liner": "Find and engage with desperate buyers across LinkedIn, Email, and X",
+    "batch": "Spring 2026",
+    "team_size": 5,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://pumpgtm.com",
+    "email": "hello@pumpgtm.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "autumn-labs",
+    "name": "Autumn Labs",
+    "one_liner": "Datadog for industrial robots",
+    "batch": "Summer 2024",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.autumnlabs.io",
+    "email": "hello@autumnlabs.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "xtraffic",
+    "name": "XTraffic",
+    "one_liner": "Technology for cities to automate and manage their traffic lights.",
+    "batch": "Summer 2024",
+    "team_size": 3,
+    "locations": "Dallas, TX, USA",
+    "website": "https://xtraffic.com",
+    "email": "interest@xtraffic.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "getcho",
+    "name": "Getcho",
+    "one_liner": "The reliability platform for last-mile delivery",
+    "batch": "Fall 2024",
+    "team_size": 3,
+    "locations": "New York City, NY, USA; Remote",
+    "website": "https://getcho.app",
+    "email": "support@getcho.app",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
