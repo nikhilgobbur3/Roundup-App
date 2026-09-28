@@ -9,7 +9,7 @@
     "website": "https://bentolabs.ai",
     "email": "contact@bentolabs.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "rhem-labs",
@@ -21,7 +21,7 @@
     "website": "https://rhem.ai",
     "email": "support@rhem.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "pumpgtm",
@@ -33,7 +33,7 @@
     "website": "https://pumpgtm.com",
     "email": "hello@pumpgtm.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "autumn-labs",
@@ -45,7 +45,7 @@
     "website": "https://www.autumnlabs.io",
     "email": "hello@autumnlabs.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "xtraffic",
@@ -57,7 +57,7 @@
     "website": "https://xtraffic.com",
     "email": "interest@xtraffic.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "getcho",
@@ -69,6 +69,6 @@
     "website": "https://getcho.app",
     "email": "support@getcho.app",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
