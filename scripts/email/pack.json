@@ -1,41 +1,5 @@
 [
   {
-    "slug": "openseo",
-    "name": "OpenSEO",
-    "one_liner": "Open source alternative to Semrush and Ahrefs",
-    "batch": "Fall 2026",
-    "team_size": 2,
-    "locations": "Boston, MA, USA",
-    "website": "https://openseo.so",
-    "email": "ben@openseo.so",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "elodin",
-    "name": "Elodin",
-    "one_liner": "Unified flight software and hardware for the mission of tomorrow",
-    "batch": "Winter 2024",
-    "team_size": 5,
-    "locations": "San Francisco, CA, USA",
-    "website": "https://elodin.systems",
-    "email": "info@elodin.systems",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "million",
-    "name": "Million",
-    "one_liner": "Tools for agent verification",
-    "batch": "Winter 2024",
-    "team_size": 5,
-    "locations": "San Francisco, CA, USA",
-    "website": "https://million.dev",
-    "email": "founders@million.dev",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
     "slug": "angstrom-ai",
     "name": "Ångström AI",
     "one_liner": "Gen AI molecular simulations that reproduce wetlab results",
@@ -45,18 +9,6 @@
     "website": "https://www.angstrom-ai.com",
     "email": "info@angstrom-ai.com",
     "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "educato",
-    "name": "Educato",
-    "one_liner": "Worldwide exam-prep platform",
-    "batch": "Summer 2024",
-    "team_size": 5,
-    "locations": "San Francisco, CA, USA; Remote",
-    "website": "https://www.educato.com",
-    "email": "info@educato.com",
-    "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
