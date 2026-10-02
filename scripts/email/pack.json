@@ -1,14 +1,1 @@
-[
-  {
-    "slug": "angstrom-ai",
-    "name": "Ångström AI",
-    "one_liner": "Gen AI molecular simulations that reproduce wetlab results",
-    "batch": "Summer 2024",
-    "team_size": 5,
-    "locations": "San Francisco, CA, USA",
-    "website": "https://www.angstrom-ai.com",
-    "email": "info@angstrom-ai.com",
-    "email_type": "contact",
-    "draftTries": 2
-  }
-]
+[]
