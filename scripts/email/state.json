@@ -661,10 +661,28 @@
     "million": "2026-09-30",
     "angstrom-ai": "2026-09-30",
     "educato": "2026-09-30",
-    "prohostai": "2026-09-30"
+    "prohostai": "2026-09-30",
+    "anara": "2026-10-03",
+    "draft-the-record": "2026-10-03",
+    "x1": "2026-10-03",
+    "vibrant-labs": "2026-10-03",
+    "whip": "2026-10-03",
+    "powder": "2026-10-03",
+    "dench-com": "2026-10-03",
+    "raycaster": "2026-10-03",
+    "titanio": "2026-10-03",
+    "heroui": "2026-10-03",
+    "ionworks": "2026-10-03",
+    "videogen": "2026-10-03",
+    "silurian": "2026-10-03",
+    "voker": "2026-10-03",
+    "moonset-health": "2026-10-03",
+    "pazi": "2026-10-03",
+    "hazel-2": "2026-10-03",
+    "diana": "2026-10-03"
   },
   "sent": {},
-  "lastFetch": "2026-09-30",
+  "lastFetch": "2026-10-03",
   "issued": {
     "support@yenmo.in": 9,
     "grievance@clickpe.ai": 10,
@@ -912,6 +930,14 @@
     "ben@openseo.so": 260,
     "info@elodin.systems": 261,
     "founders@million.dev": 262,
-    "info@educato.com": 263
+    "info@educato.com": 263,
+    "sales@heroui.com": 264,
+    "info@ionworks.com": 265,
+    "info@videogen.io": 266,
+    "contact@silurian.ai": 267,
+    "support@voker.ai": 268,
+    "support@pazi.ai": 269,
+    "press@hazelai.com": 270,
+    "careers@getdiana.com": 271
   }
 }
