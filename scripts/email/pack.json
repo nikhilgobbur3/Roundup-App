@@ -9,7 +9,7 @@
     "website": "https://mem0.ai",
     "email": "support@mem0.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "hamming-ai",
@@ -21,7 +21,7 @@
     "website": "https://hamming.ai",
     "email": "careers@hamming.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "phonely",
@@ -33,7 +33,7 @@
     "website": "https://phonely.ai",
     "email": "email@phonely.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "offstream",
@@ -45,6 +45,6 @@
     "website": "https://www.useoffstream.com",
     "email": "hello@useoffstream.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
