@@ -9,7 +9,7 @@
     "website": "https://www.databuddy.cc",
     "email": "support@databuddy.cc",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "zeit-ai",
@@ -21,43 +21,7 @@
     "website": "https://zeit-ai.com",
     "email": "contact@zeit-ai.com",
     "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "intryc",
-    "name": "Intryc",
-    "one_liner": "Intryc is the unified quality assurance, governance, and training…",
-    "batch": "Summer 2024",
-    "team_size": 12,
-    "locations": "San Francisco, CA, USA; Remote",
-    "website": "https://intryc.com",
-    "email": "reviewee@intryc.com",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "toma",
-    "name": "Toma",
-    "one_liner": "AI Applied Research",
-    "batch": "Winter 2024",
-    "team_size": 20,
-    "locations": "San Francisco, CA, USA",
-    "website": "http://www.toma.com",
-    "email": "hi@toma.com",
-    "email_type": "contact",
-    "draftTries": 1
-  },
-  {
-    "slug": "claimsorted",
-    "name": "ClaimSorted",
-    "one_liner": "Making it easy for insurance companies to process claims",
-    "batch": "Summer 2024",
-    "team_size": 20,
-    "locations": "London, England, United Kingdom",
-    "website": "https://claimsorted.com",
-    "email": "info@claimsorted.com",
-    "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "tandem-2",
@@ -69,6 +33,6 @@
     "website": "https://tandemspace.com",
     "email": "info@tandem.space",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
