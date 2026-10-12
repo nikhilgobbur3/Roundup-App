@@ -1,1 +1,110 @@
-[]
+[
+  {
+    "slug": "redapto",
+    "name": "Redapto",
+    "one_liner": "Intelligence that moves the world",
+    "batch": "Fall 2025",
+    "team_size": 7,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://www.redapto.com",
+    "email": "hello@redapto.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "munito-ai",
+    "name": "Munito AI",
+    "one_liner": "Open-model inference provider for Europe, private by default.",
+    "batch": "Fall 2026",
+    "team_size": 1,
+    "locations": "Paris, Île-de-France, France; Remote",
+    "website": "https://munito.ai",
+    "email": "support@munito.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "respan",
+    "name": "Respan",
+    "one_liner": "Self-driving observability, evals, and gateway for AI agents",
+    "batch": "Winter 2024",
+    "team_size": 23,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://respan.ai",
+    "email": "careers@respan.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "mdhub",
+    "name": "mdhub",
+    "one_liner": "AI-native operating system for behavioral health clinics.",
+    "batch": "Summer 2024",
+    "team_size": 25,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.mdhub.ai",
+    "email": "support@mdhub.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "stacksync",
+    "name": "Stacksync",
+    "one_liner": "Real-time and two-way sync between CRMs and Databases",
+    "batch": "Winter 2024",
+    "team_size": 34,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.stacksync.com",
+    "email": "hello@stacksync.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "garage-2",
+    "name": "Garage",
+    "one_liner": "Marketplace for America's most essential assets",
+    "batch": "Winter 2024",
+    "team_size": 35,
+    "locations": "New York City, NY, USA",
+    "website": "https://www.shopgarage.com",
+    "email": "support@shopgarage.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "rimward",
+    "name": "Rimward",
+    "one_liner": "Solar farm security software for existing cameras",
+    "batch": "Summer 2023",
+    "team_size": 1,
+    "locations": "Paris, Île-de-France, France",
+    "website": "https://rimward.ai",
+    "email": "careers@rimward.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "careoasis",
+    "name": "CareOasis",
+    "one_liner": "Get Paid for Family Caregiving",
+    "batch": "Summer 2023",
+    "team_size": 2,
+    "locations": "Dover, DE, USA; Remote",
+    "website": "https://www.thecareoasis.com",
+    "email": "info@thecareoasis.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "apoxy",
+    "name": "Apoxy",
+    "one_liner": "Simpler and cheaper multi-cloud and cross-platform deployments.",
+    "batch": "Summer 2023",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://apoxy.dev",
+    "email": "hello@apoxy.dev",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
