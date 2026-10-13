@@ -9,7 +9,7 @@
     "website": "https://www.redapto.com",
     "email": "hello@redapto.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "munito-ai",
@@ -21,7 +21,7 @@
     "website": "https://munito.ai",
     "email": "support@munito.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "respan",
@@ -33,7 +33,7 @@
     "website": "https://respan.ai",
     "email": "careers@respan.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "mdhub",
@@ -45,7 +45,7 @@
     "website": "https://www.mdhub.ai",
     "email": "support@mdhub.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "stacksync",
@@ -57,7 +57,7 @@
     "website": "https://www.stacksync.com",
     "email": "hello@stacksync.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "garage-2",
@@ -69,7 +69,7 @@
     "website": "https://www.shopgarage.com",
     "email": "support@shopgarage.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "rimward",
@@ -81,7 +81,7 @@
     "website": "https://rimward.ai",
     "email": "careers@rimward.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "careoasis",
@@ -93,7 +93,7 @@
     "website": "https://www.thecareoasis.com",
     "email": "info@thecareoasis.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "apoxy",
@@ -105,6 +105,6 @@
     "website": "https://apoxy.dev",
     "email": "hello@apoxy.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
