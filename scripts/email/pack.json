@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "altair-health",
+    "name": "Altair Health",
+    "one_liner": "Stripe for medical billing",
+    "batch": "Fall 2026",
+    "team_size": 4,
+    "locations": "Austin, TX, USA",
+    "website": "https://www.altair-health.com",
+    "email": "hello@altair-health.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "the-vibe-company",
+    "name": "The Vibe Company",
+    "one_liner": "AI-native agency that scales like software, run on our own AI agents.",
+    "batch": "Winter 2024",
+    "team_size": 5,
+    "locations": "Paris, Île-de-France, France",
+    "website": "https://thevibecompany.co",
+    "email": "founders@thevibecompany.co",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "unify",
+    "name": "Unify",
+    "one_liner": "Models that keep learning",
+    "batch": "Winter 2023",
+    "team_size": 3,
+    "locations": "London, England, United Kingdom; Remote",
+    "website": "https://unify.ai",
+    "email": "hello@unify.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "versive",
+    "name": "Versive",
+    "one_liner": "AI-first user research platform",
+    "batch": "Winter 2023",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://www.getversive.com",
+    "email": "support@getversive.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "factiq",
+    "name": "FactIQ",
+    "one_liner": "Investment research data for AI agents",
+    "batch": "Winter 2023",
+    "team_size": 3,
+    "locations": "Singapore, Singapore",
+    "website": "https://factiq.com",
+    "email": "founders@factiq.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "corgi-labs",
+    "name": "Corgi Labs",
+    "one_liner": "AI to increase payment acceptance and reduce fraud for businesses",
+    "batch": "Winter 2023",
+    "team_size": 3,
+    "locations": "Singapore, Singapore",
+    "website": "https://www.corgilabs.ai",
+    "email": "woof@corgilabs.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "epsilla",
+    "name": "Epsilla",
+    "one_liner": "All-in-one platform to create AI agents with your private knowledge",
+    "batch": "Summer 2023",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://www.epsilla.com",
+    "email": "info@epsilla.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "trainy",
+    "name": "Trainy",
+    "one_liner": "Infrastructure for managing GPU clusters for training/serving.",
+    "batch": "Summer 2023",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://trainy.ai",
+    "email": "support@trainy.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "repacket",
+    "name": "Repacket",
+    "one_liner": "Employee security done for you.",
+    "batch": "Winter 2023",
+    "team_size": 4,
+    "locations": "Vancouver, BC, Canada",
+    "website": "https://repacket.com",
+    "email": "support@repacket.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "ariglad",
+    "name": "Ariglad",
+    "one_liner": "Knowledge base maintenance on auto-pilot",
+    "batch": "Winter 2023",
+    "team_size": 4,
+    "locations": "Vancouver, BC, Canada; Remote",
+    "website": "https://www.ariglad.com",
+    "email": "careers@ariglad.com",
+    "email_type": "hr",
+    "draftTries": 1
+  }
+]
