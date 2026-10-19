@@ -9,7 +9,7 @@
     "website": "http://www.sanvivo.eu",
     "email": "kontakt@sanvivo.eu",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "stralis-aircraft",
@@ -21,7 +21,7 @@
     "website": "https://stralis.aero",
     "email": "careers@stralis.aero",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "candoriq",
@@ -33,7 +33,7 @@
     "website": "https://www.candoriq.com",
     "email": "support@candoriq.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "sizeless",
@@ -45,7 +45,7 @@
     "website": "https://www.sizeless.co",
     "email": "career@sizeless.co",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "studdy",
@@ -57,7 +57,7 @@
     "website": "https://www.studdyai.com",
     "email": "hello@studdy.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "gooseworks",
@@ -69,7 +69,7 @@
     "website": "https://gooseworks.ai",
     "email": "help@gooseworks.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "rivet",
@@ -81,7 +81,7 @@
     "website": "https://rivet.dev",
     "email": "support@rivet.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "cedana",
@@ -93,7 +93,7 @@
     "website": "https://cedana.ai",
     "email": "contact@cedana.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "cargo",
@@ -105,7 +105,7 @@
     "website": "https://getcargo.io",
     "email": "engineering@getcargo.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "persist-ai",
@@ -117,6 +117,6 @@
     "website": "http://www.persist-ai.com",
     "email": "info@persist-ai.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
