@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "openhack",
+    "name": "OpenHack",
+    "one_liner": "Always-on AI security engineer",
+    "batch": "Fall 2026",
+    "team_size": 1,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://openhack.com",
+    "email": "ananay@openhack.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "claimkit",
+    "name": "ClaimKit",
+    "one_liner": "AI-native professional services agency ",
+    "batch": "Fall 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://claimkit.co",
+    "email": "support@claimkit.co",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "invitris",
+    "name": "Invitris",
+    "one_liner": "Creating new protein-based drugs at scale",
+    "batch": "Winter 2023",
+    "team_size": 6,
+    "locations": "Munich, BY, Germany",
+    "website": "https://invitris.com",
+    "email": "contact@invitris.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "surface-labs",
+    "name": "Surface Labs",
+    "one_liner": "Building the AI-powered marketing ops platform that turns website…",
+    "batch": "Summer 2023",
+    "team_size": 6,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://withsurface.com",
+    "email": "support@withsurface.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "aglide",
+    "name": "Aglide",
+    "one_liner": "Connect every disconnected app to your SSO.",
+    "batch": "Summer 2023",
+    "team_size": 6,
+    "locations": "London, England, United Kingdom",
+    "website": "https://aglide.com",
+    "email": "contact@aglide.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "sameday",
+    "name": "Sameday",
+    "one_liner": "The leading AI workforce for the trades.",
+    "batch": "Winter 2023",
+    "team_size": 7,
+    "locations": "Lehi, UT, USA",
+    "website": "https://www.gosameday.com",
+    "email": "sales@gosameday.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "skyhook",
+    "name": "Skyhook",
+    "one_liner": "PaaS-like experience with the power of Kubernetes, on your cloud",
+    "batch": "Winter 2023",
+    "team_size": 7,
+    "locations": "Tel Aviv-Yafo, Tel Aviv District, Israel",
+    "website": "https://skyhook.io",
+    "email": "careers@skyhook.io",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "vendah",
+    "name": "Vendah",
+    "one_liner": "Vendah is building a Faire-style marketplace for LATAM’s +50M…",
+    "batch": "Winter 2023",
+    "team_size": 8,
+    "locations": "São Paulo, SP, Brazil",
+    "website": "https://vendah.com.br",
+    "email": "atendimento@vendah.com.br",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "common-paper",
+    "name": "Common Paper",
+    "one_liner": "The SAFE for commercial contracts",
+    "batch": "Winter 2023",
+    "team_size": 8,
+    "locations": "Philadelphia, PA, USA; Remote",
+    "website": "https://commonpaper.com",
+    "email": "team@commonpaper.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "berry",
+    "name": "Berry",
+    "one_liner": "Scale customer success and onboarding with AI ",
+    "batch": "Winter 2023",
+    "team_size": 8,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://berryai.com",
+    "email": "sales@berryai.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
