@@ -9,7 +9,7 @@
     "website": "https://openhack.com",
     "email": "ananay@openhack.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "claimkit",
@@ -21,7 +21,7 @@
     "website": "https://claimkit.co",
     "email": "support@claimkit.co",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "invitris",
@@ -33,7 +33,7 @@
     "website": "https://invitris.com",
     "email": "contact@invitris.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "surface-labs",
@@ -45,7 +45,7 @@
     "website": "https://withsurface.com",
     "email": "support@withsurface.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "aglide",
@@ -57,7 +57,7 @@
     "website": "https://aglide.com",
     "email": "contact@aglide.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "sameday",
@@ -69,7 +69,7 @@
     "website": "https://www.gosameday.com",
     "email": "sales@gosameday.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "skyhook",
@@ -81,7 +81,7 @@
     "website": "https://skyhook.io",
     "email": "careers@skyhook.io",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "vendah",
@@ -93,7 +93,7 @@
     "website": "https://vendah.com.br",
     "email": "atendimento@vendah.com.br",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "common-paper",
@@ -105,7 +105,7 @@
     "website": "https://commonpaper.com",
     "email": "team@commonpaper.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "berry",
@@ -117,6 +117,6 @@
     "website": "https://berryai.com",
     "email": "sales@berryai.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
