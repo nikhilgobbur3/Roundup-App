@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "verdun",
+    "name": "Verdun",
+    "one_liner": "The world's most advanced security monitoring service",
+    "batch": "Fall 2026",
+    "team_size": 6,
+    "locations": "Los Angeles, CA, USA",
+    "website": "https://verdun.ai",
+    "email": "support@verdun.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "biblo",
+    "name": "Biblo",
+    "one_liner": "Your personal AI fitness coach, over iMessage.",
+    "batch": "Fall 2024",
+    "team_size": 7,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.heybiblo.com",
+    "email": "support@heybiblo.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "speedy-labs",
+    "name": "Speedy Labs",
+    "one_liner": "Maximize profits with AI-powered rebate management.",
+    "batch": "Winter 2023",
+    "team_size": 8,
+    "locations": "Toronto, ON, Canada; Remote",
+    "website": "https://speedylabs.ai",
+    "email": "brandon@speedylabs.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "venta-ai",
+    "name": "Venta AI",
+    "one_liner": "The compliant AI colleague for sales teams in Europe",
+    "batch": "Summer 2023",
+    "team_size": 8,
+    "locations": "",
+    "website": "https://www.getventa.ai",
+    "email": "info@getventa.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "rubbrband",
+    "name": "Rubbrband",
+    "one_liner": "A new kind of creative company.",
+    "batch": "Winter 2023",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://rubbrband.com",
+    "email": "contact@rubbrband.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "trackstar",
+    "name": "Trackstar",
+    "one_liner": "Plaid for supply chain logistics",
+    "batch": "Winter 2023",
+    "team_size": 10,
+    "locations": "New York City, NY, USA",
+    "website": "https://www.trackstarhq.com",
+    "email": "support@trackstarhq.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "pierre",
+    "name": "Pierre",
+    "one_liner": "Pierre is a new, opinionated, git platform.",
+    "batch": "Winter 2023",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://pierre.co",
+    "email": "pierre@pierre.co",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "refine",
+    "name": "refine",
+    "one_liner": "Open-source Retool for enterprise",
+    "batch": "Summer 2023",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://refine.dev",
+    "email": "info@refine.dev",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "energent-ai",
+    "name": "Energent AI",
+    "one_liner": "AI that audits AI — catching hallucinations before you ship them.",
+    "batch": "Summer 2023",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://energent.ai",
+    "email": "support@energent.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "paradedb",
+    "name": "ParadeDB",
+    "one_liner": "You should just use Postgres.",
+    "batch": "Summer 2023",
+    "team_size": 11,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://paradedb.com",
+    "email": "hello@paradedb.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
