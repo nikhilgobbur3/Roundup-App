@@ -9,7 +9,7 @@
     "website": "https://verdun.ai",
     "email": "support@verdun.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "biblo",
@@ -21,7 +21,7 @@
     "website": "https://www.heybiblo.com",
     "email": "support@heybiblo.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "speedy-labs",
@@ -33,7 +33,7 @@
     "website": "https://speedylabs.ai",
     "email": "brandon@speedylabs.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "venta-ai",
@@ -45,7 +45,7 @@
     "website": "https://www.getventa.ai",
     "email": "info@getventa.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "rubbrband",
@@ -57,7 +57,7 @@
     "website": "https://rubbrband.com",
     "email": "contact@rubbrband.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "trackstar",
@@ -69,7 +69,7 @@
     "website": "https://www.trackstarhq.com",
     "email": "support@trackstarhq.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "pierre",
@@ -81,7 +81,7 @@
     "website": "https://pierre.co",
     "email": "pierre@pierre.co",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "refine",
@@ -93,7 +93,7 @@
     "website": "https://refine.dev",
     "email": "info@refine.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "energent-ai",
@@ -105,7 +105,7 @@
     "website": "https://energent.ai",
     "email": "support@energent.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "paradedb",
@@ -117,6 +117,6 @@
     "website": "https://paradedb.com",
     "email": "hello@paradedb.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
