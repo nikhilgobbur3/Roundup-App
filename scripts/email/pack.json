@@ -9,7 +9,7 @@
     "website": "https://every.io",
     "email": "sales@every.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "syncly",
@@ -21,7 +21,7 @@
     "website": "https://syncly.app",
     "email": "hello@deepbluedot.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "numen",
@@ -33,7 +33,7 @@
     "website": "https://www.numen.com",
     "email": "contact@numen.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "loopfour",
@@ -45,7 +45,7 @@
     "website": "https://www.loopfour.com",
     "email": "careers@loopfour.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "flower",
@@ -57,7 +57,7 @@
     "website": "https://flower.ai",
     "email": "careers.flower@recruitee-inbox.com",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "vector",
@@ -69,7 +69,7 @@
     "website": "https://vector.co",
     "email": "support@vector.co",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "tiptap",
@@ -81,7 +81,7 @@
     "website": "https://tiptap.dev",
     "email": "humans@tiptap.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "depot",
@@ -93,7 +93,7 @@
     "website": "https://depot.dev",
     "email": "help@depot.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "cloudchipr",
@@ -105,7 +105,7 @@
     "website": "https://cloudchipr.com",
     "email": "support@cloudchipr.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "infinia",
@@ -117,6 +117,6 @@
     "website": "https://www.infiniaweb.com",
     "email": "support@infiniaweb.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
