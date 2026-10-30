@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "hillstar",
+    "name": "HillStar",
+    "one_liner": "Agents to help utilities make better buying decisions.",
+    "batch": "Fall 2026",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://hillstar.ai",
+    "email": "info@hillstar.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "archgen-labs",
+    "name": "Archgen Labs",
+    "one_liner": "AI-powered EDA tools for faster, cooler 3D chips",
+    "batch": "Fall 2026",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.archgen.tech",
+    "email": "hari@archgen.tech",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "axonnic",
+    "name": "Axonnic",
+    "one_liner": "Bringing human dexterity to every robot",
+    "batch": "Fall 2026",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://www.axonnic.com",
+    "email": "info@axonnic.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "superserve",
+    "name": "Superserve",
+    "one_liner": "Virtual machines for autonomous agents",
+    "batch": "Fall 2026",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://superserve.ai",
+    "email": "jobs@superserve.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "aikido-technologies",
+    "name": "Aikido Technologies",
+    "one_liner": "Clean marine AI datacenters",
+    "batch": "Fall 2026",
+    "team_size": 5,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://www.aikidotechnologies.com",
+    "email": "info@aikidotechnologies.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "the-letter-company",
+    "name": "The Letter Company",
+    "one_liner": "The world's first coding agent, harness, & IDE for growth engineering.",
+    "batch": "Fall 2026",
+    "team_size": 6,
+    "locations": "New York City, NY, USA",
+    "website": "https://letter.dev",
+    "email": "hello@acme-mail.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "hyperbound",
+    "name": "Hyperbound",
+    "one_liner": "Revenue Activation Platform",
+    "batch": "Summer 2023",
+    "team_size": 30,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://hyperbound.ai",
+    "email": "careers@hyperbound.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "hona",
+    "name": "Hona",
+    "one_liner": "Personal Injury Legal Work - Automated",
+    "batch": "Winter 2023",
+    "team_size": 32,
+    "locations": "Orem, UT, USA",
+    "website": "https://hona.com",
+    "email": "support@hona.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "hockeystack",
+    "name": "HockeyStack",
+    "one_liner": "The operating system for inbound B2B revenue",
+    "batch": "Summer 2023",
+    "team_size": 32,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://hockeystack.com",
+    "email": "sales@hockeystack.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "kivo-health",
+    "name": "Kivo Health",
+    "one_liner": "AI-powered care for seniors with chronic disease",
+    "batch": "Winter 2023",
+    "team_size": 40,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://kivohealth.com",
+    "email": "hello@kivohealth.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
