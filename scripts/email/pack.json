@@ -9,7 +9,7 @@
     "website": "https://hillstar.ai",
     "email": "info@hillstar.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "archgen-labs",
@@ -21,7 +21,7 @@
     "website": "https://www.archgen.tech",
     "email": "hari@archgen.tech",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "axonnic",
@@ -33,7 +33,7 @@
     "website": "https://www.axonnic.com",
     "email": "info@axonnic.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "superserve",
@@ -45,7 +45,7 @@
     "website": "https://superserve.ai",
     "email": "jobs@superserve.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "aikido-technologies",
@@ -57,7 +57,7 @@
     "website": "https://www.aikidotechnologies.com",
     "email": "info@aikidotechnologies.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "the-letter-company",
@@ -69,7 +69,7 @@
     "website": "https://letter.dev",
     "email": "hello@acme-mail.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "hyperbound",
@@ -81,7 +81,7 @@
     "website": "https://hyperbound.ai",
     "email": "careers@hyperbound.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "hona",
@@ -93,7 +93,7 @@
     "website": "https://hona.com",
     "email": "support@hona.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "hockeystack",
@@ -105,7 +105,7 @@
     "website": "https://hockeystack.com",
     "email": "sales@hockeystack.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "kivo-health",
@@ -117,6 +117,6 @@
     "website": "https://kivohealth.com",
     "email": "hello@kivohealth.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
