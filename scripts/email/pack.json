@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "finni-health",
+    "name": "Finni Health",
+    "one_liner": "Empowering Autism Care Providers to Go Independent",
+    "batch": "Winter 2023",
+    "team_size": 40,
+    "locations": "",
+    "website": "https://www.finnihealth.com",
+    "email": "careers@finnihealth.com",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "resend",
+    "name": "Resend",
+    "one_liner": "Email for developers",
+    "batch": "Winter 2023",
+    "team_size": 45,
+    "locations": "Remote",
+    "website": "https://resend.com",
+    "email": "support@resend.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "suger",
+    "name": "Suger",
+    "one_liner": "Salesforce for Cloud marketplaces on AWS, Azure, GCP",
+    "batch": "Winter 2023",
+    "team_size": 50,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.suger.io",
+    "email": "sales@suger.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "craftwork",
+    "name": "Craftwork",
+    "one_liner": "Digital-native home painting franchise",
+    "batch": "Summer 2023",
+    "team_size": 50,
+    "locations": "Charlotte, NC, USA",
+    "website": "https://craftwork.com",
+    "email": "sales@craftwork.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "blink-new",
+    "name": "Blink",
+    "one_liner": "Build fully functional apps with AI.",
+    "batch": "Winter 2022",
+    "team_size": 1,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://blink.new",
+    "email": "support@blink.new",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "integrated-reasoning",
+    "name": "Integrated Reasoning",
+    "one_liner": "Faster processors for solving NP-complete problems",
+    "batch": "Summer 2022",
+    "team_size": 1,
+    "locations": "San Diego, CA, USA; Kilauea, HI, USA; Remote",
+    "website": "https://integrated-reasoning.com",
+    "email": "hello@integrated-reasoning.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "oto",
+    "name": "Oto",
+    "one_liner": "Digital program for tinnitus",
+    "batch": "Winter 2022",
+    "team_size": 2,
+    "locations": "London, England, United Kingdom; Remote",
+    "website": "https://www.joinoto.com",
+    "email": "support@joinoto.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "karate-labs",
+    "name": "Karate Labs",
+    "one_liner": "Open-source API & UI test automation ",
+    "batch": "Winter 2022",
+    "team_size": 2,
+    "locations": "Wilmington, DE, USA; Remote",
+    "website": "https://karatelabs.io",
+    "email": "info@karatelabs.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "bluehill-payments",
+    "name": "BlueHill Payments",
+    "one_liner": "Client management, communication, and projects in one platform.",
+    "batch": "Summer 2022",
+    "team_size": 2,
+    "locations": "Chicago, IL, USA",
+    "website": "https://www.usebluehill.com",
+    "email": "hello@usebluehill.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "invision-medical-technology",
+    "name": "InVision Medical Technology",
+    "one_liner": "AI Diagnosis of Heart Disease",
+    "batch": "Summer 2022",
+    "team_size": 2,
+    "locations": "San Francisco, CA, USA",
+    "website": "http://invisionmedtech.com",
+    "email": "info@invisionmedtech.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
