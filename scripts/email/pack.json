@@ -9,7 +9,7 @@
     "website": "https://www.finnihealth.com",
     "email": "careers@finnihealth.com",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "resend",
@@ -21,7 +21,7 @@
     "website": "https://resend.com",
     "email": "support@resend.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "suger",
@@ -33,7 +33,7 @@
     "website": "https://www.suger.io",
     "email": "sales@suger.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "craftwork",
@@ -45,7 +45,7 @@
     "website": "https://craftwork.com",
     "email": "sales@craftwork.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "blink-new",
@@ -57,7 +57,7 @@
     "website": "https://blink.new",
     "email": "support@blink.new",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "integrated-reasoning",
@@ -69,7 +69,7 @@
     "website": "https://integrated-reasoning.com",
     "email": "hello@integrated-reasoning.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "oto",
@@ -81,7 +81,7 @@
     "website": "https://www.joinoto.com",
     "email": "support@joinoto.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "karate-labs",
@@ -93,7 +93,7 @@
     "website": "https://karatelabs.io",
     "email": "info@karatelabs.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "bluehill-payments",
@@ -105,7 +105,7 @@
     "website": "https://www.usebluehill.com",
     "email": "hello@usebluehill.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "invision-medical-technology",
@@ -117,6 +117,6 @@
     "website": "http://invisionmedtech.com",
     "email": "info@invisionmedtech.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
