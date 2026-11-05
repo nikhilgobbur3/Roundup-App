@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "efficient-computation-inc",
+    "name": "Efficient Computation Inc.",
+    "one_liner": "building principled reinforcement learning environments",
+    "batch": "Fall 2025",
+    "team_size": 4,
+    "locations": "Bengaluru, KA, India",
+    "website": "https://ecomp.so",
+    "email": "samrath@ecomp.so",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "firezone",
+    "name": "Firezone",
+    "one_liner": "Easiest way to set up Zero Trust Access for your team",
+    "batch": "Winter 2022",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.firezone.dev",
+    "email": "media@firezone.dev",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "azuki",
+    "name": "Omoi (formerly Azuki)",
+    "one_liner": "Japanese comic subscription service",
+    "batch": "Winter 2022",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://www.omoi.com",
+    "email": "careers@omoi.com",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "tuva-health",
+    "name": "Tuva Health",
+    "one_liner": "Open source software that cleans and transforms messy healthcare data.",
+    "batch": "Winter 2022",
+    "team_size": 3,
+    "locations": "Salt Lake City, UT, USA; Remote",
+    "website": "https://tuvahealth.com",
+    "email": "hello@tuvahealth.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "float-health",
+    "name": "Float Health",
+    "one_liner": "Float is the full-stack platform for Specialty Pharma",
+    "batch": "Winter 2022",
+    "team_size": 3,
+    "locations": "Carlsbad, CA, USA",
+    "website": "https://floathealth.com",
+    "email": "info@float.health",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "reviving-mind",
+    "name": "Reviving Mind",
+    "one_liner": "Addressing Loneliness and Isolation for Seniors",
+    "batch": "Winter 2022",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA; Boston, MA, USA; Remote",
+    "website": "https://www.revivingmind.com",
+    "email": "hello@revivingmind.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "paragon-ai",
+    "name": "Paragon AI",
+    "one_liner": "Turns your sales calls into CRM data, automatically.",
+    "batch": "Summer 2022",
+    "team_size": 3,
+    "locations": "New York City, NY, USA; San Juan, San Juan, Puerto Rico; Remote",
+    "website": "https://paragon.ai",
+    "email": "hello@paragon.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "solum-health",
+    "name": "Solum Health",
+    "one_liner": "AI Automation for Therapy Practices",
+    "batch": "Summer 2022",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.getsolum.com",
+    "email": "hello@getsolum.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "movinglake",
+    "name": "MovingLake",
+    "one_liner": "Realtime Data Connectors",
+    "batch": "Summer 2022",
+    "team_size": 3,
+    "locations": "Mexico City, CDMX, Mexico; Remote",
+    "website": "https://movinglake.com",
+    "email": "info@movinglake.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "sota2",
+    "name": "Sota2",
+    "one_liner": "Help business find and discover AI solutions",
+    "batch": "Winter 2022",
+    "team_size": 4,
+    "locations": "Seattle, WA, USA; Remote",
+    "website": "https://www.sota2.com",
+    "email": "hello@sota2.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
