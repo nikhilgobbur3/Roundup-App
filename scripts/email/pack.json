@@ -9,7 +9,7 @@
     "website": "https://ecomp.so",
     "email": "samrath@ecomp.so",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "firezone",
@@ -21,7 +21,7 @@
     "website": "https://www.firezone.dev",
     "email": "media@firezone.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "azuki",
@@ -33,7 +33,7 @@
     "website": "https://www.omoi.com",
     "email": "careers@omoi.com",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "tuva-health",
@@ -45,7 +45,7 @@
     "website": "https://tuvahealth.com",
     "email": "hello@tuvahealth.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "float-health",
@@ -57,7 +57,7 @@
     "website": "https://floathealth.com",
     "email": "info@float.health",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "reviving-mind",
@@ -69,7 +69,7 @@
     "website": "https://www.revivingmind.com",
     "email": "hello@revivingmind.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "paragon-ai",
@@ -81,7 +81,7 @@
     "website": "https://paragon.ai",
     "email": "hello@paragon.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "solum-health",
@@ -93,7 +93,7 @@
     "website": "https://www.getsolum.com",
     "email": "hello@getsolum.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "movinglake",
@@ -105,7 +105,7 @@
     "website": "https://movinglake.com",
     "email": "info@movinglake.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "sota2",
@@ -117,6 +117,6 @@
     "website": "https://www.sota2.com",
     "email": "hello@sota2.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
