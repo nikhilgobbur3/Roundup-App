@@ -9,7 +9,7 @@
     "website": "https://result.dev",
     "email": "support@result.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "macadamia",
@@ -21,7 +21,7 @@
     "website": "https://macadamialabs.com",
     "email": "founders@macadamialabs.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "groundmail",
@@ -33,7 +33,7 @@
     "website": "https://groundmail.dev",
     "email": "contact@groundmail.dev",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "perl-street",
@@ -45,7 +45,7 @@
     "website": "https://perlstreet.com",
     "email": "team@perlstreet.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "airwork",
@@ -57,7 +57,7 @@
     "website": "https://www.airworkhq.com",
     "email": "hello@airworkhq.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "powerdocs",
@@ -69,7 +69,7 @@
     "website": "https://powerdocs.so",
     "email": "contact@powerdocs.so",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "chordio",
@@ -81,7 +81,7 @@
     "website": "https://chordio.com",
     "email": "hello@chordio.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "blitz",
@@ -93,7 +93,7 @@
     "website": "https://www.blitznocode.com",
     "email": "hello@blitznocode.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "apply-design",
@@ -105,7 +105,7 @@
     "website": "http://www.applydesign.io",
     "email": "info@applydesign.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "attack-capital",
@@ -117,6 +117,6 @@
     "website": "https://attack.capital",
     "email": "gp@attack.capital",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
