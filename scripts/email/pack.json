@@ -9,7 +9,7 @@
     "website": "https://www.aravolta.com",
     "email": "hello@aravolta.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "datanode",
@@ -21,7 +21,7 @@
     "website": "https://datanodelabs.com",
     "email": "support@datanodelabs.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "metalcraft",
@@ -33,7 +33,7 @@
     "website": "https://metalcraft.ai",
     "email": "founders@metalcraft.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "verno",
@@ -45,7 +45,7 @@
     "website": "https://verno-ai.com",
     "email": "oliver@verno-ai.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "hub-labs",
@@ -57,7 +57,7 @@
     "website": "https://hublabs.com",
     "email": "hello@hub.xyz",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "capuchin",
@@ -69,7 +69,7 @@
     "website": "https://capuchin.ai",
     "email": "contact@capuchin.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "brown-foods",
@@ -81,7 +81,7 @@
     "website": "https://unrealmilk.com",
     "email": "hello@unrealmilk.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "lightmeter",
@@ -93,7 +93,7 @@
     "website": "https://lightmeter.io",
     "email": "hello@lightmeter.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "darsel",
@@ -105,7 +105,7 @@
     "website": "http://darsel.tech",
     "email": "team@darsel.tech",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "wolfia",
@@ -117,6 +117,6 @@
     "website": "https://wolfia.com",
     "email": "support@wolfia.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
