@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "orikata-bio-pbc",
+    "name": "Orikata Bio PBC",
+    "one_liner": "A multiplayer discovery workspace for human and agentic scientists",
+    "batch": "Summer 2026",
+    "team_size": 1,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://orikata.ai",
+    "email": "info@orikata.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "gatherhq",
+    "name": "GatherHQ",
+    "one_liner": "Applied AI for Enterprise GTM (3X founders, 10X growth, backed by ANT)",
+    "batch": "Fall 2026",
+    "team_size": 9,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.gatherhq.com",
+    "email": "support@gatherhq.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "signatur-biosciences",
+    "name": "Signatur Biosciences",
+    "one_liner": "Simple tests for complex diseases.",
+    "batch": "Summer 2022",
+    "team_size": 5,
+    "locations": "London, England, United Kingdom",
+    "website": "https://www.signatur.bio",
+    "email": "contact@signatur.bio",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "quinn",
+    "name": "Quinn",
+    "one_liner": "Your biopharma team, from molecule design to portfolio strategy",
+    "batch": "Summer 2022",
+    "team_size": 5,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.quinnbio.com",
+    "email": "team@quinnbio.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "ad-army",
+    "name": "Ad Army",
+    "one_liner": "Generate, iterate, and ship AI ad creatives faster",
+    "batch": "Summer 2022",
+    "team_size": 5,
+    "locations": "London, England, United Kingdom",
+    "website": "https://ad.army",
+    "email": "support@ad.army",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "lunajoy-health",
+    "name": "LunaJoy Health",
+    "one_liner": "AI-powered scalable infrastructure + mental health services, starting…",
+    "batch": "Winter 2022",
+    "team_size": 6,
+    "locations": "Atlanta, GA, USA",
+    "website": "http://hellolunajoy.com",
+    "email": "hlj.helpdesk@hellolunajoy.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "fogbender",
+    "name": "Fogbender",
+    "one_liner": "Customer support tool purpose-built for companies that sell APIs",
+    "batch": "Winter 2022",
+    "team_size": 6,
+    "locations": "Truckee, CA, USA; Remote",
+    "website": "https://fogbender.com",
+    "email": "hello@fogbender.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "powerhouse-ai",
+    "name": "Powerhouse AI",
+    "one_liner": "Vision-powered warehouse automation: maximizing performance and value",
+    "batch": "Winter 2022",
+    "team_size": 6,
+    "locations": "Singapore, Singapore",
+    "website": "https://www.powerhouseai.com",
+    "email": "info@powerhouseai.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "onboard-io",
+    "name": "Onboard.io",
+    "one_liner": "Manage & automate customer onboarding and implementation",
+    "batch": "Winter 2022",
+    "team_size": 6,
+    "locations": "Detroit, MI, USA; Remote",
+    "website": "https://onboard.io",
+    "email": "support@onboard.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "serinus-biosciences",
+    "name": "Serinus Biosciences",
+    "one_liner": "Combinations therapy by rational design",
+    "batch": "Summer 2022",
+    "team_size": 6,
+    "locations": "New York City, NY, USA; New York, NY, USA",
+    "website": "http://www.serinus.bio",
+    "email": "info@serinus.bio",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
