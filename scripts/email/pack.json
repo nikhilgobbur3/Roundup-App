@@ -9,7 +9,7 @@
     "website": "https://orikata.ai",
     "email": "info@orikata.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "gatherhq",
@@ -21,7 +21,7 @@
     "website": "https://www.gatherhq.com",
     "email": "support@gatherhq.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "signatur-biosciences",
@@ -33,7 +33,7 @@
     "website": "https://www.signatur.bio",
     "email": "contact@signatur.bio",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "quinn",
@@ -45,7 +45,7 @@
     "website": "https://www.quinnbio.com",
     "email": "team@quinnbio.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "ad-army",
@@ -57,7 +57,7 @@
     "website": "https://ad.army",
     "email": "support@ad.army",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "lunajoy-health",
@@ -69,7 +69,7 @@
     "website": "http://hellolunajoy.com",
     "email": "hlj.helpdesk@hellolunajoy.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "fogbender",
@@ -81,7 +81,7 @@
     "website": "https://fogbender.com",
     "email": "hello@fogbender.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "powerhouse-ai",
@@ -93,7 +93,7 @@
     "website": "https://www.powerhouseai.com",
     "email": "info@powerhouseai.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "onboard-io",
@@ -105,7 +105,7 @@
     "website": "https://onboard.io",
     "email": "support@onboard.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "serinus-biosciences",
@@ -117,6 +117,6 @@
     "website": "http://www.serinus.bio",
     "email": "info@serinus.bio",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
