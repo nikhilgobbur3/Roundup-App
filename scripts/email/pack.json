@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "litmus-hiring",
+    "name": "Litmus",
+    "one_liner": "Evals for humans",
+    "batch": "Summer 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://litmushiring.com",
+    "email": "founders@litmushiring.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "bobidi",
+    "name": "Bobidi",
+    "one_liner": "Restaurant Loyalty Using Quiz",
+    "batch": "Winter 2022",
+    "team_size": 7,
+    "locations": "San Francisco, CA, USA",
+    "website": "http://www.upswell.ai",
+    "email": "choi@upswell.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "lizza",
+    "name": "Lizza",
+    "one_liner": "AI-assitant for managing creator-brand partnerships",
+    "batch": "Winter 2022",
+    "team_size": 7,
+    "locations": "Heidelberg, BW, Germany; Guadalajara, Jal., Mexico; Remote",
+    "website": "https://lizza.link",
+    "email": "hello@lizza.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "superbar",
+    "name": "Superbar",
+    "one_liner": "Sales AI for your Website",
+    "batch": "Summer 2022",
+    "team_size": 7,
+    "locations": "Toronto, ON, Canada; Remote",
+    "website": "http://www.superbar.ai",
+    "email": "careers@superbar.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "strac",
+    "name": "Strac",
+    "one_liner": "Data Discovery, DLP, DSPM for SaaS, Cloud, Gen AI & Endpoints",
+    "batch": "Winter 2022",
+    "team_size": 8,
+    "locations": "Seattle, WA, USA",
+    "website": "https://www.strac.io",
+    "email": "hello@strac.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "convoy-2",
+    "name": "Convoy",
+    "one_liner": "Webhooks Gateway for outgoing and incoming webhooks.",
+    "batch": "Winter 2022",
+    "team_size": 8,
+    "locations": "London, England, United Kingdom; LA, Nigeria; Remote",
+    "website": "https://getconvoy.io",
+    "email": "sales@getconvoy.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "argument-computer-corporation",
+    "name": "Argument Computer Corporation",
+    "one_liner": "Accelerate verifiable computing",
+    "batch": "Winter 2022",
+    "team_size": 8,
+    "locations": "Boston, MA, USA; Remote",
+    "website": "https://argument.xyz",
+    "email": "contact@argument.xyz",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "rownd",
+    "name": "Rownd",
+    "one_liner": "Fully autonomous defense solutions for the global edge.",
+    "batch": "Winter 2022",
+    "team_size": 9,
+    "locations": "Raleigh, NC, USA",
+    "website": "https://rownd.ai",
+    "email": "careers@rownd.ai",
+    "email_type": "hr",
+    "draftTries": 1
+  },
+  {
+    "slug": "status",
+    "name": "Status",
+    "one_liner": "Sims but Social Media",
+    "batch": "Winter 2022",
+    "team_size": 9,
+    "locations": "New York City, NY, USA",
+    "website": "https://www.statusai.com",
+    "email": "support@statusai.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "namecard-ai",
+    "name": "Namecard.ai",
+    "one_liner": "AI-powered business matchmaking",
+    "batch": "Summer 2022",
+    "team_size": 9,
+    "locations": "Taipei, Taiwan",
+    "website": "https://namecard.ai",
+    "email": "contact@namecard.ai",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
