@@ -9,7 +9,7 @@
     "website": "https://litmushiring.com",
     "email": "founders@litmushiring.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "bobidi",
@@ -21,7 +21,7 @@
     "website": "http://www.upswell.ai",
     "email": "choi@upswell.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "lizza",
@@ -33,7 +33,7 @@
     "website": "https://lizza.link",
     "email": "hello@lizza.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "superbar",
@@ -45,7 +45,7 @@
     "website": "http://www.superbar.ai",
     "email": "careers@superbar.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "strac",
@@ -57,7 +57,7 @@
     "website": "https://www.strac.io",
     "email": "hello@strac.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "convoy-2",
@@ -69,7 +69,7 @@
     "website": "https://getconvoy.io",
     "email": "sales@getconvoy.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "argument-computer-corporation",
@@ -81,7 +81,7 @@
     "website": "https://argument.xyz",
     "email": "contact@argument.xyz",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "rownd",
@@ -93,7 +93,7 @@
     "website": "https://rownd.ai",
     "email": "careers@rownd.ai",
     "email_type": "hr",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "status",
@@ -105,7 +105,7 @@
     "website": "https://www.statusai.com",
     "email": "support@statusai.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "namecard-ai",
@@ -117,6 +117,6 @@
     "website": "https://namecard.ai",
     "email": "contact@namecard.ai",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
