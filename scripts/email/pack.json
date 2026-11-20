@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "slug": "wideframe",
+    "name": "Wideframe",
+    "one_liner": "We help video teams deliver better edits, faster.",
+    "batch": "Winter 2026",
+    "team_size": 4,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://wideframe.com",
+    "email": "support@wideframe.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "keiki",
+    "name": "Keiki",
+    "one_liner": "Put your products on iMessage",
+    "batch": "Spring 2025",
+    "team_size": 3,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://onkeiki.com",
+    "email": "support@onkeiki.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "biggerpicture",
+    "name": "BiggerPicture",
+    "one_liner": "The freight appointment network for carriers, shippers and warehouses",
+    "batch": "Summer 2022",
+    "team_size": 9,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "http://biggerpicture.co",
+    "email": "info@biggerpicture.co",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "teamout",
+    "name": "TeamOut",
+    "one_liner": "Online marketplace for team retreat venues",
+    "batch": "Winter 2022",
+    "team_size": 10,
+    "locations": "Los Angeles, CA, USA; Remote",
+    "website": "https://www.teamout.com",
+    "email": "sales@teamout.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "dart",
+    "name": "Dart",
+    "one_liner": "The work and agent management platform",
+    "batch": "Winter 2022",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA",
+    "website": "https://www.dartai.com",
+    "email": "support@dartai.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "heptabase",
+    "name": "Heptabase",
+    "one_liner": "An AI visual knowledge base to understand and create knowledge.",
+    "batch": "Winter 2022",
+    "team_size": 10,
+    "locations": "Manchester, England, United Kingdom; Remote",
+    "website": "https://heptabase.com",
+    "email": "team@heptabase.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "disclo",
+    "name": "Disclo",
+    "one_liner": "Health disclosure and accommodation management platform",
+    "batch": "Summer 2022",
+    "team_size": 10,
+    "locations": "Austin, TX, USA; Remote",
+    "website": "http://www.disclo.com",
+    "email": "hello@disclo.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "codecrafters",
+    "name": "CodeCrafters",
+    "one_liner": "Programming courses for experienced engineers",
+    "batch": "Summer 2022",
+    "team_size": 10,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://codecrafters.io",
+    "email": "sarup@codecrafters.io",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "koala",
+    "name": "Koala",
+    "one_liner": "Minecraft for Teachers",
+    "batch": "Winter 2022",
+    "team_size": 11,
+    "locations": "San Francisco, CA, USA; Remote",
+    "website": "https://www.teachwithkoala.com",
+    "email": "support@teachwithkoala.com",
+    "email_type": "contact",
+    "draftTries": 1
+  },
+  {
+    "slug": "happl",
+    "name": "Happl",
+    "one_liner": "Your personalised benefits and engagement platform for global teams",
+    "batch": "Winter 2022",
+    "team_size": 11,
+    "locations": "London, England, United Kingdom",
+    "website": "https://happl.com",
+    "email": "press@happl.com",
+    "email_type": "contact",
+    "draftTries": 1
+  }
+]
