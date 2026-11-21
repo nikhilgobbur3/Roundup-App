@@ -9,7 +9,7 @@
     "website": "https://wideframe.com",
     "email": "support@wideframe.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "keiki",
@@ -21,7 +21,7 @@
     "website": "https://onkeiki.com",
     "email": "support@onkeiki.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "biggerpicture",
@@ -33,7 +33,7 @@
     "website": "http://biggerpicture.co",
     "email": "info@biggerpicture.co",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "teamout",
@@ -45,7 +45,7 @@
     "website": "https://www.teamout.com",
     "email": "sales@teamout.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "dart",
@@ -57,7 +57,7 @@
     "website": "https://www.dartai.com",
     "email": "support@dartai.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "heptabase",
@@ -69,7 +69,7 @@
     "website": "https://heptabase.com",
     "email": "team@heptabase.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "disclo",
@@ -81,7 +81,7 @@
     "website": "http://www.disclo.com",
     "email": "hello@disclo.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "codecrafters",
@@ -93,7 +93,7 @@
     "website": "https://codecrafters.io",
     "email": "sarup@codecrafters.io",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "koala",
@@ -105,7 +105,7 @@
     "website": "https://www.teachwithkoala.com",
     "email": "support@teachwithkoala.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   },
   {
     "slug": "happl",
@@ -117,6 +117,6 @@
     "website": "https://happl.com",
     "email": "press@happl.com",
     "email_type": "contact",
-    "draftTries": 1
+    "draftTries": 2
   }
 ]
